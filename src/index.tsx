@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { BrowserRouter } from 'react-router-dom';
 import yaml from 'js-yaml';
 import App from './components/App';
 import { CVData } from './types/cv';
@@ -8,7 +9,7 @@ import { CVData } from './types/cv';
 const fetchCVData = async (): Promise<CVData> => {
   try {
     // Try to fetch JSON file first
-    const response = await fetch('data/cv-data.json');
+    const response = await fetch('/data/cv-data.json');
     if (response.ok) {
       return await response.json();
     }
@@ -18,7 +19,7 @@ const fetchCVData = async (): Promise<CVData> => {
   
   try {
     // Fallback to YAML if JSON is not available
-    const yamlResponse = await fetch('data/cv-data.yaml');
+    const yamlResponse = await fetch('/data/cv-data.yaml');
     if (yamlResponse.ok) {
       const yamlText = await yamlResponse.text();
       const parsedData = yaml.load(yamlText) as CVData;
@@ -91,7 +92,9 @@ const initApp = async () => {
       const root = ReactDOM.createRoot(rootElement);
       root.render(
         <React.StrictMode>
-          <App data={cvData} />
+          <BrowserRouter>
+            <App data={cvData} />
+          </BrowserRouter>
         </React.StrictMode>
       );
     } else {

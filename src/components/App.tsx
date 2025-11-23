@@ -1,13 +1,15 @@
 import React from 'react';
+import { Routes, Route } from 'react-router-dom';
 import { getTemplateComponent } from '../templates/registry';
 import { CVData } from '../types/cv';
 import { PDF_FILENAME } from '../cv-meta';
+import CoverLetter from '../cover-letters/drc-roster-2025/CoverLetter';
 
 interface AppProps {
   data: CVData;
 }
 
-const App: React.FC<AppProps> = ({ data }) => {
+const CVPage: React.FC<AppProps> = ({ data }) => {
   const handlePrint = () => {
     // Open the pre-generated PDF with cache busting to ensure latest version
     // Use the filename from metadata which includes the date
@@ -28,6 +30,15 @@ const App: React.FC<AppProps> = ({ data }) => {
         {data.basics.name} - CV
       </div>
     </div>
+  );
+};
+
+const App: React.FC<AppProps> = ({ data }) => {
+  return (
+    <Routes>
+      <Route path="/" element={<CVPage data={data} />} />
+      <Route path="/cover-letters/drc-roster-2025" element={<CoverLetter data={data} />} />
+    </Routes>
   );
 };
 
