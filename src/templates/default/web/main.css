@@ -16,6 +16,10 @@ html {
   box-sizing: border-box;
 }
 
+button, input, select, textarea {
+  font-family: inherit;
+}
+
 body {
   font-family: "Linux Libertine", "Latin Modern Roman", "Computer Modern", "Times New Roman", Times, serif;
   line-height: 1.6;
