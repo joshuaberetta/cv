@@ -226,6 +226,11 @@ a:hover {
   margin-bottom: 0.5rem;
 }
 
+.item-subtitle .location {
+  color: #666;
+  font-style: italic;
+}
+
 .language-item {
   margin-bottom: 0.5rem;
 }

@@ -25,7 +25,8 @@ const MainContent: React.FC<MainContentProps> = ({ basics, sections, work, educa
                   <div className="item-date">{job.startDate} – {job.endDate}</div>
                 </div>
                 <div className="item-subtitle">
-                  {job.company} ({job.location})
+                  {job.company}
+                  {job.location && <span className="location">, {job.location}</span>}
                 </div>
                 {job.description && <p>{job.description}</p>}
               </div>
@@ -49,7 +50,8 @@ const MainContent: React.FC<MainContentProps> = ({ basics, sections, work, educa
                     </a>
                   ) : (
                     edu.institution
-                  )} ({edu.location})
+                  )}
+                  {edu.location && <span className="location">, {edu.location}</span>}
                 </div>
                 <div>Level in EQF: {edu.level}</div>
                 {edu.description && <p>{edu.description}</p>}
@@ -88,7 +90,8 @@ const MainContent: React.FC<MainContentProps> = ({ basics, sections, work, educa
                   <div className="item-date">{deployment.startDate} – {deployment.endDate}</div>
                 </div>
                 <div className="item-subtitle">
-                  {deployment.organization} ({deployment.location})
+                  {deployment.organization}
+                  {deployment.location && <span className="location">, {deployment.location}</span>}
                 </div>
                 {deployment.description && <p>{deployment.description}</p>}
               </div>

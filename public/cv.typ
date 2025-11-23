@@ -179,7 +179,7 @@
               align(left)[== #w.position],
               align(right)[#text(fill: gray-color)[#w.startDate - #w.endDate]]
             )
-            #text(style: "italic")[#w.company, #w.location] \
+            #text(style: "italic")[#w.company#if "location" in w [, #text(fill: gray-color)[#w.location]]] \
             #if "description" in w [
               #w.description
             ]
@@ -200,7 +200,7 @@
                 #link(edu.website)[#edu.institution]
               ] else [
                 #edu.institution
-              ], #edu.location
+              ]#if "location" in edu [, #text(fill: gray-color)[#edu.location]]
             ] \
             #if "level" in edu [
               #edu.level
@@ -239,7 +239,7 @@
                 align(left)[== #dep.position],
                 align(right)[#text(fill: gray-color)[#dep.startDate - #dep.endDate]]
               )
-              #text(style: "italic")[#dep.organization, #dep.location] \
+              #text(style: "italic")[#dep.organization#if "location" in dep [, #text(fill: gray-color)[#dep.location]]] \
               #dep.description
               #v(0.5em)
             ]
