@@ -34,7 +34,7 @@ const CoverLetter: React.FC<CoverLetterProps> = ({ data }) => {
 
           <div className="cover-letter-body" style={{ marginTop: '2rem', lineHeight: '1.6', fontSize: '1.1rem' }}>
             <p style={{ marginBottom: '1rem' }}><strong>Date:</strong> {new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}</p>
-            <p style={{ marginBottom: '2rem' }}><strong>Subject:</strong> {content.subject}</p>
+            <p style={{ marginBottom: '2rem' }}><strong>{content.subject}</strong></p>
 
             <p style={{ marginBottom: '1rem' }}>Dear {content.recipient},</p>
 
