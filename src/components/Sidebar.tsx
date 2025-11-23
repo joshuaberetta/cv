@@ -1,5 +1,4 @@
 import React from 'react';
-import QRCode from 'react-qr-code';
 import { Basics, Language } from '../types/cv';
 
 interface SidebarProps {
@@ -106,24 +105,6 @@ const Sidebar: React.FC<SidebarProps> = ({ basics, languages }) => {
           </div>
         ))}
       </div>
-
-      {basics.latestVersionUrl && (
-        <div className="sidebar-section no-print">
-          <div className="qr-code-container-sidebar">
-            <div className="qr-code-wrapper">
-              <QRCode 
-                value={basics.latestVersionUrl} 
-                size={64} 
-                style={{ height: "auto", maxWidth: "100%", width: "100%" }}
-                viewBox={`0 0 256 256`}
-              />
-            </div>
-            <a href={basics.latestVersionUrl} target="_blank" rel="noopener noreferrer" className="qr-link" style={{ textAlign: 'center' }}>
-              Latest Version<br/>cv.joshuaberetta.com
-            </a>
-          </div>
-        </div>
-      )}
     </div>
   );
 };

@@ -2,15 +2,16 @@
 
 #set page(
   paper: "a4",
-  margin: (x: 1cm, y: 1cm),
+  margin: (x: 1.5cm, y: 1.5cm),
   numbering: "1",
 )
 
 #set text(
-  font: "Arial",
   size: 9pt,
   lang: "en",
 )
+
+#set par(justify: true)
 
 #let primary-color = rgb("#1a73e8")
 #let text-color = rgb("#333333")

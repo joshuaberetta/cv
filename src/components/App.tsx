@@ -9,7 +9,7 @@ interface AppProps {
 const App: React.FC<AppProps> = ({ data }) => {
   const handlePrint = () => {
     // Open the pre-generated PDF
-    window.open('/cv.pdf', '_blank');
+    window.open('cv.pdf', '_blank');
   };
 
   return (

@@ -21,6 +21,8 @@ A TypeScript & React-based CV generator that creates a responsive, printable HTM
 npm install
 ```
 
+3. Install [Typst](https://github.com/typst/typst) on your system (required for PDF generation).
+
 ## Usage
 
 ### Development Mode
@@ -33,32 +35,19 @@ npm run dev
 
 This will start a development server at http://localhost:3000 showing your CV.
 
-### Building Static HTML
-
-To generate a static HTML file (best for GitHub Pages hosting):
-
-```bash
-npm run start
-```
-
-This will create a `dist/index.html` file that contains everything needed to display your CV.
-
 ### Building for Production
 
-To build a production version with Vite:
+To build a production version with Vite (includes PDF generation):
 
 ```bash
 npm run build
 ```
 
-This creates optimized files in the `dist` directory.
+This creates optimized files in the `dist` directory and generates `public/cv.pdf`.
 
-### Generating PDF
+### Generating PDF Only
 
-To generate a high-quality PDF version of your CV using Typst:
-
-1. Install [Typst](https://github.com/typst/typst) on your system.
-2. Run the generation command:
+To generate just the PDF version of your CV using Typst:
 
 ```bash
 npm run build:pdf
@@ -96,26 +85,30 @@ The main styles are in `src/styles/main.css`. You can modify:
 
 ## Deployment
 
-### GitHub Pages
+### GitHub Pages (Automated)
 
-For hosting on GitHub Pages:
+This repository includes a GitHub Actions workflow that automatically builds and deploys your CV to GitHub Pages whenever you push to the `main` branch.
+
+1. Push your changes to `main`.
+2. The workflow will:
+   - Install dependencies
+   - Install Typst
+   - Generate the PDF
+   - Build the React website
+   - Deploy to GitHub Pages
+
+Ensure you have enabled GitHub Pages in your repository settings (Settings > Pages > Source: GitHub Actions).
+
+### Manual Deployment
+
+If you prefer to deploy manually:
 
 1. Build your static CV:
    ```bash
-   npm run start
+   npm run build
    ```
 
-2. Push the `dist` directory to your GitHub Pages repository.
-
-### Other Hosting
-
-Any static site hosting will work:
-
-- Netlify
-- Vercel
-- Firebase Hosting
-- Amazon S3
-- etc.
+2. Upload the `dist` directory to your hosting provider.
 
 ## Project Structure
 
