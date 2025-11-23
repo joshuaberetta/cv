@@ -45,6 +45,7 @@ export interface Basics {
   birthdate: string;
   nationality: string;
   photo?: string;
+  linkedin?: string;
   summary?: string;
   latestVersionUrl?: string;
 }
@@ -63,6 +64,15 @@ export interface Deployment {
   description: string;
 }
 
+export interface Volunteer {
+  position: string;
+  organization: string;
+  startDate: string;
+  endDate: string;
+  summary?: string;
+  website?: string;
+}
+
 export interface CVData {
   basics: Basics;
   languages: Language[];
@@ -70,5 +80,6 @@ export interface CVData {
   education: Education[];
   trainings?: Training[];
   deployments?: Deployment[];
+  volunteering?: Volunteer[];
   skills?: string[];
 }

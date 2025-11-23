@@ -20,6 +20,7 @@ const CV: React.FC<CVProps> = ({ data }) => {
         education={data.education} 
         trainings={data.trainings}
         deployments={data.deployments}
+        volunteering={data.volunteering}
       />
     </div>
   );

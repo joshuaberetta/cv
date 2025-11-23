@@ -9,6 +9,7 @@ basics:
   phone: (+27) 617525212
   phoneUrl: https://wa.me/27617525212
   website: joshuaberetta.com
+  linkedin: https://www.linkedin.com/in/joshuaberetta/
   birthdate: 19/06/1995
   nationality: South African, Italian
   photo: /images/profile.jpg
@@ -91,7 +92,7 @@ work:
     location: Remote
     startDate: 12/2022
     endDate: 07/2023
-  - position: Software Developer
+  - position: Backend Developer
     company: Kobo
     location: Remote
     startDate: 10/2020
@@ -101,6 +102,17 @@ work:
     location: Cape Town, South Africa
     startDate: 02/2018
     endDate: 02/2020
+
+volunteering:
+  - position: SIMS Remote Information Management Support
+    organization: International Federation of Red Cross and Red Crescent Societies - IFRC
+    startDate: 10/2025
+    endDate: Current
+    summary: SIMS (Surge Information Management Support) volunteers provide critical information management support during humanitarian emergencies and disasters.
+  - position: Information Management Support
+    organization: Cruz Vermelha de Timor-Leste
+    startDate: 09/2025
+    endDate: Current
 
 education:
   - degree: MA in International Humanitarian Action

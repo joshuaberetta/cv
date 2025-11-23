@@ -6,6 +6,10 @@
   --section-spacing: 1.5rem;
 }
 
+html {
+  font-size: 18px;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -134,6 +138,24 @@ a:hover {
   display: flex;
   align-items: center;
   margin-bottom: 0.5rem;
+}
+
+.social-links {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid #eee;
+}
+
+.social-icon {
+  width: 24px;
+  height: 24px;
+  transition: transform 0.2s;
+}
+
+.social-icon:hover {
+  transform: scale(1.1);
 }
 
 .contact-icon {

@@ -28,14 +28,15 @@
 #show heading.where(level: 1): it => [
   #set text(fill: primary-color, size: 1.8em)
   #it
+  #v(-0.3em)
   #line(length: 100%, stroke: 1pt + primary-color)
-  #v(0.3em)
+  #v(0.2em)
 ]
 
 #show heading.where(level: 2): it => [
   #set text(fill: text-color, size: 1.1em)
   #it
-  #v(0.3em)
+  // #v(0.1em)
 ]
 
 #grid(
@@ -57,7 +58,7 @@
       block(radius: 50%, clip: true, image(photo-path, width: 100%))
     }
     
-    #v(0.5em)
+    #v(0.3em)
     
     = Contact
     
@@ -66,6 +67,7 @@
       else if name == "email" { "📧" }
       else if name == "phone" { "📱" }
       else if name == "website" { "🌐" }
+      else if name == "linkedin" { "🔗" }
       else if name == "birthdate" { "🎂" }
       else if name == "nationality" { "🌍" }
     }
@@ -95,7 +97,19 @@
       icon("website"), [#link("https://" + data.basics.website)[#data.basics.website]]
     )
     
-    #v(0.5em)
+    #v(0.3em)
+    
+    #if "linkedin" in data.basics [
+      #grid(
+        columns: (auto),
+        gutter: 1em,
+        link("https://" + data.basics.linkedin)[
+          #image("images/linkedin.svg", width: 1.5em)
+        ]
+      )
+    ]
+    
+    #v(0.3em)
     
     = Personal
     #grid(
@@ -106,7 +120,7 @@
       icon("birthdate"), [#data.basics.birthdate],
       icon("nationality"), [#data.basics.nationality]
     )
-    #v(0.5em)
+    #v(0.3em)
     
     = Languages
     #for lang in data.languages [
@@ -166,7 +180,23 @@
       #if "description" in w [
         #w.description
       ]
-      #v(0.8em)
+      #v(0.5em)
+    ]
+
+    #if data.volunteering != none [
+      = Volunteering
+      #for vol in data.volunteering [
+        #grid(
+          columns: (1fr, auto),
+          align(left)[== #vol.position],
+          align(right)[#text(fill: gray-color)[#vol.startDate - #vol.endDate]]
+        )
+        #text(style: "italic")[#vol.organization] \
+        #if "summary" in vol [
+          #vol.summary
+        ]
+        #v(0.5em)
+      ]
     ]
     
     = Education
@@ -186,11 +216,11 @@
       #if "level" in edu [
         #edu.level
       ]
-      #v(0.8em)
+      #v(0.5em)
     ]
 
     #if data.deployments != none [
-      = Deployments
+      = Humanitarian Deployments
       #for dep in data.deployments [
         #grid(
           columns: (1fr, auto),
@@ -199,16 +229,16 @@
         )
         #text(style: "italic")[#dep.organization, #dep.location] \
         #dep.description
-        #v(0.8em)
+        #v(0.5em)
       ]
     ]
     
     #if data.trainings != none [
-      = Trainings
+      = Trainings and Workshops
       #for train in data.trainings [
         - *#train.event* (#train.year)
       ]
-      #v(0.8em)
+      #v(0.5em)
     ]
   ]
 )

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Basics, WorkExperience, Education, Training, Deployment } from '../types/cv';
+import { Basics, WorkExperience, Education, Training, Deployment, Volunteer } from '../types/cv';
 
 interface MainContentProps {
   basics: Basics;
@@ -7,9 +7,10 @@ interface MainContentProps {
   education: Education[];
   trainings?: Training[];
   deployments?: Deployment[];
+  volunteering?: Volunteer[];
 }
 
-const MainContent: React.FC<MainContentProps> = ({ basics, work, education, trainings, deployments }) => {
+const MainContent: React.FC<MainContentProps> = ({ basics, work, education, trainings, deployments, volunteering }) => {
   return (
     <div className="main-content">
       <h1>{basics.name}</h1>
@@ -31,6 +32,24 @@ const MainContent: React.FC<MainContentProps> = ({ basics, work, education, trai
           </div>
         ))}
       </div>
+
+      {volunteering && volunteering.length > 0 && (
+        <div className="section">
+          <h2>Volunteering</h2>
+          {volunteering.map((vol, index) => (
+            <div className="experience-item" key={index}>
+              <div className="item-header">
+                <div className="item-title">{vol.position}</div>
+                <div className="item-date">{vol.startDate} – {vol.endDate}</div>
+              </div>
+              <div className="item-subtitle">
+                {vol.organization}
+              </div>
+              {vol.summary && <p>{vol.summary}</p>}
+            </div>
+          ))}
+        </div>
+      )}
 
       <div className="section">
         <h2>Education</h2>

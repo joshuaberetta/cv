@@ -61,6 +61,14 @@ const Sidebar: React.FC<SidebarProps> = ({ basics, languages }) => {
             {basics.website}
           </a>
         </div>
+        
+        <div className="social-links">
+          {basics.linkedin && (
+            <a href={`https://${basics.linkedin}`} target="_blank" rel="noopener noreferrer" title="LinkedIn">
+              <img src="/images/linkedin.svg" alt="LinkedIn" className="social-icon" />
+            </a>
+          )}
+        </div>
       </div>
       
       <div className="sidebar-section">
