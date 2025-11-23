@@ -61,12 +61,24 @@ This will generate `public/cv.pdf` which is linked from the "Download PDF" butto
 
 ### Edit Your Data
 
-Update your personal information in either:
+Update your personal information in:
 
-- `data/cv-data.yaml` (YAML format, more readable)
-- `data/cv-data.json` (JSON format, better tooling support)
+- `public/data/cv-data.yaml` (YAML format, preferred)
 
-The generator will automatically choose one of these files (YAML is preferred if both exist).
+### Customizing Sections
+
+You can customize the order and titles of your CV sections in the `sections` block of your data file. The order of keys in this block determines the order of sections on the website and PDF.
+
+```yaml
+sections:
+  work: Work Experience
+  education: Education
+  volunteering: Volunteering
+  deployments: Humanitarian Deployments
+  trainings: Trainings and Workshops
+```
+
+Supported sections include: `work`, `education`, `volunteering`, `deployments`, and `trainings`.
 
 ### Add Your Photo
 
@@ -113,10 +125,10 @@ If you prefer to deploy manually:
 ## Project Structure
 
 ```
-├── data/                  # CV data files
-│   ├── cv-data.json       # JSON version
-│   └── cv-data.yaml       # YAML version (preferred)
 ├── public/                # Static assets
+│   ├── cv.typ             # Typst PDF template
+│   └── data/              # CV data files
+│       └── cv-data.yaml   # YAML data source
 ├── src/                   # Source code
 │   ├── components/        # React components
 │   ├── styles/            # CSS styles

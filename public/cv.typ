@@ -169,76 +169,93 @@
       #data.basics.summary
     ]
     
-    = Work Experience
-    #for w in data.work [
-      #grid(
-        columns: (1fr, auto),
-        align(left)[== #w.position],
-        align(right)[#text(fill: gray-color)[#w.startDate - #w.endDate]]
-      )
-      #text(style: "italic")[#w.company, #w.location] \
-      #if "description" in w [
-        #w.description
-      ]
-      #v(0.5em)
-    ]
-
-    #if data.volunteering != none [
-      = Volunteering
-      #for vol in data.volunteering [
-        #grid(
-          columns: (1fr, auto),
-          align(left)[== #vol.position],
-          align(right)[#text(fill: gray-color)[#vol.startDate - #vol.endDate]]
-        )
-        #text(style: "italic")[#vol.organization] \
-        #if "summary" in vol [
-          #vol.summary
+    #for (key, title) in data.sections {
+      if key == "work" {
+        [
+          = #title
+          #for w in data.work [
+            #grid(
+              columns: (1fr, auto),
+              align(left)[== #w.position],
+              align(right)[#text(fill: gray-color)[#w.startDate - #w.endDate]]
+            )
+            #text(style: "italic")[#w.company, #w.location] \
+            #if "description" in w [
+              #w.description
+            ]
+            #v(0.5em)
+          ]
         ]
-        #v(0.5em)
-      ]
-    ]
-    
-    = Education
-    #for edu in data.education [
-      #grid(
-        columns: (1fr, auto),
-        align(left)[== #edu.degree],
-        align(right)[#text(fill: gray-color)[#edu.startDate - #edu.endDate]]
-      )
-      #text(style: "italic")[
-        #if "website" in edu [
-          #link(edu.website)[#edu.institution]
-        ] else [
-          #edu.institution
-        ], #edu.location
-      ] \
-      #if "level" in edu [
-        #edu.level
-      ]
-      #v(0.5em)
-    ]
-
-    #if data.deployments != none [
-      = Humanitarian Deployments
-      #for dep in data.deployments [
-        #grid(
-          columns: (1fr, auto),
-          align(left)[== #dep.position],
-          align(right)[#text(fill: gray-color)[#dep.startDate - #dep.endDate]]
-        )
-        #text(style: "italic")[#dep.organization, #dep.location] \
-        #dep.description
-        #v(0.5em)
-      ]
-    ]
-    
-    #if data.trainings != none [
-      = Trainings and Workshops
-      #for train in data.trainings [
-        - *#train.event* (#train.year)
-      ]
-      #v(0.5em)
-    ]
+      } else if key == "education" {
+        [
+          = #title
+          #for edu in data.education [
+            #grid(
+              columns: (1fr, auto),
+              align(left)[== #edu.degree],
+              align(right)[#text(fill: gray-color)[#edu.startDate - #edu.endDate]]
+            )
+            #text(style: "italic")[
+              #if "website" in edu [
+                #link(edu.website)[#edu.institution]
+              ] else [
+                #edu.institution
+              ], #edu.location
+            ] \
+            #if "level" in edu [
+              #edu.level
+            ]
+            #if "description" in edu [
+              \ #edu.description
+            ]
+            #v(0.5em)
+          ]
+        ]
+      } else if key == "volunteering" {
+        if data.volunteering != none {
+          [
+            = #title
+            #for vol in data.volunteering [
+              #grid(
+                columns: (1fr, auto),
+                align(left)[== #vol.position],
+                align(right)[#text(fill: gray-color)[#vol.startDate - #vol.endDate]]
+              )
+              #text(style: "italic")[#vol.organization] \
+              #if "summary" in vol [
+                #vol.summary
+              ]
+              #v(0.5em)
+            ]
+          ]
+        }
+      } else if key == "deployments" {
+        if data.deployments != none {
+          [
+            = #title
+            #for dep in data.deployments [
+              #grid(
+                columns: (1fr, auto),
+                align(left)[== #dep.position],
+                align(right)[#text(fill: gray-color)[#dep.startDate - #dep.endDate]]
+              )
+              #text(style: "italic")[#dep.organization, #dep.location] \
+              #dep.description
+              #v(0.5em)
+            ]
+          ]
+        }
+      } else if key == "trainings" {
+        if data.trainings != none {
+          [
+            = #title
+            #for train in data.trainings [
+              - *#train.event* (#train.year)
+            ]
+            #v(0.5em)
+          ]
+        }
+      }
+    }
   ]
 )

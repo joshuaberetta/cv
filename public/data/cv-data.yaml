@@ -16,6 +16,13 @@ basics:
   latestVersionUrl: https://cv.joshuaberetta.com
   summary: Joshua was on the core backend development team for Kobo, and now coordinates and manages project delivery, maintains the day-to-day contact with key partners, coordinates and performs online and in-person training sessions, leads Kobo's humanitarian response initiative, and works with users to address complex new needs with custom solutions.
 
+sections:
+  work: Work Experience
+  volunteering: Volunteering
+  education: Education
+  deployments: Humanitarian Deployments
+  trainings: Trainings and Workshops
+
 languages:
   - language: English
     fluency: Mother tongue
@@ -115,13 +122,14 @@ volunteering:
     endDate: Current
 
 education:
-  - degree: MA in International Humanitarian Action
-    institution: Rijksuniversiteit Groningen
-    location: Groningen, Netherlands
-    website: https://www.rug.nl/
+  - degree: NOHA Masters in International Humanitarian Action
+    institution: Rijksuniversiteit Groningen & Universidad de Deusto
+    location: The Netherlands & Spain
+    website: https://nohanet.org/masters
     startDate: 09/2024
     endDate: Current
     level: Level 7
+    description: Grantee of the Erasmus Mundus scholarship.
   - degree: BSc Mechanical Engineering
     institution: University of Cape Town
     location: Cape Town, South Africa
@@ -129,3 +137,4 @@ education:
     startDate: 02/2014
     endDate: 12/2017
     level: Level 6
+    description: Graduate (First Class Honours), various scholarships, class medals in mathematics and physics.

@@ -73,8 +73,17 @@ export interface Volunteer {
   website?: string;
 }
 
+export interface SectionTitles {
+  work: string;
+  education: string;
+  volunteering: string;
+  deployments: string;
+  trainings: string;
+}
+
 export interface CVData {
   basics: Basics;
+  sections: SectionTitles;
   languages: Language[];
   work: WorkExperience[];
   education: Education[];

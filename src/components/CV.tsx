@@ -16,6 +16,7 @@ const CV: React.FC<CVProps> = ({ data }) => {
       />
       <MainContent 
         basics={data.basics} 
+        sections={data.sections}
         work={data.work} 
         education={data.education} 
         trainings={data.trainings}
