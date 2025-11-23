@@ -28,7 +28,10 @@ jobs:
           cache: 'npm'
 
       - name: Setup Typst
-        uses: typst-community/setup-typst@v1
+        run: |
+          wget -qO- https://github.com/typst/typst/releases/latest/download/typst-x86_64-unknown-linux-musl.tar.xz | tar -xJ
+          sudo mv typst-x86_64-unknown-linux-musl/typst /usr/local/bin/typst
+          typst --version
 
       - name: Install dependencies
         run: npm ci
