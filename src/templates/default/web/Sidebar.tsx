@@ -1,32 +1,22 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Basics, Language } from '../../../types/cv';
 
 interface SidebarProps {
   basics: Basics;
   languages: Language[];
+  isOpen?: boolean;
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ basics, languages }) => {
-  const [isExpanded, setIsExpanded] = useState(false);
-
+const Sidebar: React.FC<SidebarProps> = ({ basics, languages, isOpen = false }) => {
   return (
-    <div className="sidebar">
+    <div className={`sidebar ${isOpen ? 'open' : ''}`}>
       <img 
         src={basics.photo || "https://api.dicebear.com/7.x/avataaars/svg?seed=" + encodeURIComponent(basics.name)} 
         alt={basics.name} 
         className="profile-img" 
       />
-
-      <button 
-        className="mobile-toggle" 
-        onClick={() => setIsExpanded(!isExpanded)}
-        aria-expanded={isExpanded}
-      >
-        {isExpanded ? 'Hide Contact & Skills' : 'Show Contact & Skills'}
-        <span className={`toggle-icon ${isExpanded ? 'expanded' : ''}`}>▼</span>
-      </button>
       
-      <div className={`sidebar-content ${isExpanded ? 'expanded' : ''}`}>
+      <div className="sidebar-content">
         <div className="sidebar-section">
           <h2>Contact</h2>
         <div className="contact-item">

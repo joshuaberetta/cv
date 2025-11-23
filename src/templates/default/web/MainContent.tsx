@@ -147,8 +147,6 @@ const MainContent: React.FC<MainContentProps> = ({ basics, sections, work, educa
 
   return (
     <div className="main-content">
-      <h1>{basics.name}</h1>
-      <p className="tagline">{basics.tagline}</p>
       {basics.summary && <p className="summary">{basics.summary}</p>}
       
       {Object.keys(sections).map(key => renderSection(key))}

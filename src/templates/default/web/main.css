@@ -55,6 +55,55 @@ a:hover {
   position: relative;
 }
 
+.content-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.cv-header {
+  position: sticky;
+  top: 0;
+  background-color: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(5px);
+  z-index: 100;
+  padding: 1rem 0;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.3s;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex: 1;
+  min-width: 0;
+}
+
+.header-contact-btn {
+  display: none;
+}
+
+.cv-header h1 {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  color: var(--primary-color);
+  line-height: 1.2;
+}
+
+.cv-header .tagline {
+  font-style: italic;
+  color: #666;
+  margin-bottom: 0;
+}
+
+.header-photo {
+  display: none;
+}
+
 .sidebar {
   background-color: #fafafa;
   padding: 1.5rem;
@@ -110,15 +159,6 @@ a:hover {
   .toggle-icon.expanded {
     transform: rotate(180deg);
   }
-
-  .sidebar-content {
-    display: none;
-  }
-
-  .sidebar-content.expanded {
-    display: block;
-    animation: fadeIn 0.3s ease-in-out;
-  }
 }
 
 @keyframes fadeIn {
@@ -171,17 +211,7 @@ a:hover {
   position: relative;
 }
 
-.main-content h1 {
-  font-size: 2.5rem;
-  margin-bottom: 0.5rem;
-  color: var(--primary-color);
-}
-
-.tagline {
-  font-style: italic;
-  margin-bottom: 2rem;
-  color: #666;
-}
+/* Removed h1 and tagline styles from main-content as they are now in cv-header */
 
 .summary {
   margin-bottom: 2rem;
@@ -462,17 +492,102 @@ a:hover {
 
 @media (max-width: 768px) {
   .cv-container {
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
     padding-bottom: 80px;
+  }
+
+  .content-wrapper {
+    display: contents;
+  }
+
+  .cv-header {
+    order: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.8rem;
+    margin: -1rem -1rem 1rem -1rem; /* Full width */
+    border-bottom: 1px solid var(--border-color);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  }
+
+  .header-contact-btn {
+    display: block;
+    background: none;
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
+    padding: 0.4rem 0.8rem;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.2s;
+  }
+
+  .header-contact-btn.active {
+    background-color: var(--primary-color);
+    color: white;
+  }
+
+  .header-photo {
+    display: block;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+  }
+
+  .cv-header h1 {
+    font-size: 1.2rem;
+    margin-bottom: 0.1rem;
+  }
+
+  .cv-header .tagline {
+    font-size: 0.8rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+  }
+
+  .header-text {
+    min-width: 0; /* Allow text truncation */
+    flex: 1;
   }
   
   .sidebar {
+    order: 1;
     border-right: none;
     border-bottom: 1px solid var(--border-color);
-    padding: 1.5rem;
+    padding: 0;
     position: static; /* Disable sticky on mobile */
     height: auto;
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.3s ease-in-out, padding 0.3s ease-in-out;
+    opacity: 0;
   }
+
+  .sidebar.open {
+    max-height: 1000px; /* Arbitrary large number */
+    padding: 1.5rem;
+    opacity: 1;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  /* Hide the big profile image in sidebar on mobile since we have it in header */
+  .sidebar .profile-img {
+    display: none;
+  }
+
+  .main-content {
+    order: 2;
+  }
+}
 
   .print-controls {
     position: fixed;
