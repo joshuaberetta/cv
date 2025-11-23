@@ -34,7 +34,7 @@ try {
       console.log('QR code generated successfully at ' + qrPath);
       
       // Generate Cover Letter QR Code
-      const coverLetterUrl = data.basics.latestVersionUrl.replace(/\/$/, '') + '/cover-letters/drc-roster-2025';
+      const coverLetterUrl = data.basics.latestVersionUrl.replace(/\/$/, '') + '/#/cover-letters/drc-roster-2025';
       const clQrPath = path.join(imagesDir, 'qr-code-cover-letter.png');
       
       QRCode.toFile(clQrPath, coverLetterUrl, {

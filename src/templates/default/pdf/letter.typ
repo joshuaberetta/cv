@@ -110,7 +110,7 @@
          #block(breakable: false, width: 100%)[
            #align(center)[
              #block(width: 3cm, radius: 8pt, fill: rgb("#FFFFFF"), inset: 4pt, image("/public/images/qr-code-cover-letter.png", width: 100%))
-             #link(data.basics.latestVersionUrl + "/cover-letters/drc-roster-2025")[Web Version]
+             #link(data.basics.latestVersionUrl + "/#/cover-letters/drc-roster-2025")[Web Version]
              
              #v(1em)
              

@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { BrowserRouter } from 'react-router-dom';
+import { HashRouter } from 'react-router-dom';
 import yaml from 'js-yaml';
 import App from './components/App';
 import { CVData } from './types/cv';
@@ -92,9 +92,9 @@ const initApp = async () => {
       const root = ReactDOM.createRoot(rootElement);
       root.render(
         <React.StrictMode>
-          <BrowserRouter>
+          <HashRouter>
             <App data={cvData} />
-          </BrowserRouter>
+          </HashRouter>
         </React.StrictMode>
       );
     } else {

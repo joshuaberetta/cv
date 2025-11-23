@@ -1,5 +1,5 @@
 import React from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import { getTemplateComponent } from '../templates/registry';
 import { CVData } from '../types/cv';
 import { PDF_FILENAME } from '../cv-meta';
@@ -38,6 +38,7 @@ const App: React.FC<AppProps> = ({ data }) => {
     <Routes>
       <Route path="/" element={<CVPage data={data} />} />
       <Route path="/cover-letters/drc-roster-2025" element={<CoverLetter data={data} />} />
+      <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );
 };
