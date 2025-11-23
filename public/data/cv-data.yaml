@@ -1,20 +1,20 @@
 basics:
   name: Joshua Beretta
-    tagline: Trying to do some good in this chaotic world we live in.
-    location: Cape Town, South Africa
-    email: 
-      - me@joshuaberetta.com
-      - joshua.beretta@kobo.ngo
-      - joshua@kobotoolbox.org
-    phone: (+27) 617525212
-    phoneUrl: https://wa.me/27617525212
-    website: joshuaberetta.com
-    linkedin: https://www.linkedin.com/in/joshuaberetta/
-    birthdate: 19/06/1995
-    nationality: South African, Italian
-    photo: /images/profile.jpg
-    latestVersionUrl: https://cv.joshuaberetta.com
-    summary: Humanitarian technology professional combining technical expertise with field experience. Core backend developer turned project coordinator at Kobo, managing partnerships with UN agencies, INGOs, and governments across crisis contexts. Leads humanitarian response initiatives and remote deployments, delivering technical training in multiple languages across Africa, Latin America, and Asia. Solutions Architect and Researcher specializing in AI integration for humanitarian data collection, with focus on responsible AI implementation in emergency settings.
+  tagline: Trying to do some good in this chaotic world we live in.
+  location: Cape Town, South Africa
+  email: 
+    - me@joshuaberetta.com
+    - joshua.beretta@kobo.ngo
+    - joshua@kobotoolbox.org
+  phone: (+27) 617525212
+  phoneUrl: https://wa.me/27617525212
+  website: joshuaberetta.com
+  linkedin: https://www.linkedin.com/in/joshuaberetta/
+  birthdate: 19/06/1995
+  nationality: South African, Italian
+  photo: /images/profile.jpg
+  latestVersionUrl: https://cv.joshuaberetta.com
+  summary: Humanitarian technology professional combining technical expertise with field experience. Core backend developer turned project coordinator at Kobo, managing partnerships with UN agencies, INGOs, and governments across crisis contexts. Leads humanitarian response initiatives and remote deployments, delivering technical training in multiple languages across Africa, Latin America, and Asia. Solutions Architect and Researcher specializing in AI integration for humanitarian data collection, with focus on responsible AI implementation in emergency settings.
 
 sections:
   work: Work Experience
