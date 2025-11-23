@@ -8,8 +8,8 @@ interface AppProps {
 
 const App: React.FC<AppProps> = ({ data }) => {
   const handlePrint = () => {
-    // Open the pre-generated PDF
-    window.open('cv.pdf', '_blank');
+    // Open the pre-generated PDF with cache busting to ensure latest version
+    window.open(`cv.pdf?t=${Date.now()}`, '_blank');
   };
 
   return (

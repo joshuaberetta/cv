@@ -39,6 +39,16 @@ jobs:
       - name: Build Website and PDF
         run: npm run build
 
+      - name: Verify PDF Generation
+        run: |
+          if [ -f dist/cv.pdf ]; then
+            echo "PDF exists in dist folder."
+            ls -l dist/cv.pdf
+          else
+            echo "Error: PDF not found in dist folder!"
+            exit 1
+          fi
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
