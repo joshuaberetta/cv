@@ -12,7 +12,7 @@
 )
 
 #set text(
-  font: "Helvetica",
+  font: "Roboto",
   size: 10pt,
 )
 

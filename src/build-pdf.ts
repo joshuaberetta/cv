@@ -74,7 +74,7 @@ function generateCoverLetterPdf(data: any) {
     console.log(`Generating Cover Letter PDF: ${filename}...`);
     
     try {
-        execSync(`typst compile --root . "${inputPath}" "${outputPath}"`, { stdio: 'inherit' });
+        execSync(`typst compile --root . --font-path fonts "${inputPath}" "${outputPath}"`, { stdio: 'inherit' });
         console.log('Cover Letter PDF generated successfully!');
     } catch (error) {
         console.error('Error generating Cover Letter PDF:', error);
@@ -105,7 +105,7 @@ function generatePdf(data: any) {
             }
         }
 
-        execSync(`typst compile --root . "${inputPath}" "${outputPath}"`, { stdio: 'inherit' });
+        execSync(`typst compile --root . --font-path fonts "${inputPath}" "${outputPath}"`, { stdio: 'inherit' });
         console.log('PDF generated successfully!');
         
         // Write metadata for App.tsx

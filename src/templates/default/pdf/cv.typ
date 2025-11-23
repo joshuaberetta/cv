@@ -13,6 +13,7 @@
 #set text(
   size: 9pt,
   lang: "en",
+  font: "Roboto",
 )
 
 #set par(justify: true)
@@ -26,7 +27,7 @@
 #show link: set text(fill: link-color)
 
 #show heading.where(level: 1): it => [
-  #set text(fill: primary-color, size: 1.8em)
+  #set text(fill: primary-color, size: 1.4em)
   #it
   #v(-0.3em)
   #line(length: 100%, stroke: 1pt + primary-color)
@@ -34,7 +35,7 @@
 ]
 
 #show heading.where(level: 2): it => [
-  #set text(fill: text-color, size: 1.1em)
+  #set text(fill: text-color, size: 1em)
   #it
   // #v(0.1em)
 ]

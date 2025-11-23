@@ -21,7 +21,7 @@ button, input, select, textarea {
 }
 
 body {
-  font-family: "Linux Libertine", "Latin Modern Roman", "Computer Modern", "Times New Roman", Times, serif;
+  font-family: "Roboto", sans-serif;
   line-height: 1.6;
   color: var(--text-color);
   background-color: #fff;

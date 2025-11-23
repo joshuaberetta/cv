@@ -10,7 +10,7 @@
 }
 
 .pride-cv-container {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Roboto", sans-serif;
   color: var(--text-color);
   background-color: var(--bg-color);
   line-height: 1.6;
