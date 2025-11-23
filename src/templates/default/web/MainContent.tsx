@@ -1,5 +1,5 @@
 import React from 'react';
-import { Basics, WorkExperience, Education, Training, Deployment, Volunteer, SectionTitles } from '../types/cv';
+import { Basics, WorkExperience, Education, Training, Deployment, Volunteer, SectionTitles } from '../../../types/cv';
 
 interface MainContentProps {
   basics: Basics;

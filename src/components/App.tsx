@@ -1,5 +1,5 @@
 import React from 'react';
-import CV from './CV';
+import { getTemplateComponent } from '../templates/registry';
 import { CVData } from '../types/cv';
 import { PDF_FILENAME } from '../cv-meta';
 
@@ -14,6 +14,8 @@ const App: React.FC<AppProps> = ({ data }) => {
     window.open(`${PDF_FILENAME}?t=${Date.now()}`, '_blank');
   };
 
+  const CVComponent = getTemplateComponent(data.basics.template);
+
   return (
     <div className="app">
       <div className="no-print print-controls">
@@ -21,7 +23,7 @@ const App: React.FC<AppProps> = ({ data }) => {
           Download PDF
         </button>
       </div>
-      <CV data={data} />
+      <CVComponent data={data} />
       <div className="print-footer">
         {data.basics.name} - CV
       </div>

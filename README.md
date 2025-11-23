@@ -95,6 +95,16 @@ The main styles are in `src/styles/main.css`. You can modify:
 - Layout
 - Print options
 
+## Templates
+
+This project supports multiple templates. The default template is configured in `public/data/cv-data.yaml`.
+
+To change the template:
+1.  Open `public/data/cv-data.yaml`.
+2.  Set `basics.template` to the desired template name (e.g., `default`).
+
+To create a new template, refer to `ai-docs/creating-templates.md`.
+
 ## Deployment
 
 ### GitHub Pages (Automated)
@@ -126,12 +136,14 @@ If you prefer to deploy manually:
 
 ```
 ├── public/                # Static assets
-│   ├── cv.typ             # Typst PDF template
 │   └── data/              # CV data files
 │       └── cv-data.yaml   # YAML data source
 ├── src/                   # Source code
 │   ├── components/        # React components
-│   ├── styles/            # CSS styles
+│   ├── templates/         # Templates directory
+│   │   └── default/       # Default template
+│   │       ├── web/       # Web components and styles
+│   │       └── pdf/       # Typst PDF template
 │   ├── types/             # TypeScript type definitions
 │   ├── build.ts           # Static HTML generator script
 │   └── index.tsx          # Main entry point

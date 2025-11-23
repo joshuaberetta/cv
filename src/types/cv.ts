@@ -35,6 +35,7 @@ export interface Education {
 }
 
 export interface Basics {
+  template?: string;
   name: string;
   tagline: string;
   location: string;

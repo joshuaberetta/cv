@@ -51,10 +51,11 @@ function generatePdf(data: any) {
     const dateStr = date.toISOString().slice(0, 10).replace(/-/g, ''); // YYYYMMDD
     const filename = `${name} - CV - ${dateStr}.pdf`;
     
-    const inputPath = path.join(publicDir, 'cv.typ');
+    const template = data.basics.template || 'default';
+    const inputPath = path.join(process.cwd(), `src/templates/${template}/pdf/cv.typ`);
     const outputPath = path.join(publicDir, filename);
     
-    console.log(`Generating PDF: ${filename}...`);
+    console.log(`Generating PDF: ${filename} using template ${template}...`);
     
     try {
         // Clean up old PDFs
@@ -67,7 +68,7 @@ function generatePdf(data: any) {
             }
         }
 
-        execSync(`typst compile "${inputPath}" "${outputPath}"`, { stdio: 'inherit' });
+        execSync(`typst compile --root . "${inputPath}" "${outputPath}"`, { stdio: 'inherit' });
         console.log('PDF generated successfully!');
         
         // Write metadata for App.tsx

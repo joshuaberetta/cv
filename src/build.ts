@@ -32,9 +32,17 @@ const loadCVData = (): CVData => {
 
 // Function to generate static HTML
 const generateStaticHTML = (data: CVData): string => {
+  // Determine template
+  const template = data.basics.template || 'default';
+
   // Create the CSS inline to make it a self-contained HTML file
-  const cssPath = path.resolve(process.cwd(), 'src/styles/main.css');
-  const cssContent = fs.readFileSync(cssPath, 'utf8');
+  const cssPath = path.resolve(process.cwd(), `src/templates/${template}/web/main.css`);
+  let cssContent = '';
+  if (fs.existsSync(cssPath)) {
+    cssContent = fs.readFileSync(cssPath, 'utf8');
+  } else {
+    console.warn(`CSS file not found for template ${template} at ${cssPath}`);
+  }
   
   // Render React components to string
   const appHtml = renderToString(React.createElement(App, { data }));

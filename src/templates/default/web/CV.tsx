@@ -1,7 +1,8 @@
 import React from 'react';
-import { CVData } from '../types/cv';
+import { CVData } from '../../../types/cv';
 import Sidebar from './Sidebar';
 import MainContent from './MainContent';
+import './main.css';
 
 interface CVProps {
   data: CVData;

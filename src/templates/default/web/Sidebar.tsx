@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Basics, Language } from '../types/cv';
+import { Basics, Language } from '../../../types/cv';
 
 interface SidebarProps {
   basics: Basics;

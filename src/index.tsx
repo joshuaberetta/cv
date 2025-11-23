@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import yaml from 'js-yaml';
 import App from './components/App';
-import './styles/main.css';
 import { CVData } from './types/cv';
 
 // Fetch CV data

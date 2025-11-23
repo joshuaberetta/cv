@@ -1,4 +1,5 @@
 basics:
+  template: default
   name: Joshua Beretta
   tagline: Trying to do some good in this chaotic world we live in.
   location: Cape Town, South Africa

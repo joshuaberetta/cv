@@ -1,1 +1,1 @@
-export const PDF_FILENAME = "CV.pdf";
+export const PDF_FILENAME = "Joshua Beretta - CV - 20251123.pdf";
