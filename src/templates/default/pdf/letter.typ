@@ -10,7 +10,7 @@
   )
 
   set text(
-    size: 10pt,
+    size: 9pt,
     lang: "en",
     font: "Roboto",
   )
@@ -39,7 +39,7 @@
   ]
 
   grid(
-    columns: (30%, 70%),
+    columns: (30%, 1fr),
     gutter: 2em,
     
     // Sidebar

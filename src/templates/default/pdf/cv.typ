@@ -41,7 +41,7 @@
 ]
 
 #grid(
-  columns: (30%, 70%),
+  columns: (30%, 1fr),
   gutter: 2em,
   
   // Sidebar
