@@ -47,6 +47,13 @@ const defaultData: CVData = {
     birthdate: "01/01/1990",
     nationality: "Your Nationality"
   },
+  sections: {
+    work: "Work Experience",
+    education: "Education",
+    volunteering: "Volunteering",
+    deployments: "Humanitarian Deployments",
+    trainings: "Trainings and Workshops"
+  },
   languages: [
     {
       language: "English",
