@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { CVData } from '../../types/cv';
 import Sidebar from '../../templates/default/web/Sidebar';
 import '../../templates/default/web/main.css';
@@ -15,7 +16,17 @@ const CoverLetter: React.FC<CoverLetterProps> = ({ data }) => {
 
   return (
     <div className="app">
-      <div className="no-print print-controls">
+      <div className="no-print print-controls" style={{ display: 'flex', gap: '1rem' }}>
+        <Link 
+          to="/" 
+          className="print-button" 
+          style={{ 
+            backgroundColor: '#666', 
+            textDecoration: 'none' 
+          }}
+        >
+          ← Back to CV
+        </Link>
         <button onClick={handlePrint} className="print-button">
           Download PDF
         </button>
