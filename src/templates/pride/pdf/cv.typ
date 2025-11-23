@@ -8,6 +8,7 @@
 #let pride-purple = rgb("#750787")
 
 #set page(
+  paper: "a4",
   margin: (x: 0cm, y: 0cm),
 )
 
