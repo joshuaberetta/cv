@@ -5,7 +5,7 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "npm run build:pdf && tsc && vite build",
-    "build:pdf": "ts-node src/generate-qr.ts && typst compile public/cv.typ public/cv.pdf",
+    "build:pdf": "ts-node src/build-pdf.ts",
     "start": "ts-node src/build.ts",
     "dev": "vite",
     "test": "jest"

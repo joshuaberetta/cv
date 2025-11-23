@@ -4,6 +4,10 @@
   paper: "a4",
   margin: (x: 1.5cm, y: 1.5cm),
   numbering: "1",
+  header: align(right)[
+    #set text(size: 8pt, fill: rgb("#666666"))
+    Version: #datetime.today().display("[year]-[month]-[day]")
+  ]
 )
 
 #set text(

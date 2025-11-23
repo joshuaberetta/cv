@@ -1,6 +1,7 @@
 import React from 'react';
 import CV from './CV';
 import { CVData } from '../types/cv';
+import { PDF_FILENAME } from '../cv-meta';
 
 interface AppProps {
   data: CVData;
@@ -9,7 +10,8 @@ interface AppProps {
 const App: React.FC<AppProps> = ({ data }) => {
   const handlePrint = () => {
     // Open the pre-generated PDF with cache busting to ensure latest version
-    window.open(`cv.pdf?t=${Date.now()}`, '_blank');
+    // Use the filename from metadata which includes the date
+    window.open(`${PDF_FILENAME}?t=${Date.now()}`, '_blank');
   };
 
   return (

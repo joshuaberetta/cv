@@ -41,9 +41,9 @@ jobs:
 
       - name: Verify PDF Generation
         run: |
-          if [ -f dist/cv.pdf ]; then
+          if ls dist/*.pdf 1> /dev/null 2>&1; then
             echo "PDF exists in dist folder."
-            ls -l dist/cv.pdf
+            ls -l dist/*.pdf
           else
             echo "Error: PDF not found in dist folder!"
             exit 1
