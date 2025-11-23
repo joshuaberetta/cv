@@ -12,7 +12,7 @@ const Sidebar: React.FC<SidebarProps> = ({ basics, languages }) => {
   return (
     <div className="sidebar">
       <img 
-        src={basics.photo || "https://api.dicebear.com/7.x/avataaars/svg?seed=" + basics.name.split(' ')[0]} 
+        src={basics.photo || "https://api.dicebear.com/7.x/avataaars/svg?seed=" + encodeURIComponent(basics.name)} 
         alt={basics.name} 
         className="profile-img" 
       />

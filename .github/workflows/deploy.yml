@@ -49,6 +49,16 @@ jobs:
             exit 1
           fi
 
+      - name: Create CNAME
+        env:
+          CNAME_DOMAIN: ${{ vars.CNAME_DOMAIN }}
+        run: |
+          if [ -n "$CNAME_DOMAIN" ]; then
+            echo "$CNAME_DOMAIN" > dist/CNAME
+          else
+            echo "cv.joshuaberetta.com" > dist/CNAME
+          fi
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:

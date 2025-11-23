@@ -45,8 +45,8 @@ const generateStaticHTML = (data: CVData): string => {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CV - ${data.basics.name}</title>
-  <meta name="description" content="Professional CV for ${data.basics.name}">
+  <title>${data.basics.name}</title>
+  <meta name="description" content="${data.basics.tagline || `Professional CV for ${data.basics.name}`}">
   <style>${cssContent}</style>
 </head>
 <body>
