@@ -51,8 +51,11 @@ export interface Basics {
 }
 
 export interface Training {
-  event: string;
+  organization: string;
+  course: string;
+  location: string;
   year: string;
+  language?: string;
 }
 
 export interface Deployment {

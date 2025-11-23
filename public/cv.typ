@@ -249,9 +249,27 @@
         if data.trainings != none {
           [
             = #title
-            #for train in data.trainings [
-              - *#train.event* (#train.year)
-            ]
+            #let current-year = ""
+            #for train in data.trainings {
+              if train.year != current-year {
+                current-year = train.year
+                v(0.8em)
+                text(weight: "bold", size: 1em, fill: primary-color)[#current-year]
+                v(-0.3em)
+                line(length: 100%, stroke: 0.5pt + rgb("#eeeeee"))
+                v(0.3em)
+              }
+              grid(
+                columns: (1em, 1fr),
+                gutter: 0.5em,
+                align(top + right)[•],
+                align(left)[
+                  *#train.organization*#if "location" in train [, #text(style: "italic", fill: gray-color)[#train.location]] \
+                  #train.course #if "language" in train [ #sym.bullet #text(style: "italic", fill: gray-color)[#train.language] ]
+                ]
+              )
+              v(0.4em)
+            }
             #v(0.5em)
           ]
         }

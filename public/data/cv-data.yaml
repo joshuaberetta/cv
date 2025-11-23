@@ -43,51 +43,116 @@ deployments:
     description: Deployed to Jamaica for 2 weeks for the humanitarian response and recovery after Hurricane Melissa. Worked closely with OCHA, UNDAC, IOM, WFP, MLSS government ministry, and others on the ground to support the emergency IM efforts.
 
 trainings:
-  - event: Directorate of Epidemiology (DIEPI) Dominican Republic in-person workshop in Spanish
+  - organization: Directorate of Epidemiology (DIEPI)
+    course: In-person workshop
+    location: Santo Domingo, Dominican Republic
     year: "2025"
-  - event: Grupo de Trabajo de Localización en Colombia (GTLo) 2 day in-person workshop on KoboToolbox and Introduction to AI for Humanitarians in Spanish
+    language: Spanish
+  - organization: Grupo de Trabajo de Localización en Colombia (GTLo)
+    course: KoboToolbox and Introduction to AI for Humanitarians
+    location: Bogotá, Colombia
     year: "2025"
-  - event: Cruz Vermelha de Timor-Leste (CVTL) 3 day in-person workshop on KoboToolbox and Introduction to AI for Humanitarians
+    language: Spanish
+  - organization: Cruz Vermelha de Timor-Leste (CVTL)
+    course: KoboToolbox and Introduction to AI for Humanitarians
+    location: Dili, Timor-Leste
     year: "2025"
-  - event: UNTL Timor-Leste in-person training workshop
+    language: English, Tetum
+  - organization: UNTL
+    course: In-person training workshop
+    location: Dili, Timor-Leste
     year: "2025"
-  - event: FAO/Tanzania NPPO/SADC 5 day in-person workshop, Dar es Salaam
+    language: English
+  - organization: FAO/Tanzania NPPO/SADC
+    course: 5 day in-person workshop
+    location: Dar es Salaam, Tanzania
     year: "2025"
-  - event: Gates Foundation & GPEI in-person workshop at IFRC/ARCS offices in Kabul
+    language: English
+  - organization: Gates Foundation & GPEI
+    course: In-person workshop at IFRC/ARCS offices
+    location: Kabul, Afghanistan
     year: "2025"
-  - event: UNHCR Buenos Aires online training
+    language: English
+  - organization: UNHCR Buenos Aires
+    course: Online training
+    location: Remote
     year: "2025"
-  - event: R4V/GIFFM Colombia in-person workshop
+    language: Spanish
+  - organization: R4V/GIFFM
+    course: In-person workshop
+    location: Bogotá, Colombia
     year: "2024"
-  - event: Pontificia Universidad Javeriana in-person training workshop
+    language: Spanish
+  - organization: Pontificia Universidad Javeriana
+    course: In-person training workshop
+    location: Bogotá, Colombia
     year: "2024"
-  - event: R4V/GTRM Peru in-person workshop
+    language: Spanish
+  - organization: R4V/GTRM
+    course: In-person workshop
+    location: Lima, Peru
     year: "2024"
-  - event: UNHCR Buenos Aires in-person training
+    language: Spanish
+  - organization: UNHCR
+    course: In-person training
+    location: Buenos Aires, Argentina
     year: "2024"
-  - event: Ethiopia Somali Regional Truth and Reconciliation Commission in-person training
+    language: English
+  - organization: Ethiopia Somali Regional Truth and Reconciliation Commission
+    course: In-person training
+    location: Jijiga, Ethiopia
     year: "2023"
-  - event: SCI KoboToolbox online training
+    language: English
+  - organization: SCI
+    course: KoboToolbox online training
+    location: Remote
     year: "2023"
-  - event: SGDD Turkey in-person workshop
+    language: English
+  - organization: SGDD
+    course: In-person workshop
+    location: Ankara, Turkey
     year: "2023"
-  - event: ACF advanced KoboToolbox online training
+    language: English
+  - organization: ACF
+    course: Advanced KoboToolbox online training
+    location: Remote
     year: "2023"
-  - event: Gates Foundation second online training to multiple agency partners
+    language: English
+  - organization: Gates Foundation
+    course: Second online training to multiple agency partners
+    location: Remote
     year: "2023"
-  - event: Gates Foundation in-person workshop in Amman to multiple agency partners
+    language: English
+  - organization: Gates Foundation
+    course: In-person workshop to multiple agency partners
+    location: Amman, Jordan
     year: "2023"
-  - event: Gates Foundation online training to multiple agency partners
+    language: English
+  - organization: Gates Foundation
+    course: Online training to multiple agency partners
+    location: Remote
     year: "2023"
-  - event: UNHCR online training
+    language: English
+  - organization: UNHCR
+    course: Online training
+    location: Remote
     year: "2022"
-  - event: IFRC 2-day in-person training in Warsaw (including translation to Russian)
+    language: English
+  - organization: IFRC
+    course: 2-day in-person training (including translation to Russian)
+    location: Warsaw, Poland
     year: "2022"
-  - event: UNHCR in-person training in Warsaw
+    language: English, Russian
+  - organization: UNHCR
+    course: In-person training
+    location: Warsaw, Poland
     year: "2022"
-  - event: Arsht-Rock online training
+    language: English
+  - organization: Arsht-Rock
+    course: Online training
+    location: Remote
     year: "2022"
-
+    language: English
 work:
   - position: Humanitarian Project Coordinator
     company: Kobo

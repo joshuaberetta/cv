@@ -197,6 +197,13 @@ a:hover {
 
 .experience-item, .education-item {
   margin-bottom: 1.5rem;
+  padding-left: 1rem;
+  border-left: 3px solid #f0f0f0;
+  transition: border-color 0.2s;
+}
+
+.experience-item:hover, .education-item:hover {
+  border-left-color: var(--primary-color);
 }
 
 .item-header {
@@ -250,11 +257,62 @@ a:hover {
 }
 
 .trainings-list {
-  padding-left: 1.2rem;
+  padding-left: 0;
+  list-style: none;
+}
+
+.training-year-group {
+  margin-bottom: 1.5rem;
+}
+
+.year-label {
+  font-weight: bold;
+  font-size: 1.1rem;
+  color: var(--primary-color);
+  margin-bottom: 0.8rem;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 0.2rem;
 }
 
 .trainings-list li {
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
+  padding-left: 1rem;
+  border-left: 3px solid #f0f0f0;
+  transition: border-color 0.2s;
+}
+
+.trainings-list li:hover {
+  border-left-color: var(--primary-color);
+}
+
+.trainings-list li strong {
+  display: inline-block;
+  color: var(--text-color);
+  font-size: 1.05rem;
+}
+
+.trainings-list .location {
+  color: #666;
+  font-style: italic;
+}
+
+.training-org {
+  margin-bottom: 0.1rem;
+}
+
+.training-info {
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.trainings-list .course {
+  color: #444;
+}
+
+.trainings-list .language {
+  color: #777;
+  font-size: 0.9em;
+  font-style: italic;
 }
 
 /* Print Controls */

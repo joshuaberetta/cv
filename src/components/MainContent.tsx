@@ -97,16 +97,44 @@ const MainContent: React.FC<MainContentProps> = ({ basics, sections, work, educa
         );
       case 'trainings':
         if (!trainings || trainings.length === 0) return null;
+        
+        // Group trainings by year
+        const trainingsByYear = trainings.reduce((acc, training) => {
+          const year = training.year;
+          if (!acc[year]) {
+            acc[year] = [];
+          }
+          acc[year].push(training);
+          return acc;
+        }, {} as Record<string, typeof trainings>);
+
+        // Sort years descending
+        const sortedYears = Object.keys(trainingsByYear).sort((a, b) => parseInt(b) - parseInt(a));
+
         return (
           <div className="section" key={key}>
             <h2>{sections.trainings}</h2>
-            <ul className="trainings-list">
-              {trainings.map((training, index) => (
-                <li key={index}>
-                  {training.event}, {training.year}
-                </li>
+            <div className="trainings-container">
+              {sortedYears.map(year => (
+                <div key={year} className="training-year-group">
+                  <div className="year-label">{year}</div>
+                  <ul className="trainings-list">
+                    {trainingsByYear[year].map((training, index) => (
+                      <li key={index}>
+                        <div className="training-org">
+                          <strong>{training.organization}</strong>
+                          {training.location && <span className="location">, {training.location}</span>}
+                        </div>
+                        <div className="training-info">
+                          <span className="course">{training.course}</span>
+                          {training.language && <span className="language"> • {training.language}</span>}
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               ))}
-            </ul>
+            </div>
           </div>
         );
       default:
