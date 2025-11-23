@@ -16,14 +16,10 @@ const CoverLetter: React.FC<CoverLetterProps> = ({ data }) => {
 
   return (
     <div className="app">
-      <div className="no-print print-controls" style={{ display: 'flex', gap: '1rem' }}>
+      <div className="no-print print-controls">
         <Link 
           to="/" 
-          className="print-button" 
-          style={{ 
-            backgroundColor: '#666', 
-            textDecoration: 'none' 
-          }}
+          className="print-button secondary" 
         >
           ← Back to CV
         </Link>
