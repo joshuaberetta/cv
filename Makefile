@@ -29,6 +29,11 @@ build-prod:
 	@echo "Building production version..."
 	$(NPM) run build
 
+# Generate PDF with Typst
+pdf:
+	@echo "Generating PDF with Typst..."
+	typst compile public/cv.typ public/cv.pdf
+
 # Clean build artifacts
 clean:
 	@echo "Cleaning build artifacts..."

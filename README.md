@@ -8,6 +8,7 @@ A TypeScript & React-based CV generator that creates a responsive, printable HTM
 - **Modern Stack**: Built with TypeScript, React, and Vite
 - **Responsive Design**: Looks great on any device
 - **Print-Ready**: Optimized for PDF generation when printing
+- **Typst PDF**: Generate high-quality PDFs using Typst
 - **Component-Based**: Built with reusable React components
 - **Type-Safe**: Full TypeScript support for data models and components
 
@@ -51,6 +52,21 @@ npm run build
 ```
 
 This creates optimized files in the `dist` directory.
+
+### Generating PDF
+
+To generate a high-quality PDF version of your CV using Typst:
+
+1. Install [Typst](https://github.com/typst/typst) on your system.
+2. Run the generation command:
+
+```bash
+npm run build:pdf
+# or
+make pdf
+```
+
+This will generate `public/cv.pdf` which is linked from the "Download PDF" button on the site.
 
 ## Customizing Your CV
 

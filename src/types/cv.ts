@@ -40,6 +40,7 @@ export interface Basics {
   location: string;
   email: string | string[];
   phone: string;
+  phoneUrl?: string;
   website: string;
   birthdate: string;
   nationality: string;

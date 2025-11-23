@@ -8,14 +8,15 @@ interface AppProps {
 
 const App: React.FC<AppProps> = ({ data }) => {
   const handlePrint = () => {
-    window.print();
+    // Open the pre-generated PDF
+    window.open('/cv.pdf', '_blank');
   };
 
   return (
     <div className="app">
       <div className="no-print print-controls">
         <button onClick={handlePrint} className="print-button">
-          Print to PDF
+          Download PDF
         </button>
       </div>
       <CV data={data} />

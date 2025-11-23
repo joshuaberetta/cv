@@ -31,3 +31,7 @@ yarn-error.log*
 *.njsproj
 *.sln
 *.sw?
+
+# Generated files
+public/cv.pdf
+public/images/qr-code.png

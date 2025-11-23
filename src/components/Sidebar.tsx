@@ -36,7 +36,13 @@ const Sidebar: React.FC<SidebarProps> = ({ basics, languages }) => {
         </div>
         <div className="contact-item">
           <span className="contact-icon">📱</span>
-          <span>{basics.phone}</span>
+          {basics.phoneUrl ? (
+            <a href={basics.phoneUrl} target="_blank" rel="noopener noreferrer">
+              {basics.phone}
+            </a>
+          ) : (
+            <span>{basics.phone}</span>
+          )}
         </div>
         <div className="contact-item">
           <span className="contact-icon">🌐</span>
