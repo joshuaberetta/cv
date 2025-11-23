@@ -26,7 +26,7 @@ try {
       margin: 1,
       color: {
         dark: '#000000',
-        light: '#FFFFFF'
+        light: '#00000000'
       }
     }, (err) => {
       if (err) throw err;

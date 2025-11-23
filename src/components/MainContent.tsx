@@ -32,6 +32,29 @@ const MainContent: React.FC<MainContentProps> = ({ basics, work, education, trai
         ))}
       </div>
 
+      <div className="section">
+        <h2>Education</h2>
+        {education.map((edu, index) => (
+          <div className="education-item" key={index}>
+            <div className="item-header">
+              <div className="item-title">{edu.degree}</div>
+              <div className="item-date">{edu.startDate} – {edu.endDate}</div>
+            </div>
+            <div className="item-subtitle">
+              {edu.website ? (
+                <a href={edu.website} target="_blank" rel="noopener noreferrer">
+                  {edu.institution}
+                </a>
+              ) : (
+                edu.institution
+              )} ({edu.location})
+            </div>
+            <div>Level in EQF: {edu.level}</div>
+            {edu.description && <p>{edu.description}</p>}
+          </div>
+        ))}
+      </div>
+
       {deployments && deployments.length > 0 && (
         <div className="section">
           <h2>Humanitarian Deployments</h2>
@@ -49,28 +72,6 @@ const MainContent: React.FC<MainContentProps> = ({ basics, work, education, trai
           ))}
         </div>
       )}
-      
-      <div className="section">
-        <h2>Education</h2>
-        {education.map((edu, index) => (
-          <div className="education-item" key={index}>
-            <div className="item-header">
-              <div className="item-title">{edu.degree}</div>
-              <div className="item-date">{edu.startDate} – {edu.endDate}</div>
-            </div>
-            <div className="item-subtitle">
-              {edu.institution} ({edu.location})
-            </div>
-            <div>
-              <a href={edu.website} target="_blank" rel="noopener noreferrer">
-                {edu.website}
-              </a>
-            </div>
-            <div>Level in EQF: {edu.level}</div>
-            {edu.description && <p>{edu.description}</p>}
-          </div>
-        ))}
-      </div>
 
       {trainings && trainings.length > 0 && (
         <div className="section">
