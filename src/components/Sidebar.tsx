@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Basics, Language } from '../types/cv';
 
 interface SidebarProps {
@@ -7,6 +7,8 @@ interface SidebarProps {
 }
 
 const Sidebar: React.FC<SidebarProps> = ({ basics, languages }) => {
+  const [isExpanded, setIsExpanded] = useState(false);
+
   return (
     <div className="sidebar">
       <img 
@@ -14,9 +16,19 @@ const Sidebar: React.FC<SidebarProps> = ({ basics, languages }) => {
         alt={basics.name} 
         className="profile-img" 
       />
+
+      <button 
+        className="mobile-toggle" 
+        onClick={() => setIsExpanded(!isExpanded)}
+        aria-expanded={isExpanded}
+      >
+        {isExpanded ? 'Hide Contact & Skills' : 'Show Contact & Skills'}
+        <span className={`toggle-icon ${isExpanded ? 'expanded' : ''}`}>▼</span>
+      </button>
       
-      <div className="sidebar-section">
-        <h2>Contact</h2>
+      <div className={`sidebar-content ${isExpanded ? 'expanded' : ''}`}>
+        <div className="sidebar-section">
+          <h2>Contact</h2>
         <div className="contact-item">
           <span className="contact-icon">📍</span>
           <span>{basics.location}</span>
@@ -104,6 +116,7 @@ const Sidebar: React.FC<SidebarProps> = ({ basics, languages }) => {
             )}
           </div>
         ))}
+        </div>
       </div>
     </div>
   );
