@@ -1,0 +1,118 @@
+basics:
+  name: Joshua Beretta
+  tagline: Trying to do some good in this chaotic world we live in.
+  location: Cape Town, South Africa
+  email: 
+    - me@joshuaberetta.com
+    - joshua.beretta@kobo.ngo
+    - joshua@kobotoolbox.org
+  phone: (+27) 617525212
+  website: joshuaberetta.com
+  birthdate: 19/06/1995
+  nationality: South African, Italian
+  photo: /images/profile.jpg
+  latestVersionUrl: https://cv.joshuaberetta.com
+  summary: Joshua was on the core backend development team for Kobo, and now coordinates and manages project delivery, maintains the day-to-day contact with key partners, coordinates and performs online and in-person training sessions, leads Kobo's humanitarian response initiative, and works with users to address complex new needs with custom solutions.
+
+languages:
+  - language: English
+    fluency: Mother tongue
+  - language: Spanish
+    skills:
+      listening: B2
+      reading: B2
+      writing: B2
+      spokenProduction: B2
+      spokenInteraction: B2
+
+deployments:
+  - position: Humanitarian Deployment
+    organization: Kobo
+    location: Jamaica
+    startDate: 11/2025
+    endDate: 11/2025
+    description: Deployed to Jamaica for 2 weeks for the humanitarian response and recovery after Hurricane Melissa. Worked closely with OCHA, UNDAC, IOM, WFP, MLSS government ministry, and others on the ground to support the emergency IM efforts.
+
+trainings:
+  - event: Directorate of Epidemiology (DIEPI) Dominican Republic in-person workshop in Spanish
+    year: "2025"
+  - event: Grupo de Trabajo de Localización en Colombia (GTLo) 2 day in-person workshop on KoboToolbox and Introduction to AI for Humanitarians in Spanish
+    year: "2025"
+  - event: Cruz Vermelha de Timor-Leste (CVTL) 3 day in-person workshop on KoboToolbox and Introduction to AI for Humanitarians
+    year: "2025"
+  - event: UNTL Timor-Leste in-person training workshop
+    year: "2025"
+  - event: FAO/Tanzania NPPO/SADC 5 day in-person workshop, Dar es Salaam
+    year: "2025"
+  - event: Gates Foundation & GPEI in-person workshop at IFRC/ARCS offices in Kabul
+    year: "2025"
+  - event: UNHCR Buenos Aires online training
+    year: "2025"
+  - event: R4V/GIFFM Colombia in-person workshop
+    year: "2024"
+  - event: Pontificia Universidad Javeriana in-person training workshop
+    year: "2024"
+  - event: R4V/GTRM Peru in-person workshop
+    year: "2024"
+  - event: UNHCR Buenos Aires in-person training
+    year: "2024"
+  - event: Ethiopia Somali Regional Truth and Reconciliation Commission in-person training
+    year: "2023"
+  - event: SCI KoboToolbox online training
+    year: "2023"
+  - event: SGDD Turkey in-person workshop
+    year: "2023"
+  - event: ACF advanced KoboToolbox online training
+    year: "2023"
+  - event: Gates Foundation second online training to multiple agency partners
+    year: "2023"
+  - event: Gates Foundation in-person workshop in Amman to multiple agency partners
+    year: "2023"
+  - event: Gates Foundation online training to multiple agency partners
+    year: "2023"
+  - event: UNHCR online training
+    year: "2022"
+  - event: IFRC 2-day in-person training in Warsaw (including translation to Russian)
+    year: "2022"
+  - event: UNHCR in-person training in Warsaw
+    year: "2022"
+  - event: Arsht-Rock online training
+    year: "2022"
+
+work:
+  - position: Humanitarian Project Coordinator
+    company: Kobo
+    location: Remote
+    startDate: 07/2023
+    endDate: Current
+  - position: Project Coordinator
+    company: Kobo
+    location: Remote
+    startDate: 12/2022
+    endDate: 07/2023
+  - position: Software Developer
+    company: Kobo
+    location: Remote
+    startDate: 10/2020
+    endDate: 12/2022
+  - position: Mechanical Engineer
+    company: Aurecon Group
+    location: Cape Town, South Africa
+    startDate: 02/2018
+    endDate: 02/2020
+
+education:
+  - degree: MA in International Humanitarian Action
+    institution: Rijksuniversiteit Groningen
+    location: Groningen, Netherlands
+    website: https://www.rug.nl/
+    startDate: 09/2024
+    endDate: Current
+    level: Level 7
+  - degree: BSc Mechanical Engineering
+    institution: University of Cape Town
+    location: Cape Town, South Africa
+    website: https://www.uct.ac.za/
+    startDate: 02/2014
+    endDate: 12/2017
+    level: Level 6
