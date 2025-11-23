@@ -380,6 +380,8 @@ a:hover {
   justify-content: center;
   gap: 0.5rem;
   text-decoration: none;
+  line-height: 1.2;
+  min-width: 160px;
 }
 
 .print-button.secondary {
@@ -495,6 +497,7 @@ a:hover {
     display: flex;
     flex-direction: column;
     padding-bottom: 80px;
+    gap: 0;
   }
 
   .content-wrapper {
@@ -577,6 +580,7 @@ a:hover {
     padding: 1.5rem;
     opacity: 1;
     border-bottom: 1px solid var(--border-color);
+    margin-bottom: 2rem;
   }
 
   /* Hide the big profile image in sidebar on mobile since we have it in header */
@@ -604,7 +608,6 @@ a:hover {
   .print-button {
     font-size: 0.9rem;
     padding: 0.8rem 1rem;
-    flex: 1;
     white-space: nowrap;
   }
 }
