@@ -47,6 +47,7 @@ export interface Basics {
   nationality: string;
   photo?: string;
   linkedin?: string;
+  github?: string;
   summary?: string;
   latestVersionUrl?: string;
 }
