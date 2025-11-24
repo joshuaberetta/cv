@@ -70,6 +70,7 @@
       else if name == "phone" { "📱" }
       else if name == "website" { "🌐" }
       else if name == "linkedin" { "🔗" }
+      else if name == "github" { "💻" }
       else if name == "birthdate" { "🎂" }
       else if name == "nationality" { "🌍" }
     }
@@ -101,13 +102,20 @@
     
     #v(0.3em)
     
-    #if "linkedin" in data.basics [
+    #if "linkedin" in data.basics or "github" in data.basics [
       #grid(
-        columns: (auto),
+        columns: (auto, auto),
         gutter: 1em,
-        link("https://" + data.basics.linkedin)[
-          #image("/public/images/linkedin.svg", width: 1.5em)
-        ]
+        if "linkedin" in data.basics {
+          link("https://" + data.basics.linkedin)[
+            #image("/public/images/linkedin.svg", width: 1.5em)
+          ]
+        },
+        if "github" in data.basics {
+          link("https://" + data.basics.github)[
+            #image("/public/images/github.svg", width: 1.5em)
+          ]
+        }
       )
     ]
     

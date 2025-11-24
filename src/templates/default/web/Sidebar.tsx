@@ -58,6 +58,11 @@ const Sidebar: React.FC<SidebarProps> = ({ basics, languages, isOpen = false }) 
               <img src="/images/linkedin.svg" alt="LinkedIn" className="social-icon" />
             </a>
           )}
+          {basics.github && (
+            <a href={`https://${basics.github}`} target="_blank" rel="noopener noreferrer" title="GitHub">
+              <img src="/images/github.svg" alt="GitHub" className="social-icon" />
+            </a>
+          )}
         </div>
       </div>
       

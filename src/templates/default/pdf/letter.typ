@@ -66,9 +66,10 @@
         if name == "location" { "📍" }
         else if name == "email" { "📧" }
         else if name == "phone" { "📱" }
-        else if name == "website" { "🌐" }
-        else if name == "linkedin" { "🔗" }
-        else if name == "birthdate" { "🎂" }
+      else if name == "website" { "🌐" }
+      else if name == "linkedin" { "🔗" }
+      else if name == "github" { "💻" }
+      else if name == "birthdate" { "🎂" }
         else if name == "nationality" { "🌍" }
       }
       
@@ -99,17 +100,26 @@
       
       #v(0.3em)
       
-      #if "linkedin" in data.basics [
-        #grid(
-          columns: (auto),
-          gutter: 1em,
+    #v(0.3em)
+    
+    #if "linkedin" in data.basics or "github" in data.basics [
+      #grid(
+        columns: (auto, auto),
+        gutter: 1em,
+        if "linkedin" in data.basics {
           link("https://" + data.basics.linkedin)[
             #image("/public/images/linkedin.svg", width: 1.5em)
           ]
-        )
-      ]
-      
-      #v(1fr)
+        },
+        if "github" in data.basics {
+          link("https://" + data.basics.github)[
+            #image("/public/images/github.svg", width: 1.5em)
+          ]
+        }
+      )
+    ]
+    
+    #v(0.3em)      #v(1fr)
       
       #if "latestVersionUrl" in data.basics [
          #block(breakable: false, width: 100%)[
