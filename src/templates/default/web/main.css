@@ -656,59 +656,6 @@ a:hover {
   margin-bottom: 0;
 }
 
-.globe-filters {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.4rem;
-  margin-bottom: 0.5rem;
-}
-
-.globe-filter-select {
-  flex: 1;
-  min-width: 80px;
-  padding: 4px 6px;
-  font-size: 0.7rem;
-  border: 1px solid var(--border-color);
-  border-radius: 4px;
-  background-color: white;
-  color: var(--text-color);
-  cursor: pointer;
-  transition: border-color 0.2s;
-}
-
-.globe-filter-select:hover {
-  border-color: var(--primary-color);
-}
-
-.globe-filter-select:focus {
-  outline: none;
-  border-color: var(--primary-color);
-  box-shadow: 0 0 0 2px rgba(26, 115, 232, 0.1);
-}
-
-.globe-filter-clear {
-  padding: 4px 8px;
-  font-size: 0.7rem;
-  background-color: var(--light-gray);
-  border: 1px solid var(--border-color);
-  border-radius: 4px;
-  color: #666;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.globe-filter-clear:hover {
-  background-color: #e0e0e0;
-  color: var(--text-color);
-}
-
-.globe-filter-count {
-  text-align: center;
-  font-size: 0.7rem;
-  color: #888;
-  margin-bottom: 0.5rem;
-}
-
 @media print {
   .globe-container {
     display: none;

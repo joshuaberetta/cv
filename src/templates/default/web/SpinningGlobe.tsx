@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState, useMemo } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import * as d3 from 'd3';
 import * as topojson from 'topojson-client';
 
@@ -22,44 +22,6 @@ interface TooltipState {
   location: GlobeLocation | null;
 }
 
-// Map countries to regions
-const countryToRegion: Record<string, string> = {
-  'South Africa': 'Africa',
-  'Kenya': 'Africa',
-  'Tanzania': 'Africa',
-  'Ethiopia': 'Africa',
-  'Jamaica': 'Americas',
-  'Dominican Republic': 'Americas',
-  'Colombia': 'Americas',
-  'Peru': 'Americas',
-  'Argentina': 'Americas',
-  'USA': 'Americas',
-  'Timor-Leste': 'Asia-Pacific',
-  'Thailand': 'Asia-Pacific',
-  'Afghanistan': 'Asia',
-  'Jordan': 'Middle East',
-  'UAE': 'Middle East',
-  'Türkiye': 'Europe',
-  'Poland': 'Europe',
-  'Netherlands': 'Europe',
-  'Spain': 'Europe',
-  'Portugal': 'Europe',
-  'France': 'Europe',
-  'United Kingdom': 'Europe',
-  'Germany': 'Europe',
-  'Italy': 'Europe',
-};
-
-const getRegion = (country: string): string => {
-  return countryToRegion[country] || 'Other';
-};
-
-interface FilterState {
-  type: string;
-  country: string;
-  region: string;
-}
-
 const SpinningGlobe: React.FC = () => {
   const svgRef = useRef<SVGSVGElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -70,35 +32,8 @@ const SpinningGlobe: React.FC = () => {
     location: null
   });
   const [isSpinning, setIsSpinning] = useState(true);
-  const [filters, setFilters] = useState<FilterState>({
-    type: '',
-    country: '',
-    region: ''
-  });
-  const [allLocations, setAllLocations] = useState<GlobeLocation[]>([]);
+  const [activeFilter, setActiveFilter] = useState<string | null>(null);
   const timerRef = useRef<d3.Timer | null>(null);
-
-  // Derive unique filter options from locations
-  const filterOptions = useMemo(() => {
-    const types = ['', ...new Set(allLocations.map(l => l.type))];
-    const countries = ['', ...new Set(allLocations.map(l => l.country))].sort();
-    const regions = ['', ...new Set(allLocations.map(l => getRegion(l.country)))].sort();
-    return { types, countries, regions };
-  }, [allLocations]);
-
-  // Apply filters to locations
-  const filteredLocations = useMemo(() => {
-    return allLocations.filter(location => {
-      if (filters.type && location.type !== filters.type) return false;
-      if (filters.country && location.country !== filters.country) return false;
-      if (filters.region && getRegion(location.country) !== filters.region) return false;
-      return true;
-    });
-  }, [allLocations, filters]);
-
-  const handleFilterChange = (filterKey: keyof FilterState, value: string) => {
-    setFilters(prev => ({ ...prev, [filterKey]: value }));
-  };
 
   const getMarkerColor = (type: string): string => {
     switch (type) {
@@ -189,16 +124,15 @@ const SpinningGlobe: React.FC = () => {
         .attr('d', path as any);
 
       locations = locationData.locations;
-      setAllLocations(locations);
 
       // Draw markers function
       const drawMarkers = () => {
-        const locationsToShow = filteredLocations.length > 0 || Object.values(filters).some(v => v)
-          ? filteredLocations
+        const filteredLocations = activeFilter
+          ? locations.filter(l => l.type === activeFilter)
           : locations;
 
         const markers = markerGroup.selectAll<SVGCircleElement, GlobeLocation>('circle')
-          .data(locationsToShow, d => `${d.name}-${d.country}`);
+          .data(filteredLocations, d => `${d.name}-${d.country}`);
 
         markers.exit().remove();
 
@@ -341,7 +275,7 @@ const SpinningGlobe: React.FC = () => {
         timerRef.current.stop();
       }
     };
-  }, [isSpinning, filters, filteredLocations]);
+  }, [isSpinning, activeFilter]);
 
   const handlePlayPause = () => {
     if (isSpinning && timerRef.current) {
@@ -350,15 +284,13 @@ const SpinningGlobe: React.FC = () => {
     setIsSpinning(!isSpinning);
   };
 
-  const typeLabels: Record<string, string> = {
-    'home': 'Home',
-    'deployment': 'Deployment',
-    'training': 'Training',
-    'education': 'Education',
-    'travel': 'Travel',
-  };
-
-  const activeFilterCount = Object.values(filters).filter(v => v).length;
+  const filterTypes = [
+    { key: null, label: 'All', color: '#6b7280' },
+    { key: 'deployment', label: 'Deployments', color: '#ef4444' },
+    { key: 'training', label: 'Trainings', color: '#3b82f6' },
+    { key: 'education', label: 'Education', color: '#8b5cf6' },
+    { key: 'travel', label: 'Travel', color: '#10b981' },
+  ];
 
   return (
     <div className="globe-container" ref={containerRef}>
@@ -371,57 +303,6 @@ const SpinningGlobe: React.FC = () => {
         >
           {isSpinning ? '⏸' : '▶'}
         </button>
-      </div>
-
-      <div className="globe-filters">
-        <select
-          className="globe-filter-select"
-          value={filters.type}
-          onChange={(e) => handleFilterChange('type', e.target.value)}
-        >
-          <option value="">All Types</option>
-          {filterOptions.types.filter(t => t).map(type => (
-            <option key={type} value={type}>
-              {typeLabels[type] || type}
-            </option>
-          ))}
-        </select>
-
-        <select
-          className="globe-filter-select"
-          value={filters.region}
-          onChange={(e) => handleFilterChange('region', e.target.value)}
-        >
-          <option value="">All Regions</option>
-          {filterOptions.regions.filter(r => r).map(region => (
-            <option key={region} value={region}>{region}</option>
-          ))}
-        </select>
-
-        <select
-          className="globe-filter-select"
-          value={filters.country}
-          onChange={(e) => handleFilterChange('country', e.target.value)}
-        >
-          <option value="">All Countries</option>
-          {filterOptions.countries.filter(c => c).map(country => (
-            <option key={country} value={country}>{country}</option>
-          ))}
-        </select>
-
-        {activeFilterCount > 0 && (
-          <button
-            className="globe-filter-clear"
-            onClick={() => setFilters({ type: '', country: '', region: '' })}
-            title="Clear all filters"
-          >
-            Clear
-          </button>
-        )}
-      </div>
-
-      <div className="globe-filter-count">
-        Showing {filteredLocations.length} of {allLocations.length} locations
       </div>
 
       <div className="globe-wrapper">
@@ -448,26 +329,16 @@ const SpinningGlobe: React.FC = () => {
       </div>
 
       <div className="globe-legend">
-        <div className="legend-item">
-          <span className="legend-dot" style={{ backgroundColor: '#f59e0b' }} />
-          <span className="legend-label">Home</span>
-        </div>
-        <div className="legend-item">
-          <span className="legend-dot" style={{ backgroundColor: '#ef4444' }} />
-          <span className="legend-label">Deployment</span>
-        </div>
-        <div className="legend-item">
-          <span className="legend-dot" style={{ backgroundColor: '#3b82f6' }} />
-          <span className="legend-label">Training</span>
-        </div>
-        <div className="legend-item">
-          <span className="legend-dot" style={{ backgroundColor: '#8b5cf6' }} />
-          <span className="legend-label">Education</span>
-        </div>
-        <div className="legend-item">
-          <span className="legend-dot" style={{ backgroundColor: '#10b981' }} />
-          <span className="legend-label">Travel</span>
-        </div>
+        {filterTypes.map(({ key, label, color }) => (
+          <button
+            key={label}
+            className={`legend-item ${activeFilter === key ? 'active' : ''}`}
+            onClick={() => setActiveFilter(key)}
+          >
+            <span className="legend-dot" style={{ backgroundColor: color }} />
+            <span className="legend-label">{label}</span>
+          </button>
+        ))}
       </div>
 
       <p className="globe-hint">Drag to rotate • Click a point for details</p>
