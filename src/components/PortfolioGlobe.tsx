@@ -47,10 +47,10 @@ const PortfolioGlobe: React.FC<PortfolioGlobeProps> = ({
 
   const getMarkerColor = (type: string): string => {
     switch (type) {
-      case 'deployment': return '#ef4444';
-      case 'training': return '#3b82f6';
+      case 'deployment': return '#C34681';
+      case 'training': return '#3388F8';
       case 'travel': return '#10b981';
-      default: return '#6b7280';
+      default: return '#6A7A82';
     }
   };
 
@@ -423,9 +423,9 @@ const PortfolioGlobe: React.FC<PortfolioGlobeProps> = ({
   };
 
   const filterTypes = [
-    { key: null, label: 'All', color: '#9ca3af' },
-    { key: 'deployment', label: 'Deployments', color: '#ef4444' },
-    { key: 'training', label: 'Trainings', color: '#3b82f6' },
+    { key: null, label: 'All', color: '#6A7A82' },
+    { key: 'deployment', label: 'Deployments', color: '#C34681' },
+    { key: 'training', label: 'Trainings', color: '#3388F8' },
     { key: 'travel', label: 'Travel', color: '#10b981' },
   ];
 

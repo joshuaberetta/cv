@@ -1,41 +1,33 @@
-/* Globe Page - Dark Theme Portfolio */
+/* Globe Page - Portfolio Style (Solarized Light inspired) */
 
 .globe-page {
   min-height: 100vh;
-  background: linear-gradient(180deg, #0a0a0f 0%, #111827 50%, #0a0a0f 100%);
-  color: #e5e7eb;
-  font-family: 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: #fff;
+  color: #6A7A82;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 16px;
+  line-height: 1.6;
 }
 
 /* Hero Section */
 .hero-section {
-  min-height: 100vh;
+  min-height: 80vh;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 2rem;
   position: relative;
   overflow: hidden;
-}
-
-.hero-section::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: radial-gradient(ellipse at center, rgba(59, 130, 246, 0.1) 0%, transparent 70%);
-  pointer-events: none;
+  background: #fff;
 }
 
 .hero-content {
   display: flex;
   align-items: center;
-  gap: 4rem;
-  max-width: 1200px;
+  gap: 3rem;
+  max-width: 1100px;
   width: 100%;
-  z-index: 1;
+  margin: 0 auto;
 }
 
 .hero-text {
@@ -44,18 +36,15 @@
 }
 
 .hero-text h1 {
-  font-size: 3rem;
+  font-size: 2.5rem;
   font-weight: 700;
   margin-bottom: 0.5rem;
-  background: linear-gradient(135deg, #fff 0%, #9ca3af 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #6A7A82;
 }
 
 .hero-tagline {
   font-size: 1.1rem;
-  color: #9ca3af;
+  color: #6A7A82;
   margin-bottom: 2rem;
   font-style: italic;
 }
@@ -71,19 +60,19 @@
   align-items: center;
   gap: 0.5rem;
   padding: 0.6rem 1.2rem;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 8px;
-  color: #e5e7eb;
+  background: #FCF6E5;
+  border: 1px solid #6A7A82;
+  border-radius: 10px;
+  color: #6A7A82;
   text-decoration: none;
   font-size: 0.9rem;
   transition: all 0.2s;
 }
 
 .hero-link:hover {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.2);
-  transform: translateY(-2px);
+  background: #FCF6E5;
+  border-color: #C34681;
+  color: #C34681;
 }
 
 .hero-link .icon {
@@ -110,8 +99,8 @@
 }
 
 .globe-play-btn {
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: #FCF6E5;
+  border: 1px solid #6A7A82;
   border-radius: 50%;
   width: 36px;
   height: 36px;
@@ -120,13 +109,13 @@
   align-items: center;
   justify-content: center;
   font-size: 0.8rem;
-  color: #e5e7eb;
+  color: #6A7A82;
   transition: all 0.2s;
 }
 
 .globe-play-btn:hover {
-  background: rgba(255, 255, 255, 0.15);
-  border-color: rgba(255, 255, 255, 0.3);
+  border-color: #C34681;
+  color: #C34681;
 }
 
 .portfolio-globe-wrapper {
@@ -145,20 +134,21 @@
 }
 
 .portfolio-globe-ocean {
-  fill: rgba(30, 58, 95, 0.3);
-  stroke: rgba(59, 130, 246, 0.3);
-  stroke-width: 1.5;
+  fill: #e8f4fc;
+  stroke: #b3d9f2;
+  stroke-width: 1;
 }
 
 .portfolio-globe-graticule {
   fill: none;
-  stroke: rgba(59, 130, 246, 0.15);
+  stroke: #d0e8f5;
   stroke-width: 0.5;
+  stroke-opacity: 0.6;
 }
 
 .portfolio-globe-country {
-  fill: rgba(30, 41, 59, 0.8);
-  stroke: rgba(100, 116, 139, 0.4);
+  fill: #f5f5f5;
+  stroke: #ccc;
   stroke-width: 0.5;
 }
 
@@ -172,16 +162,16 @@
 
 .portfolio-globe-tooltip {
   position: absolute;
-  background: rgba(17, 24, 39, 0.95);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 8px;
-  padding: 10px 14px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  background: #FCF6E5;
+  border: 1px solid #6A7A82;
+  border-radius: 10px;
+  padding: 8px 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   z-index: 100;
   pointer-events: none;
   transform: translate(-50%, -100%);
-  max-width: 250px;
-  backdrop-filter: blur(8px);
+  max-width: 220px;
+  font-size: 0.85rem;
 }
 
 .portfolio-globe-tooltip .tooltip-header {
@@ -198,12 +188,13 @@
 }
 
 .portfolio-globe-tooltip strong {
-  color: #fff;
+  color: #6A7A82;
   font-size: 0.9rem;
+  font-weight: bold;
 }
 
 .portfolio-globe-tooltip .tooltip-subtitle {
-  color: #9ca3af;
+  color: #6A7A82;
   font-size: 0.8rem;
   margin-top: 4px;
 }
@@ -220,25 +211,24 @@
   display: flex;
   align-items: center;
   gap: 6px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 20px;
-  padding: 6px 14px;
-  font-size: 0.8rem;
+  background: #FCF6E5;
+  border: 1px solid #6A7A82;
+  border-radius: 12px;
+  padding: 3px 8px;
+  font-size: 0.7rem;
   cursor: pointer;
   transition: all 0.2s;
-  color: #9ca3af;
+  color: #6A7A82;
 }
 
 .filter-btn:hover {
-  background: rgba(255, 255, 255, 0.1);
-  color: #fff;
+  border-color: #3388F8;
+  color: #3388F8;
 }
 
 .filter-btn.active {
-  background: rgba(255, 255, 255, 0.1);
   border-color: var(--filter-color);
-  color: #fff;
+  color: var(--filter-color);
 }
 
 .filter-dot {
@@ -249,9 +239,10 @@
 
 .portfolio-globe-hint {
   text-align: center;
-  font-size: 0.75rem;
-  color: #6b7280;
-  margin-top: 1rem;
+  font-size: 0.7rem;
+  color: #999;
+  margin-top: 0.5rem;
+  margin-bottom: 0;
 }
 
 /* Detail Panel */
@@ -261,7 +252,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(4px);
   z-index: 1000;
   display: flex;
@@ -277,15 +268,16 @@
 }
 
 .detail-panel {
-  background: linear-gradient(180deg, #1f2937 0%, #111827 100%);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 16px;
+  background: #FCF6E5;
+  border: 1px solid #6A7A82;
+  border-radius: 10px;
   max-width: 600px;
   width: 100%;
   max-height: 80vh;
   overflow-y: auto;
   position: relative;
   animation: slideUp 0.3s ease;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
 }
 
 @keyframes slideUp {
@@ -303,8 +295,8 @@
   position: absolute;
   top: 1rem;
   right: 1rem;
-  background: rgba(255, 255, 255, 0.1);
-  border: none;
+  background: #fff;
+  border: 1px solid #6A7A82;
   border-radius: 50%;
   width: 36px;
   height: 36px;
@@ -312,14 +304,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #9ca3af;
+  color: #6A7A82;
   transition: all 0.2s;
   z-index: 10;
 }
 
 .detail-close:hover {
-  background: rgba(255, 255, 255, 0.2);
-  color: #fff;
+  border-color: #C34681;
+  color: #C34681;
 }
 
 .detail-close svg {
@@ -349,14 +341,14 @@
 }
 
 .detail-date {
-  color: #9ca3af;
+  color: #6A7A82;
   font-size: 0.9rem;
 }
 
 .detail-title {
-  font-size: 1.8rem;
+  font-size: 1.5rem;
   font-weight: 700;
-  color: #fff;
+  color: #6A7A82;
   margin-bottom: 0.5rem;
 }
 
@@ -364,7 +356,7 @@
   display: flex;
   align-items: center;
   gap: 6px;
-  color: #9ca3af;
+  color: #6A7A82;
   font-size: 0.95rem;
   margin-bottom: 1.5rem;
 }
@@ -375,7 +367,7 @@
 }
 
 .detail-description {
-  color: #d1d5db;
+  color: #6A7A82;
   line-height: 1.7;
   margin-bottom: 1.5rem;
 }
@@ -405,9 +397,9 @@
 
 .journey-stops h3 {
   font-size: 1rem;
-  color: #9ca3af;
+  color: #C34681;
   margin-bottom: 1.5rem;
-  font-weight: 500;
+  font-weight: normal;
 }
 
 .stops-timeline {
@@ -454,13 +446,14 @@
 
 .stop-content h4 {
   font-size: 1rem;
-  color: #fff;
+  color: #6A7A82;
   margin-bottom: 0.25rem;
+  font-weight: bold;
 }
 
 .stop-content p {
   font-size: 0.9rem;
-  color: #9ca3af;
+  color: #6A7A82;
   line-height: 1.5;
 }
 
@@ -479,28 +472,29 @@
 
 /* Sections */
 .section-content {
-  max-width: 1000px;
+  max-width: 1100px;
   margin: 0 auto;
-  padding: 4rem 2rem;
+  padding: 2rem 2rem;
 }
 
 .section-content h2 {
-  font-size: 2rem;
-  font-weight: 700;
+  font-size: 1.5rem;
+  font-weight: normal;
   margin-bottom: 1.5rem;
-  color: #fff;
+  color: #C34681;
+  padding-bottom: 0.5rem;
 }
 
 /* About Section */
 .about-section {
-  background: rgba(255, 255, 255, 0.02);
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  background: #fff;
+  border-top: 1px solid #6A7A82;
 }
 
 .about-section p {
-  font-size: 1.1rem;
+  font-size: 1rem;
   line-height: 1.8;
-  color: #d1d5db;
+  color: #6A7A82;
   max-width: 700px;
 }
 
@@ -518,11 +512,11 @@
   display: block;
   font-size: 2.5rem;
   font-weight: 700;
-  color: #3b82f6;
+  color: #3388F8;
 }
 
 .stat-label {
-  color: #9ca3af;
+  color: #6A7A82;
   font-size: 0.9rem;
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -530,7 +524,7 @@
 
 /* Projects Section */
 .projects-section {
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  border-top: 1px solid #6A7A82;
 }
 
 .projects-grid {
@@ -540,29 +534,29 @@
 }
 
 .project-card {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 12px;
+  background: #FCF6E5;
+  border: 1px solid #6A7A82;
+  border-radius: 10px;
   padding: 1.5rem;
   text-decoration: none;
-  transition: all 0.3s;
+  transition: all 0.2s;
   display: block;
 }
 
 .project-card:hover {
-  background: rgba(255, 255, 255, 0.06);
-  border-color: rgba(59, 130, 246, 0.3);
-  transform: translateY(-4px);
+  background: #FCF6E5;
+  border-color: #C34681;
 }
 
 .project-card h3 {
-  font-size: 1.2rem;
-  color: #fff;
+  font-size: 1.1rem;
+  color: #6A7A82;
   margin-bottom: 0.75rem;
+  font-weight: bold;
 }
 
 .project-card p {
-  color: #9ca3af;
+  color: #6A7A82;
   font-size: 0.9rem;
   line-height: 1.6;
   margin-bottom: 1rem;
@@ -575,17 +569,18 @@
 }
 
 .tag {
-  background: rgba(59, 130, 246, 0.2);
-  color: #60a5fa;
+  background: #fff;
+  color: #3388F8;
   padding: 4px 10px;
   border-radius: 12px;
   font-size: 0.75rem;
+  border: 1px solid #3388F8;
 }
 
 /* Contact Section */
 .contact-section {
-  background: rgba(255, 255, 255, 0.02);
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  background: #fff;
+  border-top: 1px solid #6A7A82;
 }
 
 .contact-grid {
@@ -599,32 +594,33 @@
   align-items: center;
   gap: 0.75rem;
   padding: 1rem 1.5rem;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 8px;
-  color: #d1d5db;
+  background: #FCF6E5;
+  border: 1px solid #6A7A82;
+  border-radius: 10px;
+  color: #6A7A82;
   text-decoration: none;
   transition: all 0.2s;
 }
 
 .contact-item:hover {
-  background: rgba(255, 255, 255, 0.06);
-  border-color: rgba(255, 255, 255, 0.15);
+  background: #FCF6E5;
+  border-color: #C34681;
+  color: #C34681;
 }
 
 .contact-icon {
   width: 24px;
   height: 24px;
-  color: #3b82f6;
+  color: #C34681;
 }
 
 /* Footer */
 .globe-footer {
   text-align: center;
   padding: 2rem;
-  color: #6b7280;
+  color: #6A7A82;
   font-size: 0.85rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  border-top: 1px solid #6A7A82;
 }
 
 /* Responsive */
@@ -640,7 +636,7 @@
   }
 
   .hero-text h1 {
-    font-size: 2.2rem;
+    font-size: 2rem;
   }
 
   .hero-links {
@@ -667,11 +663,11 @@
   }
 
   .section-content {
-    padding: 3rem 1rem;
+    padding: 2rem 1rem;
   }
 
   .section-content h2 {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
   }
 
   .stats-grid {
@@ -688,6 +684,6 @@
   }
 
   .detail-title {
-    font-size: 1.4rem;
+    font-size: 1.3rem;
   }
 }
