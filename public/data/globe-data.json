@@ -1,0 +1,336 @@
+{
+  "locations": [
+    {
+      "id": "cape-town",
+      "name": "Cape Town",
+      "country": "South Africa",
+      "latitude": -33.9249,
+      "longitude": 18.4241,
+      "type": "travel",
+      "title": "Home Base",
+      "description": "Where it all started. Cape Town has been my home and base for exploring the world."
+    },
+    {
+      "id": "jamaica-deployment",
+      "name": "Kingston",
+      "country": "Jamaica",
+      "latitude": 18.0179,
+      "longitude": -76.8099,
+      "type": "deployment",
+      "title": "Hurricane Melissa Response",
+      "date": "November 2025",
+      "description": "Deployed to Jamaica for 2 weeks for the humanitarian response and recovery after Hurricane Melissa. Worked closely with OCHA, UNDAC, IOM, WFP, MLSS government ministry, and others on the ground to support the emergency IM efforts."
+    },
+    {
+      "id": "santo-domingo-training",
+      "name": "Santo Domingo",
+      "country": "Dominican Republic",
+      "latitude": 18.4861,
+      "longitude": -69.9312,
+      "type": "training",
+      "title": "DIEPI Workshop",
+      "date": "2025",
+      "description": "In-person workshop with the Directorate of Epidemiology (DIEPI) in Spanish."
+    },
+    {
+      "id": "bogota-training-2025",
+      "name": "Bogotá",
+      "country": "Colombia",
+      "latitude": 4.7110,
+      "longitude": -74.0721,
+      "type": "training",
+      "title": "GTLo KoboToolbox & AI Training",
+      "date": "2025",
+      "description": "KoboToolbox and Introduction to AI for Humanitarians training for the Grupo de Trabajo de Localización en Colombia (GTLo). Delivered in Spanish."
+    },
+    {
+      "id": "dili-training",
+      "name": "Dili",
+      "country": "Timor-Leste",
+      "latitude": -8.5569,
+      "longitude": 125.5603,
+      "type": "training",
+      "title": "CVTL & UNTL Workshops",
+      "date": "2025",
+      "description": "Multiple workshops in Timor-Leste including KoboToolbox and Introduction to AI for Humanitarians with Cruz Vermelha de Timor-Leste (CVTL) and a training workshop with UNTL. Delivered in English and Tetum."
+    },
+    {
+      "id": "dar-training",
+      "name": "Dar es Salaam",
+      "country": "Tanzania",
+      "latitude": -6.7924,
+      "longitude": 39.2083,
+      "type": "training",
+      "title": "FAO/SADC Workshop",
+      "date": "2025",
+      "description": "5-day in-person workshop with FAO, Tanzania NPPO, and SADC partners."
+    },
+    {
+      "id": "kabul-training",
+      "name": "Kabul",
+      "country": "Afghanistan",
+      "latitude": 34.5553,
+      "longitude": 69.2075,
+      "type": "training",
+      "title": "Gates Foundation & GPEI Workshop",
+      "date": "2025",
+      "description": "In-person workshop at IFRC/ARCS offices supporting polio eradication efforts."
+    },
+    {
+      "id": "lima-training",
+      "name": "Lima",
+      "country": "Peru",
+      "latitude": -12.0464,
+      "longitude": -77.0428,
+      "type": "training",
+      "title": "R4V/GTRM Workshop",
+      "date": "2024",
+      "description": "In-person workshop supporting the Venezuela refugee response coordination. Delivered in Spanish."
+    },
+    {
+      "id": "buenos-aires-training",
+      "name": "Buenos Aires",
+      "country": "Argentina",
+      "latitude": -34.6037,
+      "longitude": -58.3816,
+      "type": "training",
+      "title": "UNHCR Training",
+      "date": "2024-2025",
+      "description": "Multiple training sessions with UNHCR Buenos Aires, both in-person and online."
+    },
+    {
+      "id": "jijiga-training",
+      "name": "Jijiga",
+      "country": "Ethiopia",
+      "latitude": 9.3500,
+      "longitude": 42.8000,
+      "type": "training",
+      "title": "Truth & Reconciliation Commission",
+      "date": "2023",
+      "description": "In-person training with the Ethiopia Somali Regional Truth and Reconciliation Commission."
+    },
+    {
+      "id": "ankara-training",
+      "name": "Ankara",
+      "country": "Türkiye",
+      "latitude": 39.9334,
+      "longitude": 32.8597,
+      "type": "training",
+      "title": "SGDD Workshop",
+      "date": "2023",
+      "description": "In-person workshop supporting refugee assistance programs."
+    },
+    {
+      "id": "amman-training",
+      "name": "Amman",
+      "country": "Jordan",
+      "latitude": 31.9454,
+      "longitude": 35.9284,
+      "type": "training",
+      "title": "Gates Foundation Multi-agency Workshop",
+      "date": "2023",
+      "description": "In-person workshop bringing together multiple agency partners for data collection training."
+    },
+    {
+      "id": "warsaw-training",
+      "name": "Warsaw",
+      "country": "Poland",
+      "latitude": 52.2297,
+      "longitude": 21.0122,
+      "type": "training",
+      "title": "IFRC & UNHCR Trainings",
+      "date": "2022",
+      "description": "2-day in-person training with IFRC including translation to Russian, and separate UNHCR training supporting the Ukraine response."
+    },
+    {
+      "id": "groningen-edu",
+      "name": "Groningen",
+      "country": "Netherlands",
+      "latitude": 53.2194,
+      "longitude": 6.5665,
+      "type": "travel",
+      "title": "NOHA Masters",
+      "date": "2024-2025",
+      "description": "Studying the NOHA Masters in International Humanitarian Action at Rijksuniversiteit Groningen as an Erasmus Mundus scholar.",
+      "journeyId": "europe-2024"
+    },
+    {
+      "id": "bilbao-edu",
+      "name": "Bilbao",
+      "country": "Spain",
+      "latitude": 43.2630,
+      "longitude": -2.9350,
+      "type": "travel",
+      "title": "Universidad de Deusto",
+      "date": "2025",
+      "description": "Second semester of NOHA Masters at Universidad de Deusto.",
+      "journeyId": "europe-2024"
+    },
+    {
+      "id": "lisbon",
+      "name": "Lisbon",
+      "country": "Portugal",
+      "latitude": 38.7223,
+      "longitude": -9.1393,
+      "type": "travel",
+      "title": "Lisbon",
+      "description": "Exploring the historic streets and vibrant culture of Portugal's capital.",
+      "journeyId": "europe-2024"
+    },
+    {
+      "id": "madrid",
+      "name": "Madrid",
+      "country": "Spain",
+      "latitude": 40.4168,
+      "longitude": -3.7038,
+      "type": "travel",
+      "title": "Madrid",
+      "description": "Discovering the art, architecture, and energy of Spain's capital.",
+      "journeyId": "europe-2024"
+    },
+    {
+      "id": "barcelona",
+      "name": "Barcelona",
+      "country": "Spain",
+      "latitude": 41.3851,
+      "longitude": 2.1734,
+      "type": "travel",
+      "title": "Barcelona",
+      "description": "Gaudi's masterpieces and Mediterranean vibes.",
+      "journeyId": "europe-2024"
+    },
+    {
+      "id": "paris",
+      "name": "Paris",
+      "country": "France",
+      "latitude": 48.8566,
+      "longitude": 2.3522,
+      "type": "travel",
+      "title": "Paris",
+      "description": "The city of lights and endless inspiration.",
+      "journeyId": "europe-2024"
+    },
+    {
+      "id": "amsterdam",
+      "name": "Amsterdam",
+      "country": "Netherlands",
+      "latitude": 52.3676,
+      "longitude": 4.9041,
+      "type": "travel",
+      "title": "Amsterdam",
+      "description": "Canals, bikes, and Dutch culture.",
+      "journeyId": "europe-2024"
+    },
+    {
+      "id": "berlin",
+      "name": "Berlin",
+      "country": "Germany",
+      "latitude": 52.5200,
+      "longitude": 13.4050,
+      "type": "travel",
+      "title": "Berlin",
+      "description": "History, art, and a city constantly reinventing itself.",
+      "journeyId": "europe-2024"
+    },
+    {
+      "id": "rome",
+      "name": "Rome",
+      "country": "Italy",
+      "latitude": 41.9028,
+      "longitude": 12.4964,
+      "type": "travel",
+      "title": "Rome",
+      "description": "Ancient history meets modern Italian life.",
+      "journeyId": "europe-2024"
+    },
+    {
+      "id": "nairobi",
+      "name": "Nairobi",
+      "country": "Kenya",
+      "latitude": -1.2921,
+      "longitude": 36.8219,
+      "type": "travel",
+      "title": "Nairobi",
+      "description": "Gateway to East Africa and incredible wildlife.",
+      "journeyId": "east-africa"
+    },
+    {
+      "id": "zanzibar",
+      "name": "Zanzibar",
+      "country": "Tanzania",
+      "latitude": -6.1659,
+      "longitude": 39.2026,
+      "type": "travel",
+      "title": "Zanzibar",
+      "description": "Spice island paradise with rich Swahili history.",
+      "journeyId": "east-africa"
+    },
+    {
+      "id": "johannesburg",
+      "name": "Johannesburg",
+      "country": "South Africa",
+      "latitude": -26.2041,
+      "longitude": 28.0473,
+      "type": "travel",
+      "title": "Johannesburg",
+      "description": "South Africa's largest city, full of history and resilience."
+    },
+    {
+      "id": "durban",
+      "name": "Durban",
+      "country": "South Africa",
+      "latitude": -29.8587,
+      "longitude": 31.0218,
+      "type": "travel",
+      "title": "Durban",
+      "description": "Coastal city with amazing Indian cuisine and warm waters."
+    },
+    {
+      "id": "new-york",
+      "name": "New York",
+      "country": "USA",
+      "latitude": 40.7128,
+      "longitude": -74.0060,
+      "type": "travel",
+      "title": "New York City",
+      "description": "The city that never sleeps."
+    },
+    {
+      "id": "bangkok",
+      "name": "Bangkok",
+      "country": "Thailand",
+      "latitude": 13.7563,
+      "longitude": 100.5018,
+      "type": "travel",
+      "title": "Bangkok",
+      "description": "Temples, street food, and organized chaos."
+    },
+    {
+      "id": "dubai",
+      "name": "Dubai",
+      "country": "UAE",
+      "latitude": 25.2048,
+      "longitude": 55.2708,
+      "type": "travel",
+      "title": "Dubai",
+      "description": "Futuristic architecture rising from the desert."
+    }
+  ],
+  "journeys": [
+    {
+      "id": "europe-2024",
+      "name": "European Adventures",
+      "description": "Exploring Europe during my NOHA Masters studies - from the Netherlands to Spain, with stops along the way.",
+      "date": "2024-2025",
+      "color": "#10b981",
+      "locations": ["groningen-edu", "amsterdam", "paris", "berlin", "rome", "barcelona", "madrid", "lisbon", "bilbao-edu"]
+    },
+    {
+      "id": "east-africa",
+      "name": "East African Journey",
+      "description": "Exploring the incredible landscapes and cultures of East Africa.",
+      "color": "#f59e0b",
+      "locations": ["nairobi", "zanzibar", "dar-training"]
+    }
+  ]
+}

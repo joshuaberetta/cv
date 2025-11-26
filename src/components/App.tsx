@@ -4,6 +4,7 @@ import { getTemplateComponent } from '../templates/registry';
 import { CVData } from '../types/cv';
 import { PDF_FILENAME } from '../cv-meta';
 import CoverLetter from '../cover-letters/drc-roster-2025/CoverLetter';
+import GlobePage from '../pages/GlobePage';
 
 interface AppProps {
   data: CVData;
@@ -37,6 +38,7 @@ const App: React.FC<AppProps> = ({ data }) => {
   return (
     <Routes>
       <Route path="/" element={<CVPage data={data} />} />
+      <Route path="/globe" element={<GlobePage basics={data.basics} />} />
       <Route path="/cover-letters/drc-roster-2025" element={<CoverLetter data={data} />} />
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
