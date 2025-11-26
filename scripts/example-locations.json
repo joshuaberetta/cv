@@ -1,0 +1,15 @@
+{
+  "locations": [
+    "Cape Town, South Africa",
+    "New York, USA",
+    "Tokyo, Japan",
+    {
+      "name": "Paris",
+      "country": "France"
+    },
+    {
+      "name": "Berlin",
+      "country": "Germany"
+    }
+  ]
+}
