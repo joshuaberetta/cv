@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PortfolioGlobe from '../components/PortfolioGlobe';
 import LocationDetail from '../components/LocationDetail';
 import { GlobeLocation, Journey } from '../types/globe';
@@ -19,6 +19,34 @@ const GlobePage: React.FC<GlobePageProps> = ({ basics }) => {
   const [selectedLocation, setSelectedLocation] = useState<GlobeLocation | null>(null);
   const [selectedJourney, setSelectedJourney] = useState<Journey | null>(null);
   const [activeFilter, setActiveFilter] = useState<string | null>(null);
+  const [activeSection, setActiveSection] = useState<string>('');
+
+  // Track active section on scroll
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = ['about', 'projects', 'contact'];
+      const scrollPosition = window.scrollY + 100;
+
+      for (const sectionId of sections) {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          const { offsetTop, offsetHeight } = element;
+          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
+            setActiveSection(sectionId);
+            return;
+          }
+        }
+      }
+
+      // If we're at the top, no section is active
+      if (window.scrollY < window.innerHeight * 0.5) {
+        setActiveSection('');
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const handleLocationSelect = (location: GlobeLocation | null) => {
     setSelectedLocation(location);
@@ -56,8 +84,27 @@ const GlobePage: React.FC<GlobePageProps> = ({ basics }) => {
     }
   ];
 
+  const navItems = [
+    { id: 'about', label: 'about' },
+    { id: 'projects', label: 'projects' },
+    { id: 'contact', label: 'contact' },
+  ];
+
   return (
     <div className="globe-page">
+      {/* Sticky Side Navigation */}
+      <nav className="side-nav">
+        {navItems.map(({ id, label }) => (
+          <a
+            key={id}
+            href={`#${id}`}
+            className={`side-nav-link ${activeSection === id ? 'active' : ''}`}
+          >
+            {label}
+          </a>
+        ))}
+      </nav>
+
       {/* Hero Section with Globe */}
       <section className="hero-section">
         <div className="hero-content">
