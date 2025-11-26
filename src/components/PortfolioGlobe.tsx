@@ -1,7 +1,45 @@
-import React, { useEffect, useRef, useState, useCallback } from 'react';
+import React, { useEffect, useRef, useState, useCallback, useMemo } from 'react';
 import * as d3 from 'd3';
 import * as topojson from 'topojson-client';
 import { GlobeLocation, Journey, GlobeData } from '../types/globe';
+
+// Map countries to regions
+const countryToRegion: Record<string, string> = {
+  'South Africa': 'Africa',
+  'Kenya': 'Africa',
+  'Tanzania': 'Africa',
+  'Ethiopia': 'Africa',
+  'Jamaica': 'Americas',
+  'Dominican Republic': 'Americas',
+  'Colombia': 'Americas',
+  'Peru': 'Americas',
+  'Argentina': 'Americas',
+  'USA': 'Americas',
+  'Timor-Leste': 'Asia-Pacific',
+  'Thailand': 'Asia-Pacific',
+  'Afghanistan': 'Asia',
+  'Jordan': 'Middle East',
+  'UAE': 'Middle East',
+  'Türkiye': 'Europe',
+  'Poland': 'Europe',
+  'Netherlands': 'Europe',
+  'Spain': 'Europe',
+  'Portugal': 'Europe',
+  'France': 'Europe',
+  'United Kingdom': 'Europe',
+  'Germany': 'Europe',
+  'Italy': 'Europe',
+};
+
+const getRegion = (country: string): string => {
+  return countryToRegion[country] || 'Other';
+};
+
+interface FilterState {
+  type: string;
+  country: string;
+  region: string;
+}
 
 interface PortfolioGlobeProps {
   onLocationSelect: (location: GlobeLocation | null) => void;
@@ -41,9 +79,44 @@ const PortfolioGlobe: React.FC<PortfolioGlobeProps> = ({
   });
   const [isSpinning, setIsSpinning] = useState(true);
   const [globeData, setGlobeData] = useState<GlobeData | null>(null);
+  const [filters, setFilters] = useState<FilterState>({
+    type: '',
+    country: '',
+    region: ''
+  });
   const timerRef = useRef<d3.Timer | null>(null);
   const projectionRef = useRef<d3.GeoProjection | null>(null);
   const isSpinningRef = useRef(true);
+
+  // Derive unique filter options from locations
+  const filterOptions = useMemo(() => {
+    if (!globeData) return { types: [], countries: [], regions: [] };
+    const types = [...new Set(globeData.locations.map(l => l.type))];
+    const countries = [...new Set(globeData.locations.map(l => l.country))].sort();
+    const regions = [...new Set(globeData.locations.map(l => getRegion(l.country)))].sort();
+    return { types, countries, regions };
+  }, [globeData]);
+
+  // Apply filters to locations
+  const computedFilteredLocations = useMemo(() => {
+    if (!globeData) return [];
+    return globeData.locations.filter(location => {
+      if (filters.type && location.type !== filters.type) return false;
+      if (filters.country && location.country !== filters.country) return false;
+      if (filters.region && getRegion(location.country) !== filters.region) return false;
+      return true;
+    });
+  }, [globeData, filters]);
+
+  const handleFilterChange = (filterKey: keyof FilterState, value: string) => {
+    setFilters(prev => ({ ...prev, [filterKey]: value }));
+  };
+
+  const clearFilters = () => {
+    setFilters({ type: '', country: '', region: '' });
+  };
+
+  const activeFilterCount = Object.values(filters).filter(v => v).length;
 
   const getMarkerColor = (type: string): string => {
     switch (type) {
@@ -149,13 +222,11 @@ const PortfolioGlobe: React.FC<PortfolioGlobeProps> = ({
         .attr('class', 'portfolio-globe-country')
         .attr('d', path as any);
 
-      // Filter locations
-      const filteredLocations = activeFilter
-        ? globeData.locations.filter(l => l.type === activeFilter)
-        : globeData.locations;
+      // Use computed filtered locations
+      const filteredLocations = computedFilteredLocations;
 
-      // Get journeys to display
-      const visibleJourneys = activeFilter === 'travel' || !activeFilter
+      // Get journeys to display (show when travel filter or no filters active)
+      const visibleJourneys = filters.type === 'travel' || !filters.type
         ? globeData.journeys
         : [];
 
@@ -407,7 +478,7 @@ const PortfolioGlobe: React.FC<PortfolioGlobeProps> = ({
         timerRef.current.stop();
       }
     };
-  }, [globeData, activeFilter, selectedLocation, selectedJourney, onLocationSelect, onJourneySelect]);
+  }, [globeData, filters, computedFilteredLocations, selectedLocation, selectedJourney, onLocationSelect, onJourneySelect]);
 
   useEffect(() => {
     const cleanup = drawGlobe();
@@ -422,12 +493,11 @@ const PortfolioGlobe: React.FC<PortfolioGlobeProps> = ({
     setIsSpinning(isSpinningRef.current);
   };
 
-  const filterTypes = [
-    { key: null, label: 'All', color: '#9ca3af' },
-    { key: 'deployment', label: 'Deployments', color: '#ef4444' },
-    { key: 'training', label: 'Trainings', color: '#3b82f6' },
-    { key: 'travel', label: 'Travel', color: '#10b981' },
-  ];
+  const typeLabels: Record<string, string> = {
+    'deployment': 'Deployment',
+    'training': 'Training',
+    'travel': 'Travel',
+  };
 
   return (
     <div className="portfolio-globe-container" ref={containerRef}>
@@ -467,17 +537,69 @@ const PortfolioGlobe: React.FC<PortfolioGlobeProps> = ({
       </div>
 
       <div className="portfolio-globe-filters">
-        {filterTypes.map(({ key, label, color }) => (
+        <select
+          className="globe-filter-select"
+          value={filters.type}
+          onChange={(e) => handleFilterChange('type', e.target.value)}
+        >
+          <option value="">All Types</option>
+          {filterOptions.types.map(type => (
+            <option key={type} value={type}>
+              {typeLabels[type] || type}
+            </option>
+          ))}
+        </select>
+
+        <select
+          className="globe-filter-select"
+          value={filters.region}
+          onChange={(e) => handleFilterChange('region', e.target.value)}
+        >
+          <option value="">All Regions</option>
+          {filterOptions.regions.map(region => (
+            <option key={region} value={region}>{region}</option>
+          ))}
+        </select>
+
+        <select
+          className="globe-filter-select"
+          value={filters.country}
+          onChange={(e) => handleFilterChange('country', e.target.value)}
+        >
+          <option value="">All Countries</option>
+          {filterOptions.countries.map(country => (
+            <option key={country} value={country}>{country}</option>
+          ))}
+        </select>
+
+        {activeFilterCount > 0 && (
           <button
-            key={label}
-            className={`filter-btn ${activeFilter === key ? 'active' : ''}`}
-            onClick={() => onFilterChange(key)}
-            style={{ '--filter-color': color } as React.CSSProperties}
+            className="globe-filter-clear"
+            onClick={clearFilters}
+            title="Clear all filters"
           >
-            <span className="filter-dot" style={{ backgroundColor: color }} />
-            {label}
+            Clear
           </button>
-        ))}
+        )}
+      </div>
+
+      <div className="portfolio-globe-filter-count">
+        Showing {computedFilteredLocations.length} of {globeData?.locations.length || 0} locations
+      </div>
+
+      <div className="portfolio-globe-legend">
+        <div className="legend-item">
+          <span className="legend-dot" style={{ backgroundColor: '#ef4444' }} />
+          <span>Deployment</span>
+        </div>
+        <div className="legend-item">
+          <span className="legend-dot" style={{ backgroundColor: '#3b82f6' }} />
+          <span>Training</span>
+        </div>
+        <div className="legend-item">
+          <span className="legend-dot" style={{ backgroundColor: '#10b981' }} />
+          <span>Travel</span>
+        </div>
       </div>
 
       <p className="portfolio-globe-hint">Drag to explore • Click locations for details</p>
