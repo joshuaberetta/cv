@@ -1,0 +1,244 @@
+{
+  "locations": [
+    {
+      "name": "Cape Town",
+      "country": "South Africa",
+      "latitude": -33.9249,
+      "longitude": 18.4241,
+      "type": "home",
+      "details": "Home base"
+    },
+    {
+      "name": "Kingston",
+      "country": "Jamaica",
+      "latitude": 18.0179,
+      "longitude": -76.8099,
+      "type": "deployment",
+      "details": "Hurricane Melissa response (Nov 2025) - Worked with OCHA, UNDAC, IOM, WFP, MLSS"
+    },
+    {
+      "name": "Santo Domingo",
+      "country": "Dominican Republic",
+      "latitude": 18.4861,
+      "longitude": -69.9312,
+      "type": "training",
+      "details": "DIEPI Workshop (2025)"
+    },
+    {
+      "name": "Bogotá",
+      "country": "Colombia",
+      "latitude": 4.7110,
+      "longitude": -74.0721,
+      "type": "training",
+      "details": "GTLo KoboToolbox & AI Training (2025), R4V/GIFMM Workshop (2024), Universidad Javeriana (2024)"
+    },
+    {
+      "name": "Dili",
+      "country": "Timor-Leste",
+      "latitude": -8.5569,
+      "longitude": 125.5603,
+      "type": "training",
+      "details": "CVTL KoboToolbox & AI Training (2025), UNTL Workshop (2025)"
+    },
+    {
+      "name": "Dar es Salaam",
+      "country": "Tanzania",
+      "latitude": -6.7924,
+      "longitude": 39.2083,
+      "type": "training",
+      "details": "FAO/SADC 5-day Workshop (2025)"
+    },
+    {
+      "name": "Kabul",
+      "country": "Afghanistan",
+      "latitude": 34.5553,
+      "longitude": 69.2075,
+      "type": "training",
+      "details": "Gates Foundation & GPEI Workshop at IFRC/ARCS (2025)"
+    },
+    {
+      "name": "Lima",
+      "country": "Peru",
+      "latitude": -12.0464,
+      "longitude": -77.0428,
+      "type": "training",
+      "details": "R4V/GTRM Workshop (2024)"
+    },
+    {
+      "name": "Buenos Aires",
+      "country": "Argentina",
+      "latitude": -34.6037,
+      "longitude": -58.3816,
+      "type": "training",
+      "details": "UNHCR Training (2024, 2025)"
+    },
+    {
+      "name": "Jijiga",
+      "country": "Ethiopia",
+      "latitude": 9.3500,
+      "longitude": 42.8000,
+      "type": "training",
+      "details": "Ethiopia Somali Regional Truth & Reconciliation Commission (2023)"
+    },
+    {
+      "name": "Ankara",
+      "country": "Türkiye",
+      "latitude": 39.9334,
+      "longitude": 32.8597,
+      "type": "training",
+      "details": "SGDD Workshop (2023)"
+    },
+    {
+      "name": "Amman",
+      "country": "Jordan",
+      "latitude": 31.9454,
+      "longitude": 35.9284,
+      "type": "training",
+      "details": "Gates Foundation Multi-agency Workshop (2023)"
+    },
+    {
+      "name": "Warsaw",
+      "country": "Poland",
+      "latitude": 52.2297,
+      "longitude": 21.0122,
+      "type": "training",
+      "details": "IFRC & UNHCR Trainings (2022)"
+    },
+    {
+      "name": "Groningen",
+      "country": "Netherlands",
+      "latitude": 53.2194,
+      "longitude": 6.5665,
+      "type": "education",
+      "details": "NOHA Masters in International Humanitarian Action"
+    },
+    {
+      "name": "Bilbao",
+      "country": "Spain",
+      "latitude": 43.2630,
+      "longitude": -2.9350,
+      "type": "education",
+      "details": "Universidad de Deusto - NOHA Masters"
+    },
+    {
+      "name": "Lisbon",
+      "country": "Portugal",
+      "latitude": 38.7223,
+      "longitude": -9.1393,
+      "type": "travel",
+      "details": "Travel"
+    },
+    {
+      "name": "Madrid",
+      "country": "Spain",
+      "latitude": 40.4168,
+      "longitude": -3.7038,
+      "type": "travel",
+      "details": "Travel"
+    },
+    {
+      "name": "Barcelona",
+      "country": "Spain",
+      "latitude": 41.3851,
+      "longitude": 2.1734,
+      "type": "travel",
+      "details": "Travel"
+    },
+    {
+      "name": "Paris",
+      "country": "France",
+      "latitude": 48.8566,
+      "longitude": 2.3522,
+      "type": "travel",
+      "details": "Travel"
+    },
+    {
+      "name": "London",
+      "country": "United Kingdom",
+      "latitude": 51.5074,
+      "longitude": -0.1278,
+      "type": "travel",
+      "details": "Travel"
+    },
+    {
+      "name": "Amsterdam",
+      "country": "Netherlands",
+      "latitude": 52.3676,
+      "longitude": 4.9041,
+      "type": "travel",
+      "details": "Travel"
+    },
+    {
+      "name": "Berlin",
+      "country": "Germany",
+      "latitude": 52.5200,
+      "longitude": 13.4050,
+      "type": "travel",
+      "details": "Travel"
+    },
+    {
+      "name": "Rome",
+      "country": "Italy",
+      "latitude": 41.9028,
+      "longitude": 12.4964,
+      "type": "travel",
+      "details": "Travel"
+    },
+    {
+      "name": "Nairobi",
+      "country": "Kenya",
+      "latitude": -1.2921,
+      "longitude": 36.8219,
+      "type": "travel",
+      "details": "Travel"
+    },
+    {
+      "name": "Zanzibar",
+      "country": "Tanzania",
+      "latitude": -6.1659,
+      "longitude": 39.2026,
+      "type": "travel",
+      "details": "Travel"
+    },
+    {
+      "name": "Johannesburg",
+      "country": "South Africa",
+      "latitude": -26.2041,
+      "longitude": 28.0473,
+      "type": "travel",
+      "details": "Travel"
+    },
+    {
+      "name": "Durban",
+      "country": "South Africa",
+      "latitude": -29.8587,
+      "longitude": 31.0218,
+      "type": "travel",
+      "details": "Travel"
+    },
+    {
+      "name": "New York",
+      "country": "USA",
+      "latitude": 40.7128,
+      "longitude": -74.0060,
+      "type": "travel",
+      "details": "Travel"
+    },
+    {
+      "name": "Bangkok",
+      "country": "Thailand",
+      "latitude": 13.7563,
+      "longitude": 100.5018,
+      "type": "travel",
+      "details": "Travel"
+    },
+    {
+      "name": "Dubai",
+      "country": "UAE",
+      "latitude": 25.2048,
+      "longitude": 55.2708,
+      "type": "travel",
+      "details": "Travel"
+    }
+  ]
+}

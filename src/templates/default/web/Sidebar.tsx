@@ -1,5 +1,6 @@
 import React from 'react';
 import { Basics, Language } from '../../../types/cv';
+import SpinningGlobe from './SpinningGlobe';
 
 interface SidebarProps {
   basics: Basics;
@@ -120,6 +121,8 @@ const Sidebar: React.FC<SidebarProps> = ({ basics, languages, isOpen = false }) 
           </div>
         ))}
         </div>
+
+        <SpinningGlobe />
       </div>
     </div>
   );
