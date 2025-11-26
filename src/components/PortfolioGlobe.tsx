@@ -43,6 +43,7 @@ const PortfolioGlobe: React.FC<PortfolioGlobeProps> = ({
   const [globeData, setGlobeData] = useState<GlobeData | null>(null);
   const timerRef = useRef<d3.Timer | null>(null);
   const projectionRef = useRef<d3.GeoProjection | null>(null);
+  const isSpinningRef = useRef(true);
 
   const getMarkerColor = (type: string): string => {
     switch (type) {
@@ -132,7 +133,7 @@ const PortfolioGlobe: React.FC<PortfolioGlobeProps> = ({
 
     const config = {
       speed: 0.006,
-      verticalTilt: -20,
+      verticalTilt: 20,
       horizontalTilt: 0
     };
 
@@ -249,36 +250,10 @@ const PortfolioGlobe: React.FC<PortfolioGlobeProps> = ({
 
         markers.exit().remove();
 
-        markers.enter()
+        const enterMarkers = markers.enter()
           .append('circle')
           .attr('class', 'portfolio-globe-marker')
-          .merge(markers)
-          .attr('cx', d => {
-            const coords = projection([d.longitude, d.latitude]);
-            return coords ? coords[0] : 0;
-          })
-          .attr('cy', d => {
-            const coords = projection([d.longitude, d.latitude]);
-            return coords ? coords[1] : 0;
-          })
-          .attr('r', d => getMarkerSize(d.type, selectedLocation?.id === d.id))
-          .attr('fill', d => {
-            const coordinate: [number, number] = [d.longitude, d.latitude];
-            const inverted = projection.invert?.(center);
-            if (!inverted) return 'none';
-            const gdistance = d3.geoDistance(coordinate, inverted);
-            return gdistance > Math.PI / 2 ? 'none' : getMarkerColor(d.type);
-          })
-          .attr('stroke', d => {
-            const coordinate: [number, number] = [d.longitude, d.latitude];
-            const inverted = projection.invert?.(center);
-            if (!inverted) return 'none';
-            const gdistance = d3.geoDistance(coordinate, inverted);
-            return gdistance > Math.PI / 2 ? 'none' : 'rgba(255,255,255,0.8)';
-          })
-          .attr('stroke-width', d => selectedLocation?.id === d.id ? 2 : 1.5)
           .style('cursor', 'pointer')
-          .style('filter', d => selectedLocation?.id === d.id ? 'url(#glow)' : 'none')
           .on('mouseenter', function(event, d) {
             const coordinate: [number, number] = [d.longitude, d.latitude];
             const inverted = projection.invert?.(center);
@@ -321,8 +296,9 @@ const PortfolioGlobe: React.FC<PortfolioGlobeProps> = ({
             // Stop spinning and rotate to clicked location
             if (timerRef.current) {
               timerRef.current.stop();
-              setIsSpinning(false);
             }
+            isSpinningRef.current = false;
+            setIsSpinning(false);
 
             onLocationSelect(d);
 
@@ -338,6 +314,34 @@ const PortfolioGlobe: React.FC<PortfolioGlobeProps> = ({
                 };
               });
           });
+
+        // Update all markers (both new and existing)
+        enterMarkers.merge(markers)
+          .attr('cx', d => {
+            const coords = projection([d.longitude, d.latitude]);
+            return coords ? coords[0] : 0;
+          })
+          .attr('cy', d => {
+            const coords = projection([d.longitude, d.latitude]);
+            return coords ? coords[1] : 0;
+          })
+          .attr('r', d => getMarkerSize(d.type, selectedLocation?.id === d.id))
+          .attr('fill', d => {
+            const coordinate: [number, number] = [d.longitude, d.latitude];
+            const inverted = projection.invert?.(center);
+            if (!inverted) return 'none';
+            const gdistance = d3.geoDistance(coordinate, inverted);
+            return gdistance > Math.PI / 2 ? 'none' : getMarkerColor(d.type);
+          })
+          .attr('stroke', d => {
+            const coordinate: [number, number] = [d.longitude, d.latitude];
+            const inverted = projection.invert?.(center);
+            if (!inverted) return 'none';
+            const gdistance = d3.geoDistance(coordinate, inverted);
+            return gdistance > Math.PI / 2 ? 'none' : 'rgba(255,255,255,0.8)';
+          })
+          .attr('stroke-width', d => selectedLocation?.id === d.id ? 2 : 1.5)
+          .style('filter', d => selectedLocation?.id === d.id ? 'url(#glow)' : 'none');
 
         markerGroup.each(function () {
           this.parentNode?.appendChild(this);
@@ -355,7 +359,7 @@ const PortfolioGlobe: React.FC<PortfolioGlobeProps> = ({
       updateGlobe();
 
       // Auto-rotation
-      if (isSpinning) {
+      if (isSpinningRef.current) {
         timerRef.current = d3.timer((elapsed) => {
           projection.rotate([
             config.speed * elapsed - 30,
@@ -371,8 +375,9 @@ const PortfolioGlobe: React.FC<PortfolioGlobeProps> = ({
         .on('start', () => {
           if (timerRef.current) {
             timerRef.current.stop();
-            setIsSpinning(false);
           }
+          isSpinningRef.current = false;
+          setIsSpinning(false);
         })
         .on('drag', (event) => {
           const rotate = projection.rotate();
@@ -402,7 +407,7 @@ const PortfolioGlobe: React.FC<PortfolioGlobeProps> = ({
         timerRef.current.stop();
       }
     };
-  }, [globeData, activeFilter, isSpinning, selectedLocation, selectedJourney, onLocationSelect, onJourneySelect]);
+  }, [globeData, activeFilter, selectedLocation, selectedJourney, onLocationSelect, onJourneySelect]);
 
   useEffect(() => {
     const cleanup = drawGlobe();
@@ -410,10 +415,11 @@ const PortfolioGlobe: React.FC<PortfolioGlobeProps> = ({
   }, [drawGlobe]);
 
   const handlePlayPause = () => {
-    if (isSpinning && timerRef.current) {
+    if (isSpinningRef.current && timerRef.current) {
       timerRef.current.stop();
     }
-    setIsSpinning(!isSpinning);
+    isSpinningRef.current = !isSpinningRef.current;
+    setIsSpinning(isSpinningRef.current);
   };
 
   const filterTypes = [
