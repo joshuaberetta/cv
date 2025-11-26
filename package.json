@@ -4,10 +4,11 @@
   "description": "A modern CV generator using TypeScript and React",
   "main": "dist/index.js",
   "scripts": {
-    "build": "npm run build:pdf && tsc && vite build",
+    "build": "npm run build:content && npm run build:pdf && tsc && vite build",
+    "build:content": "ts-node scripts/build-globe-content.ts",
     "build:pdf": "ts-node src/build-pdf.ts",
     "start": "ts-node src/build.ts",
-    "dev": "vite",
+    "dev": "npm run build:content && vite",
     "test": "jest"
   },
   "dependencies": {

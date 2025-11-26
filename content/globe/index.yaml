@@ -1,0 +1,48 @@
+# Globe Page Content Configuration
+# Controls ordering and display of content categories
+
+categories:
+  - id: deployment
+    label: Deployments
+    color: "#ef4444"
+    directory: deployments
+    order: 1
+
+  - id: training
+    label: Trainings
+    color: "#3b82f6"
+    directory: trainings
+    order: 2
+
+  - id: travel
+    label: Travel
+    color: "#10b981"
+    directory: travel
+    order: 3
+
+# Journey connections (lines between locations on the globe)
+journeys:
+  - id: europe-2024
+    name: European Adventures
+    description: Exploring Europe during my NOHA Masters studies - from the Netherlands to Spain, with stops along the way.
+    date: 2024-2025
+    color: "#10b981"
+    locations:
+      - groningen-edu
+      - amsterdam
+      - paris
+      - berlin
+      - rome
+      - barcelona
+      - madrid
+      - lisbon
+      - bilbao-edu
+
+  - id: east-africa
+    name: East African Journey
+    description: Exploring the incredible landscapes and cultures of East Africa.
+    color: "#f59e0b"
+    locations:
+      - nairobi
+      - zanzibar
+      - dar-training
