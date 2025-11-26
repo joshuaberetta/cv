@@ -293,9 +293,13 @@ const PortfolioGlobe: React.FC<PortfolioGlobeProps> = ({
             const gdistance = d3.geoDistance(coordinate, inverted);
             if (gdistance > Math.PI / 2) return;
 
+            // Hide tooltip
+            setTooltip(prev => ({ ...prev, visible: false }));
+
             // Stop spinning and rotate to clicked location
             if (timerRef.current) {
               timerRef.current.stop();
+              timerRef.current = null;
             }
             isSpinningRef.current = false;
             setIsSpinning(false);
@@ -375,6 +379,7 @@ const PortfolioGlobe: React.FC<PortfolioGlobeProps> = ({
         .on('start', () => {
           if (timerRef.current) {
             timerRef.current.stop();
+            timerRef.current = null;
           }
           isSpinningRef.current = false;
           setIsSpinning(false);

@@ -38,7 +38,16 @@ const App: React.FC<AppProps> = ({ data }) => {
   return (
     <Routes>
       <Route path="/" element={<CVPage data={data} />} />
-      <Route path="/globe" element={<GlobePage basics={data.basics} />} />
+      <Route 
+        path="/globe" 
+        element={
+          <GlobePage 
+            basics={data.basics} 
+            work={data.work}
+            trainings={data.trainings}
+          />
+        } 
+      />
       <Route path="/cover-letters/drc-roster-2025" element={<CoverLetter data={data} />} />
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>

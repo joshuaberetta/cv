@@ -527,54 +527,113 @@
   border-top: 1px solid #6A7A82;
 }
 
-.projects-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1.5rem;
-}
-
-.project-card {
+/* Square Card Base Styles */
+.carousel-square-card {
   background: #FCF6E5;
   border: 1px solid #6A7A82;
   border-radius: 10px;
-  padding: 1.5rem;
-  text-decoration: none;
+  padding: 0;
   transition: all 0.2s;
-  display: block;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 1;
+  display: flex;
+  flex-direction: column;
 }
 
-.project-card:hover {
-  background: #FCF6E5;
-  border-color: #C34681;
+.carousel-square-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(106, 122, 130, 0.2);
 }
 
-.project-card h3 {
+.carousel-square-card .card-content {
+  flex: 1;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 1rem;
+}
+
+.carousel-square-card h3 {
   font-size: 1.1rem;
   color: #6A7A82;
-  margin-bottom: 0.75rem;
+  margin: 0;
   font-weight: bold;
 }
 
-.project-card p {
-  color: #6A7A82;
-  font-size: 0.9rem;
-  line-height: 1.6;
-  margin-bottom: 1rem;
-}
-
-.project-tags {
+.carousel-square-card .card-preview {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   gap: 0.5rem;
+  align-items: center;
+  width: 100%;
 }
 
-.tag {
+.carousel-square-card .card-expand-hint {
+  background: #6A7A82;
+  color: #FCF6E5;
+  padding: 0.5rem;
+  font-size: 0.75rem;
+  text-align: center;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.carousel-square-card:hover .card-expand-hint {
+  opacity: 1;
+}
+
+/* Project Card Specific */
+.project-card:hover {
+  border-color: #C34681;
+}
+
+.project-card:hover .card-expand-hint {
+  background: #C34681;
+}
+
+.tag-mini {
   background: #fff;
   color: #3388F8;
   padding: 4px 10px;
   border-radius: 12px;
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   border: 1px solid #3388F8;
+}
+
+.preview-text {
+  font-size: 0.85rem;
+  color: #6A7A82;
+}
+
+/* Trainings Section */
+.trainings-section {
+  border-top: 1px solid #6A7A82;
+}
+
+.training-card:hover {
+  border-color: #3388F8;
+}
+
+.training-card:hover .card-expand-hint {
+  background: #3388F8;
+}
+
+/* Work Experience Section */
+.work-section {
+  border-top: 1px solid #6A7A82;
+}
+
+.work-card:hover {
+  border-color: #C34681;
+}
+
+.work-card:hover .card-expand-hint {
+  background: #C34681;
 }
 
 /* Contact Section */
