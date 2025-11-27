@@ -485,6 +485,66 @@
   padding-bottom: 0.5rem;
 }
 
+/* Section Filters */
+.section-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background: #FCF6E5;
+  border: 1px solid #6A7A82;
+  border-radius: 10px;
+}
+
+.filter-group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.filter-label {
+  font-weight: 600;
+  color: #6A7A82;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 0.25rem;
+}
+
+/* No Results */
+.no-results {
+  text-align: center;
+  padding: 3rem 2rem;
+  color: #6A7A82;
+}
+
+.no-results p {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+
+.reset-filters-btn {
+  background: #3388F8;
+  border: 1px solid #3388F8;
+  border-radius: 8px;
+  padding: 0.6rem 1.2rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  color: #fff;
+  font-family: 'IBM Plex Mono', monospace;
+  font-weight: 600;
+}
+
+.reset-filters-btn:hover {
+  background: #2277e7;
+  border-color: #2277e7;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(51, 136, 248, 0.3);
+}
+
 /* About Section */
 .about-section {
   background: #fff;
@@ -708,6 +768,21 @@
 
   .stats-grid {
     justify-content: center;
+  }
+
+  .section-filters {
+    padding: 1rem;
+    flex-direction: column;
+  }
+
+  .filter-group {
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+  }
+
+  .filter-label {
+    margin-bottom: 0.25rem;
   }
 }
 

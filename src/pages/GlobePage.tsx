@@ -3,6 +3,7 @@ import PortfolioGlobe from '../components/PortfolioGlobe';
 import LocationDetail from '../components/LocationDetail';
 import Carousel from '../components/Carousel';
 import Modal from '../components/Modal';
+import MultiSelectFilter from '../components/MultiSelectFilter';
 import { GlobeLocation, Journey } from '../types/globe';
 import { Training, WorkExperience } from '../types/cv';
 import './globe-page.css';
@@ -28,6 +29,14 @@ const GlobePage: React.FC<GlobePageProps> = ({ basics, work = [], trainings = []
     type: 'project' | 'training' | 'work' | null;
     data: any;
   }>({ type: null, data: null });
+
+  // Filter states for each section (multi-select)
+  const [projectTagFilters, setProjectTagFilters] = useState<string[]>([]);
+  const [trainingCountryFilters, setTrainingCountryFilters] = useState<string[]>([]);
+  const [trainingYearFilters, setTrainingYearFilters] = useState<string[]>([]);
+  const [trainingLanguageFilters, setTrainingLanguageFilters] = useState<string[]>([]);
+  const [workCompanyFilters, setWorkCompanyFilters] = useState<string[]>([]);
+  const [workLocationFilters, setWorkLocationFilters] = useState<string[]>([]);
 
   const handleLocationSelect = (location: GlobeLocation | null) => {
     setSelectedLocation(location);
@@ -90,6 +99,50 @@ const GlobePage: React.FC<GlobePageProps> = ({ basics, work = [], trainings = []
       tags: ['AI/ML', 'Research', 'Humanitarian']
     }
   ];
+
+  // Extract unique values for filters
+  const allProjectTags = Array.from(new Set(projects.flatMap(p => p.tags))).sort();
+  
+  const allTrainingCountries = Array.from(
+    new Set(trainings.map(t => t.location.split(',').pop()?.trim() || t.location))
+  ).sort();
+  
+  const allTrainingYears = Array.from(
+    new Set(trainings.map(t => t.year))
+  ).sort().reverse();
+  
+  const allTrainingLanguages = Array.from(
+    new Set(trainings.filter(t => t.language).map(t => t.language!))
+  ).sort();
+
+  const allWorkCompanies = Array.from(
+    new Set(work.map(w => w.company))
+  ).sort();
+  
+  const allWorkLocations = Array.from(
+    new Set(work.map(w => w.location))
+  ).sort();
+
+  // Filter data based on active filters (multi-select)
+  const filteredProjects = projectTagFilters.length > 0
+    ? projects.filter(p => projectTagFilters.some(tag => p.tags.includes(tag)))
+    : projects;
+
+  const filteredTrainings = trainings.filter(t => {
+    if (trainingCountryFilters.length > 0) {
+      const country = t.location.split(',').pop()?.trim() || t.location;
+      if (!trainingCountryFilters.includes(country)) return false;
+    }
+    if (trainingYearFilters.length > 0 && !trainingYearFilters.includes(t.year)) return false;
+    if (trainingLanguageFilters.length > 0 && (!t.language || !trainingLanguageFilters.includes(t.language))) return false;
+    return true;
+  });
+
+  const filteredWork = work.filter(w => {
+    if (workCompanyFilters.length > 0 && !workCompanyFilters.includes(w.company)) return false;
+    if (workLocationFilters.length > 0 && !workLocationFilters.includes(w.location)) return false;
+    return true;
+  });
 
   return (
     <div className="globe-page">
@@ -172,25 +225,48 @@ const GlobePage: React.FC<GlobePageProps> = ({ basics, work = [], trainings = []
       <section className="projects-section" id="projects">
         <div className="section-content">
           <h2>Projects & Tools</h2>
-          <Carousel itemsPerView={3} gap={24}>
-            {projects.map((project, index) => (
-              <div
-                key={index}
-                className="carousel-square-card project-card"
-                onClick={() => handleOpenModal('project', project)}
-              >
-                <div className="card-content">
-                  <h3>{project.name}</h3>
-                  <div className="card-preview">
-                    {project.tags.slice(0, 3).map((tag, i) => (
-                      <span key={i} className="tag-mini">{tag}</span>
-                    ))}
+          
+          {/* Project Tag Filters */}
+          <div className="section-filters">
+            <MultiSelectFilter
+              id="project-tag-filter"
+              label="Filter by Tag:"
+              options={allProjectTags.map(tag => ({
+                value: tag,
+                label: tag,
+                count: projects.filter(p => p.tags.includes(tag)).length
+              }))}
+              selectedValues={projectTagFilters}
+              onChange={setProjectTagFilters}
+              placeholder="All Projects"
+            />
+          </div>
+
+          {filteredProjects.length > 0 ? (
+            <Carousel itemsPerView={3} gap={24}>
+              {filteredProjects.map((project, index) => (
+                <div
+                  key={index}
+                  className="carousel-square-card project-card"
+                  onClick={() => handleOpenModal('project', project)}
+                >
+                  <div className="card-content">
+                    <h3>{project.name}</h3>
+                    <div className="card-preview">
+                      {project.tags.slice(0, 3).map((tag, i) => (
+                        <span key={i} className="tag-mini">{tag}</span>
+                      ))}
+                    </div>
                   </div>
+                  <div className="card-expand-hint">Click to expand</div>
                 </div>
-                <div className="card-expand-hint">Click to expand</div>
-              </div>
-            ))}
-          </Carousel>
+              ))}
+            </Carousel>
+          ) : (
+            <div className="no-results">
+              <p>No projects match the selected filter.</p>
+            </div>
+          )}
         </div>
       </section>
 
@@ -199,24 +275,85 @@ const GlobePage: React.FC<GlobePageProps> = ({ basics, work = [], trainings = []
         <section className="trainings-section" id="trainings">
           <div className="section-content">
             <h2>Trainings & Workshops</h2>
-            <Carousel itemsPerView={3} gap={24}>
-              {trainings.map((training, index) => (
-                <div 
-                  key={index} 
-                  className="carousel-square-card training-card"
-                  onClick={() => handleOpenModal('training', training)}
-                >
-                  <div className="card-content">
-                    <h3>{training.organization}</h3>
-                    <div className="card-preview">
-                      <span className="preview-text">📍 {training.location}</span>
-                      <span className="preview-text">📅 {training.year}</span>
+            
+            {/* Training Filters */}
+            <div className="section-filters">
+              <MultiSelectFilter
+                id="training-country-filter"
+                label="Country:"
+                options={allTrainingCountries.map(country => ({
+                  value: country,
+                  label: country,
+                  count: trainings.filter(t => 
+                    (t.location.split(',').pop()?.trim() || t.location) === country
+                  ).length
+                }))}
+                selectedValues={trainingCountryFilters}
+                onChange={setTrainingCountryFilters}
+                placeholder="All Countries"
+              />
+
+              <MultiSelectFilter
+                id="training-year-filter"
+                label="Year:"
+                options={allTrainingYears.map(year => ({
+                  value: year,
+                  label: year,
+                  count: trainings.filter(t => t.year === year).length
+                }))}
+                selectedValues={trainingYearFilters}
+                onChange={setTrainingYearFilters}
+                placeholder="All Years"
+              />
+
+              <MultiSelectFilter
+                id="training-language-filter"
+                label="Language:"
+                options={allTrainingLanguages.map(language => ({
+                  value: language,
+                  label: language,
+                  count: trainings.filter(t => t.language === language).length
+                }))}
+                selectedValues={trainingLanguageFilters}
+                onChange={setTrainingLanguageFilters}
+                placeholder="All Languages"
+              />
+            </div>
+
+            {filteredTrainings.length > 0 ? (
+              <Carousel itemsPerView={3} gap={24}>
+                {filteredTrainings.map((training, index) => (
+                  <div 
+                    key={index} 
+                    className="carousel-square-card training-card"
+                    onClick={() => handleOpenModal('training', training)}
+                  >
+                    <div className="card-content">
+                      <h3>{training.organization}</h3>
+                      <div className="card-preview">
+                        <span className="preview-text">📍 {training.location}</span>
+                        <span className="preview-text">📅 {training.year}</span>
+                      </div>
                     </div>
+                    <div className="card-expand-hint">Click to expand</div>
                   </div>
-                  <div className="card-expand-hint">Click to expand</div>
-                </div>
-              ))}
-            </Carousel>
+                ))}
+              </Carousel>
+            ) : (
+              <div className="no-results">
+                <p>No trainings match the selected filters.</p>
+                <button
+                  className="reset-filters-btn"
+                  onClick={() => {
+                    setTrainingCountryFilters([]);
+                    setTrainingYearFilters([]);
+                    setTrainingLanguageFilters([]);
+                  }}
+                >
+                  Reset Filters
+                </button>
+              </div>
+            )}
           </div>
         </section>
       )}
@@ -226,24 +363,69 @@ const GlobePage: React.FC<GlobePageProps> = ({ basics, work = [], trainings = []
         <section className="work-section" id="experience">
           <div className="section-content">
             <h2>Work Experience</h2>
-            <Carousel itemsPerView={3} gap={24}>
-              {work.map((job, index) => (
-                <div 
-                  key={index} 
-                  className="carousel-square-card work-card"
-                  onClick={() => handleOpenModal('work', job)}
-                >
-                  <div className="card-content">
-                    <h3>{job.position}</h3>
-                    <div className="card-preview">
-                      <span className="preview-text">{job.company}</span>
-                      <span className="preview-text">📍 {job.location}</span>
+            
+            {/* Work Filters */}
+            <div className="section-filters">
+              <MultiSelectFilter
+                id="work-company-filter"
+                label="Company:"
+                options={allWorkCompanies.map(company => ({
+                  value: company,
+                  label: company,
+                  count: work.filter(w => w.company === company).length
+                }))}
+                selectedValues={workCompanyFilters}
+                onChange={setWorkCompanyFilters}
+                placeholder="All Companies"
+              />
+
+              <MultiSelectFilter
+                id="work-location-filter"
+                label="Location:"
+                options={allWorkLocations.map(location => ({
+                  value: location,
+                  label: location,
+                  count: work.filter(w => w.location === location).length
+                }))}
+                selectedValues={workLocationFilters}
+                onChange={setWorkLocationFilters}
+                placeholder="All Locations"
+              />
+            </div>
+
+            {filteredWork.length > 0 ? (
+              <Carousel itemsPerView={3} gap={24}>
+                {filteredWork.map((job, index) => (
+                  <div 
+                    key={index} 
+                    className="carousel-square-card work-card"
+                    onClick={() => handleOpenModal('work', job)}
+                  >
+                    <div className="card-content">
+                      <h3>{job.position}</h3>
+                      <div className="card-preview">
+                        <span className="preview-text">{job.company}</span>
+                        <span className="preview-text">📍 {job.location}</span>
+                      </div>
                     </div>
+                    <div className="card-expand-hint">Click to expand</div>
                   </div>
-                  <div className="card-expand-hint">Click to expand</div>
-                </div>
-              ))}
-            </Carousel>
+                ))}
+              </Carousel>
+            ) : (
+              <div className="no-results">
+                <p>No work experiences match the selected filters.</p>
+                <button
+                  className="reset-filters-btn"
+                  onClick={() => {
+                    setWorkCompanyFilters([]);
+                    setWorkLocationFilters([]);
+                  }}
+                >
+                  Reset Filters
+                </button>
+              </div>
+            )}
           </div>
         </section>
       )}
