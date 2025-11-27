@@ -1,11 +1,14 @@
 .carousel {
   width: 100%;
   position: relative;
+  overflow: visible;
 }
 
 .carousel-container {
   overflow: hidden;
   width: 100%;
+  padding: 8px 0;
+  margin: -8px 0;
 }
 
 .carousel-track {
