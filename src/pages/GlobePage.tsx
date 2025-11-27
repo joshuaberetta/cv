@@ -4,6 +4,7 @@ import LocationDetail from '../components/LocationDetail';
 import Carousel from '../components/Carousel';
 import Modal from '../components/Modal';
 import MultiSelectFilter from '../components/MultiSelectFilter';
+import SideNav from '../components/SideNav';
 import { GlobeLocation, Journey } from '../types/globe';
 import { Training, WorkExperience } from '../types/cv';
 import './globe-page.css';
@@ -144,10 +145,23 @@ const GlobePage: React.FC<GlobePageProps> = ({ basics, work = [], trainings = []
     return true;
   });
 
+  // Navigation sections
+  const navSections = [
+    { id: 'hero', label: 'Home' },
+    { id: 'about', label: 'About' },
+    { id: 'projects', label: 'Projects' },
+    { id: 'trainings', label: 'Trainings' },
+    { id: 'experience', label: 'Experience' },
+    { id: 'contact', label: 'Contact' }
+  ];
+
   return (
     <div className="globe-page">
+      {/* Side Navigation */}
+      <SideNav sections={navSections} />
+
       {/* Hero Section with Globe */}
-      <section className="hero-section">
+      <section className="hero-section" id="hero">
         <div className="hero-content">
           <div className="hero-text">
             <h1>{basics.name}</h1>
