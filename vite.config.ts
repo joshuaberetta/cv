@@ -3,10 +3,14 @@ import react from '@vitejs/plugin-react';
 import { resolve } from 'path';
 import fs from 'fs';
 import yaml from 'js-yaml';
+import { nodePolyfills } from 'vite-plugin-node-polyfills';
 
 export default defineConfig({
   plugins: [
     react(),
+    nodePolyfills({
+      include: ['buffer']
+    }),
     {
       name: 'html-transform',
       transformIndexHtml(html) {
@@ -33,7 +37,7 @@ export default defineConfig({
       name: 'watch-yaml-data',
       configureServer(server) {
         const listener = (file: string) => {
-          if (file.includes('cv-data.yaml')) {
+          if (file.includes('cv-data.yaml') || file.endsWith('.md')) {
             server.ws.send({
               type: 'full-reload',
               path: '*'
@@ -45,6 +49,7 @@ export default defineConfig({
       }
     }
   ],
+  assetsInclude: ['**/*.md'],
   resolve: {
     alias: {
       '@': resolve(__dirname, './src')

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import PortfolioGlobe from '../components/PortfolioGlobe';
 import LocationDetail from '../components/LocationDetail';
 import Carousel from '../components/Carousel';
@@ -7,6 +8,8 @@ import MultiSelectFilter from '../components/MultiSelectFilter';
 import SideNav from '../components/SideNav';
 import { GlobeLocation, Journey } from '../types/globe';
 import { Training, WorkExperience } from '../types/cv';
+import { ProjectContent, TrainingContent, WorkContent } from '../types/content';
+import ReactMarkdown from 'react-markdown';
 import './globe-page.css';
 
 interface GlobePageProps {
@@ -20,9 +23,20 @@ interface GlobePageProps {
   };
   work?: WorkExperience[];
   trainings?: Training[];
+  projects: ProjectContent[];
+  trainingsContent?: TrainingContent[];
+  workContent?: WorkContent[];
 }
 
-const GlobePage: React.FC<GlobePageProps> = ({ basics, work = [], trainings = [] }) => {
+const GlobePage: React.FC<GlobePageProps> = ({ 
+  basics, 
+  work = [], 
+  trainings = [], 
+  projects,
+  trainingsContent = [],
+  workContent = []
+}) => {
+  const navigate = useNavigate();
   const [selectedLocation, setSelectedLocation] = useState<GlobeLocation | null>(null);
   const [selectedJourney, setSelectedJourney] = useState<Journey | null>(null);
   const [activeFilter, setActiveFilter] = useState<string | null>(null);
@@ -56,72 +70,67 @@ const GlobePage: React.FC<GlobePageProps> = ({ basics, work = [], trainings = []
 
   const handleOpenModal = (type: 'project' | 'training' | 'work', data: any) => {
     setModalContent({ type, data });
+    // Update URL without navigating
+    if (data.slug) {
+      window.history.pushState({}, '', `/${type}s/${data.slug}`);
+    }
   };
 
   const handleCloseModal = () => {
     setModalContent({ type: null, data: null });
+    // Restore URL to globe page
+    window.history.pushState({}, '', '/globe');
   };
 
-  const projects = [
-    {
-      name: 'KoboToolbox',
-      description: 'Core backend developer and humanitarian project coordinator for the leading open-source data collection platform used by UN agencies and NGOs worldwide.',
-      url: 'https://github.com/kobotoolbox',
-      tags: ['Python', 'Django', 'Open Source', 'Humanitarian']
-    },
-    {
-      name: 'SIMS Portal',
-      description: 'Information management support platform for IFRC surge volunteers during humanitarian emergencies.',
-      url: 'https://github.com/JonathanGarro/SIMS-Portal',
-      tags: ['Python', 'Flask', 'Humanitarian', 'IFRC']
-    },
-    {
-      name: 'CV Generator',
-      description: 'This very site! A React-based CV generator with PDF export, multiple templates, and now an interactive globe.',
-      url: 'https://github.com/joshuaberetta/cv',
-      tags: ['React', 'TypeScript', 'D3.js']
-    },
-    {
-      name: 'Portfolio',
-      description: 'Personal portfolio website with a unique terminal-inspired design and interactive elements.',
-      url: 'https://joshuaberetta.com',
-      tags: ['React', 'TypeScript', 'Design']
-    },
-    {
-      name: 'Humanitarian Data Tools',
-      description: 'Collection of open-source tools and utilities for humanitarian data collection and analysis.',
-      url: 'https://github.com/joshuaberetta',
-      tags: ['Open Source', 'Data Science', 'Tools']
-    },
-    {
-      name: 'AI for Humanitarians',
-      description: 'Research and implementation of responsible AI solutions for humanitarian data collection in crisis contexts.',
-      url: 'https://github.com/joshuaberetta',
-      tags: ['AI/ML', 'Research', 'Humanitarian']
-    }
-  ];
+  // Helper to get first paragraph from markdown body
+  const getPreviewText = (body: string): string => {
+    // Remove markdown formatting and get first paragraph
+    const lines = body.split('\n').filter(line => line.trim());
+    const firstParagraph = lines.find(line => 
+      !line.startsWith('#') && 
+      !line.startsWith('-') && 
+      !line.startsWith('*') &&
+      !line.startsWith('>')
+    );
+    if (!firstParagraph) return '';
+    
+    // Truncate at word boundary
+    const maxLength = 100;
+    if (firstParagraph.length <= maxLength) return firstParagraph;
+    
+    const truncated = firstParagraph.substring(0, maxLength);
+    const lastSpace = truncated.lastIndexOf(' ');
+    return lastSpace > 0 ? truncated.substring(0, lastSpace) + '...' : truncated + '...';
+  };
+
+  // Use markdown content if available, otherwise fall back to YAML
+  const displayTrainings = trainingsContent.length > 0 ? trainingsContent : trainings;
+  const displayWork = workContent.length > 0 ? workContent : work;
 
   // Extract unique values for filters
   const allProjectTags = Array.from(new Set(projects.flatMap(p => p.tags))).sort();
   
   const allTrainingCountries = Array.from(
-    new Set(trainings.map(t => t.location.split(',').pop()?.trim() || t.location))
+    new Set(displayTrainings.map(t => {
+      if ('country' in t && t.country) return t.country as string;
+      return (t.location.split(',').pop()?.trim() || t.location) as string;
+    }))
   ).sort();
   
   const allTrainingYears = Array.from(
-    new Set(trainings.map(t => t.year))
+    new Set(displayTrainings.map(t => t.year))
   ).sort().reverse();
   
   const allTrainingLanguages = Array.from(
-    new Set(trainings.filter(t => t.language).map(t => t.language!))
+    new Set(displayTrainings.filter(t => t.language).map(t => t.language!))
   ).sort();
 
   const allWorkCompanies = Array.from(
-    new Set(work.map(w => w.company))
+    new Set(displayWork.map(w => w.company))
   ).sort();
   
   const allWorkLocations = Array.from(
-    new Set(work.map(w => w.location))
+    new Set(displayWork.map(w => w.location))
   ).sort();
 
   // Filter data based on active filters (multi-select)
@@ -129,9 +138,9 @@ const GlobePage: React.FC<GlobePageProps> = ({ basics, work = [], trainings = []
     ? projects.filter(p => projectTagFilters.some(tag => p.tags.includes(tag)))
     : projects;
 
-  const filteredTrainings = trainings.filter(t => {
+  const filteredTrainings = displayTrainings.filter(t => {
     if (trainingCountryFilters.length > 0) {
-      const country = t.location.split(',').pop()?.trim() || t.location;
+      const country: string = ('country' in t && t.country) ? t.country as string : (t.location.split(',').pop()?.trim() || t.location) as string;
       if (!trainingCountryFilters.includes(country)) return false;
     }
     if (trainingYearFilters.length > 0 && !trainingYearFilters.includes(t.year)) return false;
@@ -139,7 +148,7 @@ const GlobePage: React.FC<GlobePageProps> = ({ basics, work = [], trainings = []
     return true;
   });
 
-  const filteredWork = work.filter(w => {
+  const filteredWork = displayWork.filter(w => {
     if (workCompanyFilters.length > 0 && !workCompanyFilters.includes(w.company)) return false;
     if (workLocationFilters.length > 0 && !workLocationFilters.includes(w.location)) return false;
     return true;
@@ -267,9 +276,12 @@ const GlobePage: React.FC<GlobePageProps> = ({ basics, work = [], trainings = []
                   <div className="card-content">
                     <h3>{project.name}</h3>
                     <div className="card-preview">
-                      {project.tags.slice(0, 3).map((tag, i) => (
-                        <span key={i} className="tag-mini">{tag}</span>
-                      ))}
+                      <p className="preview-text">{getPreviewText(project.body)}</p>
+                      <div className="tags-container">
+                        {project.tags.slice(0, 3).map((tag, i) => (
+                          <span key={i} className="tag-mini">{tag}</span>
+                        ))}
+                      </div>
                     </div>
                   </div>
                   <div className="card-expand-hint">Click to expand</div>
@@ -477,23 +489,27 @@ const GlobePage: React.FC<GlobePageProps> = ({ basics, work = [], trainings = []
         {modalContent.type === 'project' && modalContent.data && (
           <div className="modal-body">
             <h2>{modalContent.data.name}</h2>
-            <p>{modalContent.data.description}</p>
             <div className="modal-tags">
               {modalContent.data.tags.map((tag: string, i: number) => (
                 <span key={i} className="modal-tag">{tag}</span>
               ))}
             </div>
-            <a 
-              href={modalContent.data.url} 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="modal-link"
-            >
-              <svg viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-              </svg>
-              View Project
-            </a>
+            <div className="modal-markdown-content">
+              <ReactMarkdown>{modalContent.data.body}</ReactMarkdown>
+            </div>
+            {modalContent.data.url && (
+              <a 
+                href={modalContent.data.url} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="modal-link"
+              >
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                </svg>
+                View Project
+              </a>
+            )}
           </div>
         )}
         {modalContent.type === 'training' && modalContent.data && (
@@ -507,6 +523,11 @@ const GlobePage: React.FC<GlobePageProps> = ({ basics, work = [], trainings = []
                 <span className="modal-detail-item">🗣️ {modalContent.data.language}</span>
               )}
             </div>
+            {modalContent.data.body && (
+              <div className="modal-markdown-content">
+                <ReactMarkdown>{modalContent.data.body}</ReactMarkdown>
+              </div>
+            )}
           </div>
         )}
         {modalContent.type === 'work' && modalContent.data && (
@@ -519,7 +540,11 @@ const GlobePage: React.FC<GlobePageProps> = ({ basics, work = [], trainings = []
                 📅 {modalContent.data.startDate} - {modalContent.data.endDate}
               </span>
             </div>
-            {modalContent.data.description && (
+            {modalContent.data.body ? (
+              <div className="modal-markdown-content">
+                <ReactMarkdown>{modalContent.data.body}</ReactMarkdown>
+              </div>
+            ) : modalContent.data.description && (
               <p style={{ marginTop: '1.5rem' }}>{modalContent.data.description}</p>
             )}
           </div>
