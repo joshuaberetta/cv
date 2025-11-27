@@ -44,6 +44,7 @@ const PortfolioGlobe: React.FC<PortfolioGlobeProps> = ({
   const timerRef = useRef<d3.Timer | null>(null);
   const projectionRef = useRef<d3.GeoProjection | null>(null);
   const isSpinningRef = useRef(true);
+  const updateGlobeRef = useRef<(() => void) | null>(null);
 
   const getMarkerColor = (type: string): string => {
     switch (type) {
@@ -359,20 +360,35 @@ const PortfolioGlobe: React.FC<PortfolioGlobeProps> = ({
         drawMarkers();
       };
 
+      // Store updateGlobe reference for use in timer management
+      updateGlobeRef.current = updateGlobe;
+
       // Initial draw
       updateGlobe();
 
-      // Auto-rotation
-      if (isSpinningRef.current) {
-        timerRef.current = d3.timer((elapsed) => {
-          projection.rotate([
-            config.speed * elapsed - 30,
-            config.verticalTilt,
-            config.horizontalTilt
-          ]);
-          updateGlobe();
-        });
-      }
+      // Auto-rotation function
+      const startRotation = () => {
+        if (timerRef.current) {
+          timerRef.current.stop();
+          timerRef.current = null;
+        }
+        
+        if (isSpinningRef.current) {
+          timerRef.current = d3.timer((elapsed) => {
+            projection.rotate([
+              config.speed * elapsed - 30,
+              config.verticalTilt,
+              config.horizontalTilt
+            ]);
+            if (updateGlobeRef.current) {
+              updateGlobeRef.current();
+            }
+          });
+        }
+      };
+
+      // Start rotation if enabled
+      startRotation();
 
       // Drag behavior
       const drag = d3.drag<SVGSVGElement, unknown>()
@@ -420,11 +436,44 @@ const PortfolioGlobe: React.FC<PortfolioGlobeProps> = ({
   }, [drawGlobe]);
 
   const handlePlayPause = () => {
-    if (isSpinningRef.current && timerRef.current) {
-      timerRef.current.stop();
+    const newSpinningState = !isSpinningRef.current;
+    isSpinningRef.current = newSpinningState;
+    setIsSpinning(newSpinningState);
+
+    if (!newSpinningState) {
+      // Stop spinning
+      if (timerRef.current) {
+        timerRef.current.stop();
+        timerRef.current = null;
+      }
+    } else {
+      // Start spinning
+      if (timerRef.current) {
+        timerRef.current.stop();
+        timerRef.current = null;
+      }
+
+      if (projectionRef.current && updateGlobeRef.current) {
+        const config = {
+          speed: 0.006,
+          verticalTilt: 20,
+          horizontalTilt: 0
+        };
+
+        timerRef.current = d3.timer((elapsed) => {
+          if (projectionRef.current) {
+            projectionRef.current.rotate([
+              config.speed * elapsed - 30,
+              config.verticalTilt,
+              config.horizontalTilt
+            ]);
+            if (updateGlobeRef.current) {
+              updateGlobeRef.current();
+            }
+          }
+        });
+      }
     }
-    isSpinningRef.current = !isSpinningRef.current;
-    setIsSpinning(isSpinningRef.current);
   };
 
   const filterTypes = [
