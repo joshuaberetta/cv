@@ -248,16 +248,19 @@ const GlobePage: React.FC<GlobePageProps> = ({
           <p>{basics.summary || 'Humanitarian technology professional combining technical expertise with field experience.'}</p>
           <div className="stats-grid">
             <div className="stat-item">
-              <span className="stat-number">20+</span>
+              <span className="stat-number">{Array.from(new Set([
+                ...tripsContent.map(t => t.country),
+                ...displayTrainings.map(t => 'country' in t ? t.country : t.location.split(',').pop()?.trim() || t.location)
+              ])).length}</span>
               <span className="stat-label">Countries</span>
             </div>
             <div className="stat-item">
-              <span className="stat-number">30+</span>
+              <span className="stat-number">{displayTrainings.length}</span>
               <span className="stat-label">Trainings</span>
             </div>
             <div className="stat-item">
-              <span className="stat-number">5+</span>
-              <span className="stat-label">Years in Tech</span>
+              <span className="stat-number">{displayWork.length}</span>
+              <span className="stat-label">Positions</span>
             </div>
           </div>
         </div>
