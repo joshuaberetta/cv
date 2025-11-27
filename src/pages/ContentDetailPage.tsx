@@ -57,8 +57,17 @@ const ContentDetailPage: React.FC<ContentDetailPageProps> = ({ allContent }) => 
     if ('company' in content && content.company) {
       metadata.push({ label: '🏢 Company', value: content.company });
     }
+    if ('destination' in content && content.destination) {
+      metadata.push({ label: '📍 Destination', value: content.destination });
+    }
+    if ('country' in content && content.country) {
+      metadata.push({ label: '🌍 Country', value: content.country });
+    }
     if ('location' in content && content.location) {
       metadata.push({ label: '📍 Location', value: content.location });
+    }
+    if ('purpose' in content && content.purpose) {
+      metadata.push({ label: '🎯 Purpose', value: content.purpose });
     }
     if ('year' in content && content.year) {
       metadata.push({ label: '📅 Year', value: content.year });

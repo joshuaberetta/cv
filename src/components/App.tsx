@@ -6,7 +6,7 @@ import { PDF_FILENAME } from '../cv-meta';
 import CoverLetter from '../cover-letters/drc-roster-2025/CoverLetter';
 import GlobePage from '../pages/GlobePage';
 import ContentDetailPage from '../pages/ContentDetailPage';
-import { Content, ProjectContent, TrainingContent, WorkContent } from '../types/content';
+import { Content, ProjectContent, TrainingContent, WorkContent, TripContent } from '../types/content';
 import matter from 'gray-matter';
 
 // Import all markdown files
@@ -21,6 +21,11 @@ const trainingModules = import.meta.glob('../content/trainings/*.md', {
 });
 
 const workModules = import.meta.glob('../content/work/*.md', { 
+  eager: true,
+  as: 'raw'
+});
+
+const tripModules = import.meta.glob('../content/trips/*.md', { 
   eager: true,
   as: 'raw'
 });
@@ -63,6 +68,7 @@ const App: React.FC<AppProps> = ({ data }) => {
         const projectsData: ProjectContent[] = [];
         const trainingsData: TrainingContent[] = [];
         const workData: WorkContent[] = [];
+        const tripsData: TripContent[] = [];
         
         // Load projects
         for (const [path, content] of Object.entries(projectModules)) {
@@ -125,13 +131,35 @@ const App: React.FC<AppProps> = ({ data }) => {
           workData.push(workContent);
         }
         
+        // Load trips
+        for (const [path, content] of Object.entries(tripModules)) {
+          const result = matter(content as string);
+          const frontmatter = result.data as any;
+          
+          const tripContent: TripContent = {
+            slug: frontmatter.slug,
+            section: 'trips',
+            name: frontmatter.name,
+            body: result.content.trim(),
+            destination: frontmatter.destination,
+            country: frontmatter.country,
+            startDate: frontmatter.startDate,
+            endDate: frontmatter.endDate,
+            tags: frontmatter.tags || [],
+            purpose: frontmatter.purpose,
+            order: frontmatter.order || 999
+          };
+          tripsData.push(tripContent);
+        }
+        
         // Sort by order
         projectsData.sort((a, b) => (a.order || 999) - (b.order || 999));
         trainingsData.sort((a, b) => (a.order || 999) - (b.order || 999));
         workData.sort((a, b) => (a.order || 999) - (b.order || 999));
+        tripsData.sort((a, b) => (a.order || 999) - (b.order || 999));
         
         // Combine all content
-        setAllContent([...projectsData, ...trainingsData, ...workData]);
+        setAllContent([...projectsData, ...trainingsData, ...workData, ...tripsData]);
       } catch (error) {
         console.error('Error loading content:', error);
       } finally {
@@ -159,6 +187,7 @@ const App: React.FC<AppProps> = ({ data }) => {
             projects={allContent.filter(c => c.section === 'projects') as ProjectContent[]}
             trainingsContent={allContent.filter(c => c.section === 'trainings') as TrainingContent[]}
             workContent={allContent.filter(c => c.section === 'work') as WorkContent[]}
+            tripsContent={allContent.filter(c => c.section === 'trips') as TripContent[]}
           />
         } 
       />

@@ -3,7 +3,7 @@
  */
 export interface ContentItem {
   slug: string;
-  section: 'projects' | 'trainings' | 'work';
+  section: 'projects' | 'trainings' | 'work' | 'trips';
   name: string;
   body: string;
   order?: number;
@@ -47,9 +47,22 @@ export interface WorkContent extends ContentItem {
 }
 
 /**
+ * Trip/travel content with specific metadata
+ */
+export interface TripContent extends ContentItem {
+  section: 'trips';
+  destination: string;
+  country: string;
+  startDate: string;
+  endDate: string;
+  tags?: string[];
+  purpose?: string;
+}
+
+/**
  * Union type for all content types
  */
-export type Content = ProjectContent | TrainingContent | WorkContent;
+export type Content = ProjectContent | TrainingContent | WorkContent | TripContent;
 
 /**
  * Frontmatter data extracted from markdown files

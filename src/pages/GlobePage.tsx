@@ -8,7 +8,7 @@ import MultiSelectFilter from '../components/MultiSelectFilter';
 import SideNav from '../components/SideNav';
 import { GlobeLocation, Journey } from '../types/globe';
 import { Training, WorkExperience } from '../types/cv';
-import { ProjectContent, TrainingContent, WorkContent } from '../types/content';
+import { ProjectContent, TrainingContent, WorkContent, TripContent } from '../types/content';
 import ReactMarkdown from 'react-markdown';
 import './globe-page.css';
 
@@ -26,6 +26,7 @@ interface GlobePageProps {
   projects: ProjectContent[];
   trainingsContent?: TrainingContent[];
   workContent?: WorkContent[];
+  tripsContent?: TripContent[];
 }
 
 const GlobePage: React.FC<GlobePageProps> = ({ 
@@ -34,14 +35,15 @@ const GlobePage: React.FC<GlobePageProps> = ({
   trainings = [], 
   projects,
   trainingsContent = [],
-  workContent = []
+  workContent = [],
+  tripsContent = []
 }) => {
   const navigate = useNavigate();
   const [selectedLocation, setSelectedLocation] = useState<GlobeLocation | null>(null);
   const [selectedJourney, setSelectedJourney] = useState<Journey | null>(null);
   const [activeFilter, setActiveFilter] = useState<string | null>(null);
   const [modalContent, setModalContent] = useState<{
-    type: 'project' | 'training' | 'work' | null;
+    type: 'project' | 'training' | 'work' | 'trip' | null;
     data: any;
   }>({ type: null, data: null });
 
@@ -52,6 +54,8 @@ const GlobePage: React.FC<GlobePageProps> = ({
   const [trainingLanguageFilters, setTrainingLanguageFilters] = useState<string[]>([]);
   const [workCompanyFilters, setWorkCompanyFilters] = useState<string[]>([]);
   const [workLocationFilters, setWorkLocationFilters] = useState<string[]>([]);
+  const [tripCountryFilters, setTripCountryFilters] = useState<string[]>([]);
+  const [tripPurposeFilters, setTripPurposeFilters] = useState<string[]>([]);
 
   const handleLocationSelect = (location: GlobeLocation | null) => {
     setSelectedLocation(location);
@@ -68,7 +72,7 @@ const GlobePage: React.FC<GlobePageProps> = ({
     setSelectedJourney(null);
   };
 
-  const handleOpenModal = (type: 'project' | 'training' | 'work', data: any) => {
+  const handleOpenModal = (type: 'project' | 'training' | 'work' | 'trip', data: any) => {
     setModalContent({ type, data });
     // Update URL without navigating
     if (data.slug) {
@@ -133,6 +137,14 @@ const GlobePage: React.FC<GlobePageProps> = ({
     new Set(displayWork.map(w => w.location))
   ).sort();
 
+  const allTripCountries = Array.from(
+    new Set(tripsContent.map(t => t.country))
+  ).sort();
+  
+  const allTripPurposes = Array.from(
+    new Set(tripsContent.filter(t => t.purpose).map(t => t.purpose!))
+  ).sort();
+
   // Filter data based on active filters (multi-select)
   const filteredProjects = projectTagFilters.length > 0
     ? projects.filter(p => projectTagFilters.some(tag => p.tags.includes(tag)))
@@ -154,12 +166,19 @@ const GlobePage: React.FC<GlobePageProps> = ({
     return true;
   });
 
+  const filteredTrips = tripsContent.filter(t => {
+    if (tripCountryFilters.length > 0 && !tripCountryFilters.includes(t.country)) return false;
+    if (tripPurposeFilters.length > 0 && (!t.purpose || !tripPurposeFilters.includes(t.purpose))) return false;
+    return true;
+  });
+
   // Navigation sections
   const navSections = [
     { id: 'hero', label: 'Home' },
     { id: 'about', label: 'About' },
     { id: 'projects', label: 'Projects' },
     { id: 'trainings', label: 'Trainings' },
+    { id: 'trips', label: 'Trips' },
     { id: 'experience', label: 'Experience' },
     { id: 'contact', label: 'Contact' }
   ];
@@ -384,6 +403,94 @@ const GlobePage: React.FC<GlobePageProps> = ({
         </section>
       )}
 
+      {/* Trips Section */}
+      {tripsContent && tripsContent.length > 0 && (
+        <section className="trips-section" id="trips">
+          <div className="section-content">
+            <h2>Travel & Field Visits</h2>
+            
+            {/* Trip Filters */}
+            <div className="section-filters">
+              <MultiSelectFilter
+                id="trip-country-filter"
+                label="Country:"
+                options={allTripCountries.map(country => ({
+                  value: country,
+                  label: country,
+                  count: tripsContent.filter(t => t.country === country).length
+                }))}
+                selectedValues={tripCountryFilters}
+                onChange={setTripCountryFilters}
+                placeholder="All Countries"
+              />
+
+              <MultiSelectFilter
+                id="trip-purpose-filter"
+                label="Purpose:"
+                options={allTripPurposes.map(purpose => ({
+                  value: purpose,
+                  label: purpose,
+                  count: tripsContent.filter(t => t.purpose === purpose).length
+                }))}
+                selectedValues={tripPurposeFilters}
+                onChange={setTripPurposeFilters}
+                placeholder="All Purposes"
+              />
+            </div>
+
+            {filteredTrips.length > 0 ? (
+              <Carousel itemsPerView={3} gap={24}>
+                {filteredTrips.map((trip, index) => {
+                  // Extract preview text from markdown body
+                  const previewText = trip.body.split('\n')
+                    .filter(line => line.trim() && !line.startsWith('#') && !line.startsWith('##'))
+                    .join(' ')
+                    .slice(0, 100) + '...';
+
+                  return (
+                    <div 
+                      key={index} 
+                      className="carousel-square-card trip-card"
+                      onClick={() => handleOpenModal('trip', trip)}
+                    >
+                      <div className="card-content">
+                        <h3>{trip.destination}</h3>
+                        <div className="card-preview">
+                          <span className="preview-text">📍 {trip.country}</span>
+                          {trip.purpose && <span className="preview-text">🎯 {trip.purpose}</span>}
+                          <p className="preview-description">{previewText}</p>
+                        </div>
+                        {trip.tags && trip.tags.length > 0 && (
+                          <div className="tags-container">
+                            {trip.tags.slice(0, 3).map((tag, i) => (
+                              <span key={i} className="tag-mini">{tag}</span>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                      <div className="card-expand-hint">Click to expand</div>
+                    </div>
+                  );
+                })}
+              </Carousel>
+            ) : (
+              <div className="no-results">
+                <p>No trips match the selected filters.</p>
+                <button
+                  className="reset-filters-btn"
+                  onClick={() => {
+                    setTripCountryFilters([]);
+                    setTripPurposeFilters([]);
+                  }}
+                >
+                  Reset Filters
+                </button>
+              </div>
+            )}
+          </div>
+        </section>
+      )}
+
       {/* Work Experience Section */}
       {work && work.length > 0 && (
         <section className="work-section" id="experience">
@@ -546,6 +653,33 @@ const GlobePage: React.FC<GlobePageProps> = ({
               </div>
             ) : modalContent.data.description && (
               <p style={{ marginTop: '1.5rem' }}>{modalContent.data.description}</p>
+            )}
+          </div>
+        )}
+        {modalContent.type === 'trip' && modalContent.data && (
+          <div className="modal-body">
+            <h2>{modalContent.data.name}</h2>
+            <h3>{modalContent.data.destination}</h3>
+            <div className="modal-details">
+              <span className="modal-detail-item">📍 {modalContent.data.country}</span>
+              <span className="modal-detail-item">
+                📅 {modalContent.data.startDate} - {modalContent.data.endDate}
+              </span>
+              {modalContent.data.purpose && (
+                <span className="modal-detail-item">🎯 {modalContent.data.purpose}</span>
+              )}
+            </div>
+            {modalContent.data.tags && modalContent.data.tags.length > 0 && (
+              <div className="modal-tags">
+                {modalContent.data.tags.map((tag: string, i: number) => (
+                  <span key={i} className="modal-tag">{tag}</span>
+                ))}
+              </div>
+            )}
+            {modalContent.data.body && (
+              <div className="modal-markdown-content">
+                <ReactMarkdown>{modalContent.data.body}</ReactMarkdown>
+              </div>
             )}
           </div>
         )}
