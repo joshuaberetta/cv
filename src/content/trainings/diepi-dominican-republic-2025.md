@@ -8,6 +8,7 @@ location: Santo Domingo, Dominican Republic
 country: Dominican Republic
 year: "2025"
 language: Spanish
+description: Conducted an in-person KoboToolbox workshop focused on building capacity for digital data collection in epidemiological surveillance.
 order: 1
 ---
 

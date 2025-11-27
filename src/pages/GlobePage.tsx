@@ -295,7 +295,7 @@ const GlobePage: React.FC<GlobePageProps> = ({
                   <div className="card-content">
                     <h3>{project.name}</h3>
                     <div className="card-preview">
-                      <p className="preview-text">{getPreviewText(project.body)}</p>
+                      <p className="preview-text">{project.description}</p>
                       <div className="tags-container">
                         {project.tags.slice(0, 3).map((tag, i) => (
                           <span key={i} className="tag-mini">{tag}</span>
@@ -367,22 +367,30 @@ const GlobePage: React.FC<GlobePageProps> = ({
 
             {filteredTrainings.length > 0 ? (
               <Carousel itemsPerView={3} gap={24}>
-                {filteredTrainings.map((training, index) => (
-                  <div 
-                    key={index} 
-                    className="carousel-square-card training-card"
-                    onClick={() => handleOpenModal('training', training)}
-                  >
-                    <div className="card-content">
-                      <h3>{training.organization}</h3>
-                      <div className="card-preview">
-                        <span className="preview-text">📍 {training.location}</span>
-                        <span className="preview-text">📅 {training.year}</span>
+                {filteredTrainings.map((training, index) => {
+                  // Handle both TrainingContent and Training types
+                  const isContentType = 'name' in training;
+                  const title = isContentType ? (training as TrainingContent).name : (training as Training).organization;
+                  const description = isContentType 
+                    ? (training as TrainingContent).description 
+                    : `${(training as Training).location} • ${(training as Training).year}`;
+                  
+                  return (
+                    <div 
+                      key={index} 
+                      className="carousel-square-card training-card"
+                      onClick={() => handleOpenModal('training', training)}
+                    >
+                      <div className="card-content">
+                        <h3>{title}</h3>
+                        <div className="card-preview">
+                          <p className="preview-text">{description}</p>
+                        </div>
                       </div>
+                      <div className="card-expand-hint">Click to expand</div>
                     </div>
-                    <div className="card-expand-hint">Click to expand</div>
-                  </div>
-                ))}
+                  );
+                })}
               </Carousel>
             ) : (
               <div className="no-results">
@@ -440,14 +448,7 @@ const GlobePage: React.FC<GlobePageProps> = ({
 
             {filteredTrips.length > 0 ? (
               <Carousel itemsPerView={3} gap={24}>
-                {filteredTrips.map((trip, index) => {
-                  // Extract preview text from markdown body
-                  const previewText = trip.body.split('\n')
-                    .filter(line => line.trim() && !line.startsWith('#') && !line.startsWith('##'))
-                    .join(' ')
-                    .slice(0, 100) + '...';
-
-                  return (
+                {filteredTrips.map((trip, index) => (
                     <div 
                       key={index} 
                       className="carousel-square-card trip-card"
@@ -456,9 +457,7 @@ const GlobePage: React.FC<GlobePageProps> = ({
                       <div className="card-content">
                         <h3>{trip.destination}</h3>
                         <div className="card-preview">
-                          <span className="preview-text">📍 {trip.country}</span>
-                          {trip.purpose && <span className="preview-text">🎯 {trip.purpose}</span>}
-                          <p className="preview-description">{previewText}</p>
+                          <p className="preview-text">{trip.description}</p>
                         </div>
                         {trip.tags && trip.tags.length > 0 && (
                           <div className="tags-container">
@@ -470,8 +469,7 @@ const GlobePage: React.FC<GlobePageProps> = ({
                       </div>
                       <div className="card-expand-hint">Click to expand</div>
                     </div>
-                  );
-                })}
+                  ))}
               </Carousel>
             ) : (
               <div className="no-results">
@@ -537,8 +535,7 @@ const GlobePage: React.FC<GlobePageProps> = ({
                     <div className="card-content">
                       <h3>{job.position}</h3>
                       <div className="card-preview">
-                        <span className="preview-text">{job.company}</span>
-                        <span className="preview-text">📍 {job.location}</span>
+                        <p className="preview-text">{job.description}</p>
                       </div>
                     </div>
                     <div className="card-expand-hint">Click to expand</div>

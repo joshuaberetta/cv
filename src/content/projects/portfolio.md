@@ -3,6 +3,7 @@ slug: portfolio
 section: projects
 name: Portfolio
 url: https://joshuaberetta.com
+description: Personal portfolio website with a unique terminal-inspired design and interactive elements.
 tags:
   - React
   - TypeScript

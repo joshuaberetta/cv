@@ -3,6 +3,7 @@ slug: kobotoolbox
 section: projects
 name: KoboToolbox
 url: https://github.com/kobotoolbox
+description: Core backend developer and humanitarian project coordinator for the leading open-source data collection platform used by UN agencies and NGOs worldwide.
 tags:
   - Python
   - Django

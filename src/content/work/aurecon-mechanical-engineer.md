@@ -7,6 +7,7 @@ company: Aurecon Group
 location: Cape Town, South Africa
 startDate: 02/2018
 endDate: 02/2020
+description: Mechanical engineer working on building services and infrastructure projects across South Africa.
 order: 4
 ---
 

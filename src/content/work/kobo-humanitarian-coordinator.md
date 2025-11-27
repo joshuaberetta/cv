@@ -7,6 +7,7 @@ company: Kobo
 location: Remote
 startDate: 07/2023
 endDate: Current
+description: Leading humanitarian partnerships and technical coordination for Kobo's work with UN agencies, INGOs, and governments across crisis contexts worldwide.
 order: 1
 featured: true
 ---

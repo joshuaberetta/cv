@@ -7,6 +7,7 @@ company: Kobo
 location: Remote
 startDate: 12/2022
 endDate: 07/2023
+description: Transitioned from backend development to project coordination, managing partnerships and technical implementations for humanitarian organizations.
 order: 2
 ---
 

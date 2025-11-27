@@ -3,6 +3,7 @@ slug: ai-for-humanitarians
 section: projects
 name: AI for Humanitarians
 url: https://github.com/joshuaberetta
+description: Research and implementation of responsible AI solutions for humanitarian data collection in crisis contexts.
 tags:
   - AI/ML
   - Research

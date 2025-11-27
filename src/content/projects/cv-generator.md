@@ -3,6 +3,7 @@ slug: cv-generator
 section: projects
 name: CV Generator
 url: https://github.com/joshuaberetta/cv
+description: This very site! A React-based CV generator with PDF export, multiple templates, and an interactive globe.
 tags:
   - React
   - TypeScript

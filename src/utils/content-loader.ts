@@ -49,6 +49,7 @@ export function toTrainingContent(parsed: ParsedMarkdown): TrainingContent {
     country: frontmatter.country,
     year: frontmatter.year,
     language: frontmatter.language,
+    description: frontmatter.description,
     order: frontmatter.order || 999
   };
 }
@@ -69,6 +70,7 @@ export function toWorkContent(parsed: ParsedMarkdown): WorkContent {
     location: frontmatter.location,
     startDate: frontmatter.startDate,
     endDate: frontmatter.endDate,
+    description: frontmatter.description,
     order: frontmatter.order || 999
   };
 }

@@ -106,6 +106,7 @@ const App: React.FC<AppProps> = ({ data }) => {
             country: frontmatter.country,
             year: frontmatter.year,
             language: frontmatter.language,
+            description: frontmatter.description,
             order: frontmatter.order || 999
           };
           trainingsData.push(trainingContent);
@@ -126,6 +127,7 @@ const App: React.FC<AppProps> = ({ data }) => {
             location: frontmatter.location,
             startDate: frontmatter.startDate,
             endDate: frontmatter.endDate,
+            description: frontmatter.description,
             order: frontmatter.order || 999
           };
           workData.push(workContent);
@@ -147,6 +149,7 @@ const App: React.FC<AppProps> = ({ data }) => {
             endDate: frontmatter.endDate,
             tags: frontmatter.tags || [],
             purpose: frontmatter.purpose,
+            description: frontmatter.description,
             order: frontmatter.order || 999
           };
           tripsData.push(tripContent);

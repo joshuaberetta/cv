@@ -8,6 +8,7 @@ location: Bogotá, Colombia
 country: Colombia
 year: "2025"
 language: Spanish
+description: Delivered a comprehensive training combining KoboToolbox fundamentals with an introduction to responsible AI applications in humanitarian contexts.
 order: 2
 ---
 

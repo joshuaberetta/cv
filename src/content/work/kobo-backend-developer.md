@@ -7,6 +7,7 @@ company: Kobo
 location: Remote
 startDate: 10/2020
 endDate: 12/2022
+description: Core backend developer for KoboToolbox, the leading open-source data collection platform used by UN agencies and NGOs worldwide.
 order: 3
 ---
 

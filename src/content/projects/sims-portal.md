@@ -3,6 +3,7 @@ slug: sims-portal
 section: projects
 name: SIMS Portal
 url: https://github.com/JonathanGarro/SIMS-Portal
+description: Information management support platform for IFRC surge volunteers during humanitarian emergencies.
 tags:
   - Python
   - Flask

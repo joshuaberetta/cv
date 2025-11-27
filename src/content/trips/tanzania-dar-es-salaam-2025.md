@@ -8,6 +8,7 @@ startDate: "2025-01"
 endDate: "2025-01"
 tags: [training, workshop, agriculture, FAO]
 purpose: Training Workshop
+description: Led a 5-day in-person training workshop in Dar es Salaam for FAO, Tanzania's National Plant Protection Organization, and the Southern African Development Community.
 order: 3
 ---
 

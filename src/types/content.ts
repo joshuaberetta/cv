@@ -16,7 +16,7 @@ export interface ProjectContent extends ContentItem {
   section: 'projects';
   url?: string;
   tags: string[];
-  description?: string;
+  description: string;
   featured?: boolean;
   image?: string;
 }
@@ -32,6 +32,7 @@ export interface TrainingContent extends ContentItem {
   country: string;
   year: string;
   language?: string;
+  description: string;
 }
 
 /**
@@ -44,6 +45,7 @@ export interface WorkContent extends ContentItem {
   location: string;
   startDate: string;
   endDate: string;
+  description: string;
 }
 
 /**
@@ -57,6 +59,7 @@ export interface TripContent extends ContentItem {
   endDate: string;
   tags?: string[];
   purpose?: string;
+  description: string;
 }
 
 /**

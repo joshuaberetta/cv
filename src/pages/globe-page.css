@@ -604,7 +604,6 @@
 
 .carousel-square-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 8px 20px rgba(106, 122, 130, 0.25);
 }
 
 .carousel-square-card .card-content {
@@ -692,7 +691,6 @@
 
 .project-card:hover {
   border-color: #C34681;
-  box-shadow: 0 8px 20px rgba(195, 70, 129, 0.2);
 }
 
 .project-card:hover .card-expand-hint {
@@ -710,7 +708,6 @@
 
 .training-card:hover {
   border-color: #3388F8;
-  box-shadow: 0 8px 20px rgba(51, 136, 248, 0.2);
 }
 
 .training-card:hover .card-expand-hint {
@@ -728,7 +725,6 @@
 
 .work-card:hover {
   border-color: #C34681;
-  box-shadow: 0 8px 20px rgba(195, 70, 129, 0.2);
 }
 
 .work-card:hover .card-expand-hint {

@@ -8,6 +8,7 @@ startDate: "2025-03"
 endDate: "2025-03"
 tags: [training, workshop, AI, localization]
 purpose: Training Workshop
+description: Delivered a comprehensive training on KoboToolbox and Introduction to AI for Humanitarians for the Grupo de Trabajo de Localización en Colombia.
 order: 4
 ---
 

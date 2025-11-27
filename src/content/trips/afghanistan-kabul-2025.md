@@ -8,6 +8,7 @@ startDate: "2025-01"
 endDate: "2025-01"
 tags: [training, workshop, polio-eradication]
 purpose: Training Workshop
+description: Conducted an in-person KoboToolbox training workshop in Kabul for the Gates Foundation and Global Polio Eradication Initiative (GPEI).
 order: 2
 ---
 

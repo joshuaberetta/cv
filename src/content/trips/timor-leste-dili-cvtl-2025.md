@@ -8,6 +8,7 @@ startDate: "2025-02"
 endDate: "2025-02"
 tags: [training, workshop, AI, red-cross]
 purpose: Training Workshop
+description: Conducted a bilingual training workshop on KoboToolbox and Introduction to AI for Humanitarians for Cruz Vermelha de Timor-Leste (CVTL).
 order: 5
 ---
 

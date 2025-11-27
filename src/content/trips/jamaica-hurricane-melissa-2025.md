@@ -8,6 +8,7 @@ startDate: "2025-11"
 endDate: "2025-11"
 tags: [humanitarian, deployment, emergency-response]
 purpose: Humanitarian Deployment
+description: Deployed to Jamaica for 2 weeks as part of the humanitarian response and recovery efforts following Hurricane Melissa.
 order: 1
 ---
 

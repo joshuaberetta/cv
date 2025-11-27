@@ -3,6 +3,7 @@ slug: humanitarian-data-tools
 section: projects
 name: Humanitarian Data Tools
 url: https://github.com/joshuaberetta
+description: Collection of open-source tools and utilities for humanitarian data collection and analysis.
 tags:
   - Open Source
   - Data Science

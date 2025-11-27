@@ -8,6 +8,7 @@ startDate: "2025-01"
 endDate: "2025-01"
 tags: [training, workshop, epidemiology, government]
 purpose: Training Workshop
+description: Facilitated an in-person KoboToolbox workshop for the Directorate of Epidemiology (DIEPI) in Santo Domingo.
 order: 6
 ---
 
