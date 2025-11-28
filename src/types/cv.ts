@@ -57,7 +57,7 @@ export interface Training {
   course: string;
   location: string;
   year: string;
-  language?: string;
+  language?: string[];
 }
 
 export interface Deployment {

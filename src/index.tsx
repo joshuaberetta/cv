@@ -23,6 +23,19 @@ const fetchCVData = async (): Promise<CVData> => {
     if (yamlResponse.ok) {
       const yamlText = await yamlResponse.text();
       const parsedData = yaml.load(yamlText) as CVData;
+      
+      // Normalize trainings language field to always be an array
+      if (parsedData.trainings) {
+        parsedData.trainings = parsedData.trainings.map(training => ({
+          ...training,
+          language: training.language 
+            ? (Array.isArray(training.language) 
+                ? training.language 
+                : training.language.split(',').map(lang => lang.trim()))
+            : undefined
+        }));
+      }
+      
       console.log('Loaded YAML data');
       return parsedData;
     }

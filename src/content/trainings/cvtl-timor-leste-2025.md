@@ -7,7 +7,9 @@ course: KoboToolbox and Introduction to AI for Humanitarians
 location: Dili, Timor-Leste
 country: Timor-Leste
 year: "2025"
-language: English, Tetum
+language:
+  - English
+  - Tetum
 description: Facilitated a bilingual training workshop combining technical skills development with responsible AI integration for humanitarian operations.
 order: 3
 featured: true

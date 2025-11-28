@@ -126,7 +126,7 @@ const GlobePage: React.FC<GlobePageProps> = ({
   ).sort().reverse();
   
   const allTrainingLanguages = Array.from(
-    new Set(displayTrainings.filter(t => t.language).map(t => t.language!))
+    new Set(displayTrainings.filter(t => t.language).flatMap(t => t.language!))
   ).sort();
 
   const allWorkCompanies = Array.from(
@@ -156,7 +156,7 @@ const GlobePage: React.FC<GlobePageProps> = ({
       if (!trainingCountryFilters.includes(country)) return false;
     }
     if (trainingYearFilters.length > 0 && !trainingYearFilters.includes(t.year)) return false;
-    if (trainingLanguageFilters.length > 0 && (!t.language || !trainingLanguageFilters.includes(t.language))) return false;
+    if (trainingLanguageFilters.length > 0 && (!t.language || !t.language.some(lang => trainingLanguageFilters.includes(lang)))) return false;
     return true;
   });
 
@@ -360,7 +360,7 @@ const GlobePage: React.FC<GlobePageProps> = ({
                 options={allTrainingLanguages.map(language => ({
                   value: language,
                   label: language,
-                  count: trainings.filter(t => t.language === language).length
+                  count: trainings.filter(t => t.language?.includes(language)).length
                 }))}
                 selectedValues={trainingLanguageFilters}
                 onChange={setTrainingLanguageFilters}
@@ -626,8 +626,8 @@ const GlobePage: React.FC<GlobePageProps> = ({
             <div className="modal-details">
               <span className="modal-detail-item">📍 {modalContent.data.location}</span>
               <span className="modal-detail-item">📅 {modalContent.data.year}</span>
-              {modalContent.data.language && (
-                <span className="modal-detail-item">🗣️ {modalContent.data.language}</span>
+              {modalContent.data.language && modalContent.data.language.length > 0 && (
+                <span className="modal-detail-item">🗣️ {modalContent.data.language.join(', ')}</span>
               )}
             </div>
             {modalContent.data.body && (

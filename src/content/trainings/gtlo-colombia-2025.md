@@ -7,7 +7,8 @@ course: KoboToolbox and Introduction to AI for Humanitarians
 location: Bogotá, Colombia
 country: Colombia
 year: "2025"
-language: Spanish
+language:
+  - Spanish
 description: Delivered a comprehensive training combining KoboToolbox fundamentals with an introduction to responsible AI applications in humanitarian contexts.
 order: 2
 ---

@@ -31,7 +31,7 @@ export interface TrainingContent extends ContentItem {
   location: string;
   country: string;
   year: string;
-  language?: string;
+  language?: string[];
   description: string;
 }
 

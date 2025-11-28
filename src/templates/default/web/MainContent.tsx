@@ -130,7 +130,7 @@ const MainContent: React.FC<MainContentProps> = ({ basics, sections, work, educa
                         </div>
                         <div className="training-info">
                           <span className="course">{training.course}</span>
-                          {training.language && <span className="language"> • {training.language}</span>}
+                          {training.language && training.language.length > 0 && <span className="language"> • {training.language.join(', ')}</span>}
                         </div>
                       </li>
                     ))}

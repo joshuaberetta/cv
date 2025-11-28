@@ -48,7 +48,7 @@ export function toTrainingContent(parsed: ParsedMarkdown): TrainingContent {
     location: frontmatter.location,
     country: frontmatter.country,
     year: frontmatter.year,
-    language: frontmatter.language,
+    language: frontmatter.language ? (Array.isArray(frontmatter.language) ? frontmatter.language : [frontmatter.language]) : undefined,
     description: frontmatter.description,
     order: frontmatter.order || 999
   };

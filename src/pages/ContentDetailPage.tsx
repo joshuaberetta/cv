@@ -76,8 +76,8 @@ const ContentDetailPage: React.FC<ContentDetailPageProps> = ({ allContent }) => 
       const endDate = 'endDate' in content ? content.endDate : 'Present';
       metadata.push({ label: '📅 Period', value: `${content.startDate} - ${endDate}` });
     }
-    if ('language' in content && content.language) {
-      metadata.push({ label: '🗣️ Language', value: content.language });
+    if ('language' in content && content.language && content.language.length > 0) {
+      metadata.push({ label: '🗣️ Language', value: content.language.join(', ') });
     }
 
     if (metadata.length === 0) return null;

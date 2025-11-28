@@ -12,22 +12,26 @@ import matter from 'gray-matter';
 // Import all markdown files
 const projectModules = import.meta.glob('../content/projects/*.md', { 
   eager: true,
-  as: 'raw'
+  query: '?raw',
+  import: 'default'
 });
 
 const trainingModules = import.meta.glob('../content/trainings/*.md', { 
   eager: true,
-  as: 'raw'
+  query: '?raw',
+  import: 'default'
 });
 
 const workModules = import.meta.glob('../content/work/*.md', { 
   eager: true,
-  as: 'raw'
+  query: '?raw',
+  import: 'default'
 });
 
 const tripModules = import.meta.glob('../content/trips/*.md', { 
   eager: true,
-  as: 'raw'
+  query: '?raw',
+  import: 'default'
 });
 
 interface AppProps {
@@ -105,7 +109,7 @@ const App: React.FC<AppProps> = ({ data }) => {
             location: frontmatter.location,
             country: frontmatter.country,
             year: frontmatter.year,
-            language: frontmatter.language,
+            language: frontmatter.language ? (Array.isArray(frontmatter.language) ? frontmatter.language : [frontmatter.language]) : undefined,
             description: frontmatter.description,
             order: frontmatter.order || 999
           };

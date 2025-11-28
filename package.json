@@ -1,6 +1,7 @@
 {
   "name": "cv-generator",
   "version": "1.0.0",
+  "type": "module",
   "description": "A modern CV generator using TypeScript and React",
   "main": "dist/index.js",
   "scripts": {
