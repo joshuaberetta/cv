@@ -435,6 +435,16 @@ const PortfolioGlobe: React.FC<PortfolioGlobeProps> = ({
     return cleanup;
   }, [drawGlobe]);
 
+  // Handle window resize
+  useEffect(() => {
+    const handleResize = () => {
+      drawGlobe();
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [drawGlobe]);
+
   const handlePlayPause = () => {
     const newSpinningState = !isSpinningRef.current;
     isSpinningRef.current = newSpinningState;
