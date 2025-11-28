@@ -1,5 +1,4 @@
 ---
-slug: colombia-bogota-gtlo-2025
 section: trips
 name: GTLo Workshop - Colombia
 destination: Bogotá

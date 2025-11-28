@@ -1,5 +1,4 @@
 ---
-slug: kobo-project-coordinator
 section: work
 name: Project Coordinator
 position: Project Coordinator

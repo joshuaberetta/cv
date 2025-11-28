@@ -1,5 +1,4 @@
 ---
-slug: gtlo-colombia-2025
 section: trainings
 name: KoboToolbox and AI for Humanitarians
 organization: Grupo de Trabajo de Localización en Colombia (GTLo)

@@ -38,6 +38,12 @@ interface AppProps {
   data: CVData;
 }
 
+// Helper function to extract slug from file path
+const getSlugFromPath = (path: string): string => {
+  const filename = path.split('/').pop() || '';
+  return filename.replace(/\.md$/, '');
+};
+
 const CVPage: React.FC<AppProps> = ({ data }) => {
   const handlePrint = () => {
     // Open the pre-generated PDF with cache busting to ensure latest version
@@ -80,7 +86,7 @@ const App: React.FC<AppProps> = ({ data }) => {
           const frontmatter = result.data as any;
           
           const projectContent: ProjectContent = {
-            slug: frontmatter.slug,
+            slug: getSlugFromPath(path),
             section: 'projects',
             name: frontmatter.name,
             body: result.content.trim(),
@@ -100,7 +106,7 @@ const App: React.FC<AppProps> = ({ data }) => {
           const frontmatter = result.data as any;
           
           const trainingContent: TrainingContent = {
-            slug: frontmatter.slug,
+            slug: getSlugFromPath(path),
             section: 'trainings',
             name: frontmatter.course || frontmatter.name,
             body: result.content.trim(),
@@ -122,7 +128,7 @@ const App: React.FC<AppProps> = ({ data }) => {
           const frontmatter = result.data as any;
           
           const workContent: WorkContent = {
-            slug: frontmatter.slug,
+            slug: getSlugFromPath(path),
             section: 'work',
             name: frontmatter.position || frontmatter.name,
             body: result.content.trim(),
@@ -143,7 +149,7 @@ const App: React.FC<AppProps> = ({ data }) => {
           const frontmatter = result.data as any;
           
           const tripContent: TripContent = {
-            slug: frontmatter.slug,
+            slug: getSlugFromPath(path),
             section: 'trips',
             name: frontmatter.name,
             body: result.content.trim(),

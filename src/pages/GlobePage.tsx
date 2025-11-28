@@ -76,7 +76,12 @@ const GlobePage: React.FC<GlobePageProps> = ({
     setModalContent({ type, data });
     // Update URL without navigating
     if (data.slug) {
-      window.history.pushState({}, '', `/${type}s/${data.slug}`);
+      // Use proper section names (some are already plural, work is singular)
+      const sectionPath = type === 'project' ? 'projects' 
+        : type === 'training' ? 'trainings'
+        : type === 'trip' ? 'trips'
+        : 'work'; // work stays singular
+      window.history.pushState({}, '', `/${sectionPath}/${data.slug}`);
     }
   };
 
@@ -84,6 +89,16 @@ const GlobePage: React.FC<GlobePageProps> = ({
     setModalContent({ type: null, data: null });
     // Restore URL to globe page
     window.history.pushState({}, '', '/globe');
+  };
+
+  const handleExpandModal = () => {
+    if (modalContent.data && modalContent.type) {
+      const sectionPath = modalContent.type === 'project' ? 'projects' 
+        : modalContent.type === 'training' ? 'trainings'
+        : modalContent.type === 'trip' ? 'trips'
+        : 'work';
+      navigate(`/${sectionPath}/${modalContent.data.slug}`);
+    }
   };
 
   // Helper to get first paragraph from markdown body
@@ -592,7 +607,7 @@ const GlobePage: React.FC<GlobePageProps> = ({
       </footer>
 
       {/* Modal */}
-      <Modal isOpen={modalContent.type !== null} onClose={handleCloseModal}>
+      <Modal isOpen={modalContent.type !== null} onClose={handleCloseModal} onExpand={handleExpandModal}>
         {modalContent.type === 'project' && modalContent.data && (
           <div className="modal-body">
             <h2>{modalContent.data.name}</h2>

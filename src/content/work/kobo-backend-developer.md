@@ -1,5 +1,4 @@
 ---
-slug: kobo-backend-developer
 section: work
 name: Backend Developer
 position: Backend Developer

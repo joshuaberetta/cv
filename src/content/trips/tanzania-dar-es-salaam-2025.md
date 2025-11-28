@@ -1,5 +1,4 @@
 ---
-slug: tanzania-dar-es-salaam-2025
 section: trips
 name: FAO Plant Protection Workshop - Tanzania
 destination: Dar es Salaam

@@ -1,5 +1,4 @@
 ---
-slug: ai-for-humanitarians
 section: projects
 name: AI for Humanitarians
 url: https://github.com/joshuaberetta

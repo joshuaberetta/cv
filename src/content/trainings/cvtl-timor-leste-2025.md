@@ -1,5 +1,4 @@
 ---
-slug: cvtl-timor-leste-2025
 section: trainings
 name: KoboToolbox and AI for Humanitarians
 organization: Cruz Vermelha de Timor-Leste (CVTL)

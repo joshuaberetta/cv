@@ -1,5 +1,4 @@
 ---
-slug: kobo-humanitarian-coordinator
 section: work
 name: Humanitarian Project Coordinator
 position: Humanitarian Project Coordinator

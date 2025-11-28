@@ -1,5 +1,4 @@
 ---
-slug: cv-generator
 section: projects
 name: CV Generator
 url: https://github.com/joshuaberetta/cv

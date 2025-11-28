@@ -1,5 +1,4 @@
 ---
-slug: timor-leste-dili-cvtl-2025
 section: trips
 name: CVTL Workshop - Timor-Leste
 destination: Dili

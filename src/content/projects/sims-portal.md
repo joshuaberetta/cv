@@ -1,5 +1,4 @@
 ---
-slug: sims-portal
 section: projects
 name: SIMS Portal
 url: https://github.com/JonathanGarro/SIMS-Portal

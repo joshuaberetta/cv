@@ -1,5 +1,4 @@
 ---
-slug: dominican-republic-santo-domingo-2025
 section: trips
 name: DIEPI Workshop - Dominican Republic
 destination: Santo Domingo

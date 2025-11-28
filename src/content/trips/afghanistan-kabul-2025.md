@@ -1,5 +1,4 @@
 ---
-slug: afghanistan-kabul-2025
 section: trips
 name: GPEI Workshop - Afghanistan
 destination: Kabul

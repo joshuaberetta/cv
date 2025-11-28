@@ -1,5 +1,4 @@
 ---
-slug: diepi-dominican-republic-2025
 section: trainings
 name: In-person workshop
 organization: Directorate of Epidemiology (DIEPI)

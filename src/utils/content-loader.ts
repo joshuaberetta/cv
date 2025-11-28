@@ -15,11 +15,11 @@ export function parseMarkdown(content: string): ParsedMarkdown {
 /**
  * Convert parsed markdown to ProjectContent
  */
-export function toProjectContent(parsed: ParsedMarkdown): ProjectContent {
+export function toProjectContent(parsed: ParsedMarkdown, slug: string): ProjectContent {
   const { frontmatter, body } = parsed;
   
   return {
-    slug: frontmatter.slug,
+    slug,
     section: 'projects',
     name: frontmatter.name,
     body,
@@ -35,11 +35,11 @@ export function toProjectContent(parsed: ParsedMarkdown): ProjectContent {
 /**
  * Convert parsed markdown to TrainingContent
  */
-export function toTrainingContent(parsed: ParsedMarkdown): TrainingContent {
+export function toTrainingContent(parsed: ParsedMarkdown, slug: string): TrainingContent {
   const { frontmatter, body } = parsed;
   
   return {
-    slug: frontmatter.slug,
+    slug,
     section: 'trainings',
     name: frontmatter.course || frontmatter.name,
     body,
@@ -57,11 +57,11 @@ export function toTrainingContent(parsed: ParsedMarkdown): TrainingContent {
 /**
  * Convert parsed markdown to WorkContent
  */
-export function toWorkContent(parsed: ParsedMarkdown): WorkContent {
+export function toWorkContent(parsed: ParsedMarkdown, slug: string): WorkContent {
   const { frontmatter, body } = parsed;
   
   return {
-    slug: frontmatter.slug,
+    slug,
     section: 'work',
     name: frontmatter.position || frontmatter.name,
     body,
@@ -80,14 +80,16 @@ export function toWorkContent(parsed: ParsedMarkdown): WorkContent {
  */
 export async function loadContentFiles<T>(
   files: Record<string, () => Promise<{ default: string }>>,
-  converter: (parsed: ParsedMarkdown) => T
+  converter: (parsed: ParsedMarkdown, slug: string) => T
 ): Promise<T[]> {
   const content: T[] = [];
   
   for (const path in files) {
     const module = await files[path]();
     const parsed = parseMarkdown(module.default);
-    content.push(converter(parsed));
+    const filename = path.split('/').pop() || '';
+    const slug = filename.replace(/\.md$/, '');
+    content.push(converter(parsed, slug));
   }
   
   // Sort by order field

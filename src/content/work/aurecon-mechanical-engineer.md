@@ -1,5 +1,4 @@
 ---
-slug: aurecon-mechanical-engineer
 section: work
 name: Mechanical Engineer
 position: Mechanical Engineer

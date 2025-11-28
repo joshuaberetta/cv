@@ -1,5 +1,4 @@
 ---
-slug: jamaica-hurricane-melissa-2025
 section: trips
 name: Hurricane Melissa Response - Jamaica
 destination: Kingston

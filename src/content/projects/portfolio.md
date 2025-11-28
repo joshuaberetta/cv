@@ -1,5 +1,4 @@
 ---
-slug: portfolio
 section: projects
 name: Portfolio
 url: https://joshuaberetta.com

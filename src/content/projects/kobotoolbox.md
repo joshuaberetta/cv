@@ -1,5 +1,4 @@
 ---
-slug: kobotoolbox
 section: projects
 name: KoboToolbox
 url: https://github.com/kobotoolbox
