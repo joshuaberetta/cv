@@ -348,6 +348,43 @@ const PortfolioGlobe: React.FC<PortfolioGlobeProps> = ({
           .attr('stroke-width', d => selectedLocation?.id === d.id ? 2 : 1.5)
           .style('filter', d => selectedLocation?.id === d.id ? 'url(#glow)' : 'none');
 
+        // Add star symbols for featured locations
+        const featuredLocations = filteredLocations.filter(d => d.featured);
+        const stars = markerGroup.selectAll<SVGTextElement, GlobeLocation>('text')
+          .data(featuredLocations, d => d.id);
+
+        stars.exit().remove();
+
+        const enterStars = stars.enter()
+          .append('text')
+          .attr('class', 'portfolio-globe-star')
+          .style('cursor', 'pointer')
+          .style('pointer-events', 'none')
+          .text('*')
+          .attr('font-size', '20px')
+          .attr('font-weight', 'bold')
+          .attr('font-family', 'IBM Plex Mono, monospace')
+          .attr('text-anchor', 'middle')
+          .attr('dominant-baseline', 'middle');
+
+        enterStars.merge(stars)
+          .attr('x', d => {
+            const coords = projection([d.longitude, d.latitude]);
+            return coords ? coords[0] : 0;
+          })
+          .attr('y', d => {
+            const coords = projection([d.longitude, d.latitude]);
+            return coords ? coords[1] : 0;
+          })
+          .attr('display', d => {
+            const coordinate: [number, number] = [d.longitude, d.latitude];
+            const inverted = projection.invert?.(center);
+            if (!inverted) return 'none';
+            const gdistance = d3.geoDistance(coordinate, inverted);
+            return gdistance > Math.PI / 2 ? 'none' : 'block';
+          })
+          .style('filter', 'drop-shadow(0px 0px 2px rgba(255, 183, 3, 0.8))');
+
         markerGroup.each(function () {
           this.parentNode?.appendChild(this);
         });

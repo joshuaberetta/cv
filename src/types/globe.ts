@@ -10,6 +10,7 @@ export interface GlobeLocation {
   date?: string;
   images?: string[];
   journeyId?: string; // Links location to a journey
+  featured?: boolean;
 }
 
 export interface Journey {

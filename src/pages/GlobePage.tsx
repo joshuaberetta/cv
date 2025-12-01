@@ -187,10 +187,19 @@ const GlobePage: React.FC<GlobePageProps> = ({
     return true;
   });
 
+  // Get all featured items
+  const featuredItems = [
+    ...projects.filter(p => p.featured),
+    ...trainingsContent.filter(t => t.featured),
+    ...workContent.filter(w => w.featured),
+    ...tripsContent.filter(t => t.featured)
+  ].sort((a, b) => (a.order || 999) - (b.order || 999));
+
   // Navigation sections
   const navSections = [
     { id: 'hero', label: 'Home' },
     { id: 'about', label: 'About' },
+    ...(featuredItems.length > 0 ? [{ id: 'featured', label: 'Featured' }] : []),
     { id: 'projects', label: 'Projects' },
     { id: 'trainings', label: 'Trainings' },
     { id: 'trips', label: 'Trips' },
@@ -280,6 +289,49 @@ const GlobePage: React.FC<GlobePageProps> = ({
           </div>
         </div>
       </section>
+
+      {/* Featured Section */}
+      {featuredItems.length > 0 && (
+        <section className="featured-section" id="featured">
+          <div className="section-content">
+            <h2>Featured</h2>
+            <p className="section-subtitle">Highlights from my work, trainings, and travels</p>
+
+            <Carousel itemsPerView={3} gap={24}>
+              {featuredItems.map((item, index) => {
+                const cardType = item.section === 'projects' ? 'project' 
+                  : item.section === 'trainings' ? 'training'
+                  : item.section === 'trips' ? 'trip'
+                  : 'work';
+
+                return (
+                  <div
+                    key={index}
+                    className={`carousel-square-card ${cardType}-card featured-card`}
+                    onClick={() => handleOpenModal(cardType, item)}
+                  >
+                    <div className="featured-badge">* Featured</div>
+                    <div className="card-content">
+                      <h3>{item.name}</h3>
+                      <div className="card-preview">
+                        <p className="preview-text">{item.description}</p>
+                        {'tags' in item && item.tags && item.tags.length > 0 && (
+                          <div className="tags-container">
+                            {item.tags.slice(0, 3).map((tag, i) => (
+                              <span key={i} className="tag-mini">{tag}</span>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                    <div className="card-expand-hint">Click to expand</div>
+                  </div>
+                );
+              })}
+            </Carousel>
+          </div>
+        </section>
+      )}
 
       {/* Projects Section */}
       <section className="projects-section" id="projects">

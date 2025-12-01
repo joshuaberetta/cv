@@ -30,7 +30,8 @@
       "type": "training",
       "title": "DIEPI Workshop",
       "date": "2025",
-      "description": "In-person workshop with the Directorate of Epidemiology (DIEPI) in Spanish."
+      "description": "In-person workshop with the Directorate of Epidemiology (DIEPI) in Spanish.",
+      "featured": true
     },
     {
       "id": "bogota-training-2025",
@@ -41,7 +42,8 @@
       "type": "training",
       "title": "GTLo KoboToolbox & AI Training",
       "date": "2025",
-      "description": "KoboToolbox and Introduction to AI for Humanitarians training for the Grupo de Trabajo de Localización en Colombia (GTLo). Delivered in Spanish."
+      "description": "KoboToolbox and Introduction to AI for Humanitarians training for the Grupo de Trabajo de Localización en Colombia (GTLo). Delivered in Spanish.",
+      "featured": true
     },
     {
       "id": "dili-training",
@@ -52,7 +54,8 @@
       "type": "training",
       "title": "CVTL & UNTL Workshops",
       "date": "2025",
-      "description": "Multiple workshops in Timor-Leste including KoboToolbox and Introduction to AI for Humanitarians with Cruz Vermelha de Timor-Leste (CVTL) and a training workshop with UNTL. Delivered in English and Tetum."
+      "description": "Multiple workshops in Timor-Leste including KoboToolbox and Introduction to AI for Humanitarians with Cruz Vermelha de Timor-Leste (CVTL) and a training workshop with UNTL. Delivered in English and Tetum.",
+      "featured": true
     },
     {
       "id": "dar-training",

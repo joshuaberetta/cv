@@ -33,6 +33,7 @@ export interface TrainingContent extends ContentItem {
   year: string;
   language?: string[];
   description: string;
+  featured?: boolean;
 }
 
 /**
@@ -46,6 +47,7 @@ export interface WorkContent extends ContentItem {
   startDate: string;
   endDate: string;
   description: string;
+  featured?: boolean;
 }
 
 /**
@@ -60,6 +62,7 @@ export interface TripContent extends ContentItem {
   tags?: string[];
   purpose?: string;
   description: string;
+  featured?: boolean;
 }
 
 /**
