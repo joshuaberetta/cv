@@ -10,7 +10,7 @@ import SideNav from '../components/SideNav';
 import WorkGantt from '../components/WorkGantt';
 import { GlobeLocation, Journey } from '../types/globe';
 import { Training, WorkExperience } from '../types/cv';
-import { ProjectContent, TrainingContent, WorkContent, TripContent } from '../types/content';
+import { ProjectContent, TrainingContent, WorkContent, TripContent, EducationContent } from '../types/content';
 import ReactMarkdown from 'react-markdown';
 import './globe-page.css';
 
@@ -26,6 +26,7 @@ interface GlobePageProps {
   work?: WorkExperience[];
   trainings?: Training[];
   volunteering?: any[];
+  education?: EducationContent[];
   projects: ProjectContent[];
   trainingsContent?: TrainingContent[];
   workContent?: WorkContent[];
@@ -37,6 +38,7 @@ const GlobePage: React.FC<GlobePageProps> = ({
   work = [], 
   trainings = [], 
   volunteering = [],
+  education = [],
   projects,
   trainingsContent = [],
   workContent = [],
@@ -50,7 +52,7 @@ const GlobePage: React.FC<GlobePageProps> = ({
   const [trainingsViewMode, setTrainingsViewMode] = useState<'map' | 'cards'>('map');
   const [tripsViewMode, setTripsViewMode] = useState<'map' | 'cards'>('map');
   const [modalContent, setModalContent] = useState<{
-    type: 'project' | 'training' | 'work' | 'trip' | null;
+    type: 'project' | 'training' | 'work' | 'trip' | 'education' | null;
     data: any;
   }>({ type: null, data: null });
 
@@ -79,7 +81,7 @@ const GlobePage: React.FC<GlobePageProps> = ({
     setSelectedJourney(null);
   };
 
-  const handleOpenModal = (type: 'project' | 'training' | 'work' | 'trip', data: any) => {
+  const handleOpenModal = (type: 'project' | 'training' | 'work' | 'trip' | 'education', data: any) => {
     setModalContent({ type, data });
     // Update URL without navigating
     if (data.slug) {
@@ -87,6 +89,7 @@ const GlobePage: React.FC<GlobePageProps> = ({
       const sectionPath = type === 'project' ? 'projects' 
         : type === 'training' ? 'trainings'
         : type === 'trip' ? 'trips'
+        : type === 'education' ? 'education'
         : 'work'; // work stays singular
       window.history.pushState({}, '', `/${sectionPath}/${data.slug}`);
     }
@@ -103,6 +106,7 @@ const GlobePage: React.FC<GlobePageProps> = ({
       const sectionPath = modalContent.type === 'project' ? 'projects' 
         : modalContent.type === 'training' ? 'trainings'
         : modalContent.type === 'trip' ? 'trips'
+        : modalContent.type === 'education' ? 'education'
         : 'work';
       navigate(`/${sectionPath}/${modalContent.data.slug}`);
     }
@@ -681,7 +685,8 @@ const GlobePage: React.FC<GlobePageProps> = ({
               <WorkGantt
                 work={filteredWork}
                 volunteering={volunteering}
-                onItemClick={(item) => handleOpenModal('work', item)}
+                education={education}
+                onItemClick={(item, type) => handleOpenModal(type, item)}
               />
             ) : (
               <>
@@ -865,6 +870,31 @@ const GlobePage: React.FC<GlobePageProps> = ({
                 ))}
               </div>
             )}
+            {modalContent.data.body && (
+              <div className="modal-markdown-content">
+                <ReactMarkdown>{modalContent.data.body}</ReactMarkdown>
+              </div>
+            )}
+          </div>
+        )}
+        {modalContent.type === 'education' && modalContent.data && (
+          <div className="modal-body">
+            <h2>{modalContent.data.degree}</h2>
+            <h3>{modalContent.data.institution}</h3>
+            <div className="modal-details">
+              <span className="modal-detail-item">📍 {modalContent.data.location}</span>
+              <span className="modal-detail-item">
+                📅 {modalContent.data.startDate} - {modalContent.data.endDate}
+              </span>
+              <span className="modal-detail-item">📊 {modalContent.data.level}</span>
+              {modalContent.data.website && (
+                <span className="modal-detail-item">
+                  <a href={modalContent.data.website} target="_blank" rel="noopener noreferrer">
+                    🌐 Website
+                  </a>
+                </span>
+              )}
+            </div>
             {modalContent.data.body && (
               <div className="modal-markdown-content">
                 <ReactMarkdown>{modalContent.data.body}</ReactMarkdown>

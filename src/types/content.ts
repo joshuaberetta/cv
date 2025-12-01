@@ -3,7 +3,7 @@
  */
 export interface ContentItem {
   slug: string;
-  section: 'projects' | 'trainings' | 'work' | 'trips';
+  section: 'projects' | 'trainings' | 'work' | 'trips' | 'education';
   name: string;
   body: string;
   order?: number;
@@ -66,9 +66,25 @@ export interface TripContent extends ContentItem {
 }
 
 /**
+ * Education content with specific metadata
+ */
+export interface EducationContent extends ContentItem {
+  section: 'education';
+  degree: string;
+  institution: string;
+  location: string;
+  website?: string;
+  startDate: string;
+  endDate: string;
+  level: string;
+  description: string;
+  featured?: boolean;
+}
+
+/**
  * Union type for all content types
  */
-export type Content = ProjectContent | TrainingContent | WorkContent | TripContent;
+export type Content = ProjectContent | TrainingContent | WorkContent | TripContent | EducationContent;
 
 /**
  * Frontmatter data extracted from markdown files

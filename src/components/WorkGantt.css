@@ -109,6 +109,11 @@
   border-top: 1px dashed #6A7A82;
 }
 
+.education-divider {
+  background: #f0fdf4;
+  border-top: 1px dashed #6A7A82;
+}
+
 .section-label {
   font-weight: 600;
   font-size: 0.75rem;
@@ -120,6 +125,10 @@
 
 .volunteer-divider .section-label {
   color: #4A90E2;
+}
+
+.education-divider .section-label {
+  color: #10b981;
 }
 
 /* Organization grouping */
@@ -142,6 +151,10 @@
 
 .volunteer-org {
   color: #4A90E2;
+}
+
+.education-org {
+  color: #10b981;
 }
 
 /* Rows */
@@ -226,6 +239,12 @@
   background: transparent;
   border: 2px solid #4A90E2;
   color: #4A90E2;
+}
+
+.education-bar {
+  background: transparent;
+  border: 2px solid #10b981;
+  color: #10b981;
 }
 
 .gantt-bar:hover {

@@ -57,6 +57,18 @@ const ContentDetailPage: React.FC<ContentDetailPageProps> = ({ allContent }) => 
     if ('company' in content && content.company) {
       metadata.push({ label: '🏢 Company', value: content.company });
     }
+    if ('institution' in content && content.institution) {
+      metadata.push({ label: '🎓 Institution', value: content.institution });
+    }
+    if ('degree' in content && content.degree) {
+      metadata.push({ label: '📜 Degree', value: content.degree });
+    }
+    if ('level' in content && content.level) {
+      metadata.push({ label: '📊 Level', value: content.level });
+    }
+    if ('website' in content && content.website) {
+      metadata.push({ label: '🌐 Website', value: content.website });
+    }
     if ('destination' in content && content.destination) {
       metadata.push({ label: '📍 Destination', value: content.destination });
     }
@@ -87,7 +99,7 @@ const ContentDetailPage: React.FC<ContentDetailPageProps> = ({ allContent }) => 
         {metadata.map((item, index) => (
           <div key={index} className="metadata-item">
             <span className="metadata-label">{item.label}</span>
-            {item.label.includes('Link') ? (
+            {(item.label.includes('Link') || item.label.includes('Website')) ? (
               <a href={item.value} target="_blank" rel="noopener noreferrer" className="metadata-value metadata-link">
                 {item.value}
               </a>

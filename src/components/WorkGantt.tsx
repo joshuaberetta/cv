@@ -1,17 +1,18 @@
 import React from 'react';
 import { WorkExperience, Volunteer } from '../types/cv';
-import { WorkContent } from '../types/content';
+import { WorkContent, EducationContent } from '../types/content';
 import './WorkGantt.css';
 
 interface WorkGanttProps {
   work: (WorkExperience | WorkContent)[];
   volunteering?: Volunteer[];
-  onItemClick?: (item: WorkExperience | WorkContent | Volunteer, type: 'work' | 'volunteer') => void;
+  education?: EducationContent[];
+  onItemClick?: (item: WorkExperience | WorkContent | Volunteer | EducationContent, type: 'work' | 'volunteer' | 'education') => void;
 }
 
 interface GanttItem {
-  data: WorkExperience | WorkContent | Volunteer;
-  type: 'work' | 'volunteer';
+  data: WorkExperience | WorkContent | Volunteer | EducationContent;
+  type: 'work' | 'volunteer' | 'education';
   position: string;
   organization: string;
   startDate: Date;
@@ -20,7 +21,7 @@ interface GanttItem {
   endDateStr: string;
 }
 
-const WorkGantt: React.FC<WorkGanttProps> = ({ work, volunteering = [], onItemClick }) => {
+const WorkGantt: React.FC<WorkGanttProps> = ({ work, volunteering = [], education = [], onItemClick }) => {
   // Parse date string (MM/YYYY or YYYY format)
   const parseDate = (dateStr: string): Date => {
     if (dateStr.toLowerCase() === 'current') {
@@ -62,8 +63,19 @@ const WorkGantt: React.FC<WorkGanttProps> = ({ work, volunteering = [], onItemCl
     endDateStr: vol.endDate
   }));
 
+  const educationItems: GanttItem[] = education.map(edu => ({
+    data: edu,
+    type: 'education' as const,
+    position: edu.degree,
+    organization: edu.institution,
+    startDate: parseDate(edu.startDate),
+    endDate: edu.endDate.toLowerCase() === 'current' ? null : parseDate(edu.endDate),
+    startDateStr: edu.startDate,
+    endDateStr: edu.endDate
+  }));
+
   // Combine and sort by start date (most recent first)
-  const allItems = [...workItems, ...volunteerItems].sort((a, b) => 
+  const allItems = [...workItems, ...volunteerItems, ...educationItems].sort((a, b) => 
     b.startDate.getTime() - a.startDate.getTime()
   );
 
@@ -96,6 +108,21 @@ const WorkGantt: React.FC<WorkGanttProps> = ({ work, volunteering = [], onItemCl
   const sortedVolunteerOrgs = Object.keys(groupedVolunteerItems).sort((a, b) => {
     const aLatest = Math.max(...groupedVolunteerItems[a].map(item => item.startDate.getTime()));
     const bLatest = Math.max(...groupedVolunteerItems[b].map(item => item.startDate.getTime()));
+    return bLatest - aLatest;
+  });
+
+  const groupedEducationItems = educationItems.reduce((acc, item) => {
+    const org = item.organization;
+    if (!acc[org]) {
+      acc[org] = [];
+    }
+    acc[org].push(item);
+    return acc;
+  }, {} as Record<string, GanttItem[]>);
+
+  const sortedEducationOrgs = Object.keys(groupedEducationItems).sort((a, b) => {
+    const aLatest = Math.max(...groupedEducationItems[a].map(item => item.startDate.getTime()));
+    const bLatest = Math.max(...groupedEducationItems[b].map(item => item.startDate.getTime()));
     return bLatest - aLatest;
   });
 
@@ -205,7 +232,7 @@ const WorkGantt: React.FC<WorkGanttProps> = ({ work, volunteering = [], onItemCl
         {workItems.length > 0 && (
           <>
             <div className="gantt-section-divider">
-              <span className="section-label">Work</span>
+              <span className="section-label">Experience & Education</span>
             </div>
             {sortedWorkOrgs.map((org) => (
               <React.Fragment key={`org-${org}`}>
@@ -266,6 +293,49 @@ const WorkGantt: React.FC<WorkGanttProps> = ({ work, volunteering = [], onItemCl
                           <div className="gantt-bar-container">
                             <div
                               className="gantt-bar volunteer-bar"
+                              style={calculateBarStyle(item)}
+                            >
+                              <div className="bar-tooltip">
+                                <div className="tooltip-title">{item.position}</div>
+                                <div className="tooltip-org">{item.organization}</div>
+                                <div className="tooltip-dates">
+                                  {formatDateShort(item.startDate)} - {item.endDate ? formatDateShort(item.endDate) : 'Present'}
+                                </div>
+                                <div className="tooltip-duration">{calculateDuration(item.startDate, item.endDate)}</div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                </div>
+              </React.Fragment>
+            ))}
+          </>
+        )}
+
+        {/* Education section */}
+        {educationItems.length > 0 && (
+          <>
+            <div className="gantt-section-divider education-divider">
+              <span className="section-label">Education</span>
+            </div>
+            {sortedEducationOrgs.map((org) => (
+              <React.Fragment key={`education-org-${org}`}>
+                <div className="gantt-org-group">
+                  <div className="org-group-header education-org">{org}</div>
+                  {groupedEducationItems[org]
+                    .sort((a, b) => b.startDate.getTime() - a.startDate.getTime())
+                    .map((item, idx) => (
+                      <div key={`education-${org}-${idx}`} className="gantt-row" onClick={() => handleItemClick(item)}>
+                        <div className="gantt-left-column">
+                          <div className="row-title">{item.position}</div>
+                          <div className="row-subtitle">{item.organization}</div>
+                        </div>
+                        <div className="gantt-timeline-column">
+                          <div className="gantt-bar-container">
+                            <div
+                              className="gantt-bar education-bar"
                               style={calculateBarStyle(item)}
                             >
                               <div className="bar-tooltip">

@@ -1,5 +1,5 @@
 import matter from 'gray-matter';
-import { ProjectContent, TrainingContent, WorkContent, ParsedMarkdown } from '../types/content';
+import { ProjectContent, TrainingContent, WorkContent, EducationContent, ParsedMarkdown } from '../types/content';
 
 /**
  * Parse markdown file content and extract frontmatter
@@ -70,6 +70,29 @@ export function toWorkContent(parsed: ParsedMarkdown, slug: string): WorkContent
     location: frontmatter.location,
     startDate: frontmatter.startDate,
     endDate: frontmatter.endDate,
+    description: frontmatter.description,
+    order: frontmatter.order || 999
+  };
+}
+
+/**
+ * Convert parsed markdown to EducationContent
+ */
+export function toEducationContent(parsed: ParsedMarkdown, slug: string): EducationContent {
+  const { frontmatter, body } = parsed;
+  
+  return {
+    slug,
+    section: 'education',
+    name: frontmatter.degree || frontmatter.name,
+    body,
+    degree: frontmatter.degree,
+    institution: frontmatter.institution,
+    location: frontmatter.location,
+    website: frontmatter.website,
+    startDate: frontmatter.startDate,
+    endDate: frontmatter.endDate,
+    level: frontmatter.level,
     description: frontmatter.description,
     order: frontmatter.order || 999
   };
