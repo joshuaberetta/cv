@@ -129,13 +129,15 @@ const WorkGantt: React.FC<WorkGanttProps> = ({ work, volunteering = [], onItemCl
   const totalDays = (latestDate.getTime() - earliestDate.getTime()) / (1000 * 60 * 60 * 24);
 
   // Calculate position and width for each item
+  // Account for padding by using 95% of the available space (leaving 2.5% on each side for padding)
   const calculateBarStyle = (item: GanttItem) => {
     const start = item.startDate.getTime();
     const end = item.endDate ? item.endDate.getTime() : now.getTime();
     
     // Reverse: left side is current, right side is earliest
-    const leftOffset = ((latestDate.getTime() - end) / (1000 * 60 * 60 * 24)) / totalDays * 100;
-    const width = ((end - start) / (1000 * 60 * 60 * 24)) / totalDays * 100;
+    // Scale to 95% to account for padding
+    const leftOffset = 2.5 + (((latestDate.getTime() - end) / (1000 * 60 * 60 * 24)) / totalDays * 95);
+    const width = ((end - start) / (1000 * 60 * 60 * 24)) / totalDays * 95;
     
     return {
       left: `${leftOffset}%`,
@@ -181,7 +183,8 @@ const WorkGantt: React.FC<WorkGanttProps> = ({ work, volunteering = [], onItemCl
           <div className="timeline-markers">
             {timeMarkers.map((marker, idx) => {
               // Reverse: left side is current, right side is earliest
-              const position = ((latestDate.getTime() - marker.date.getTime()) / (1000 * 60 * 60 * 24)) / totalDays * 100;
+              // Scale to 95% to account for padding
+              const position = 2.5 + (((latestDate.getTime() - marker.date.getTime()) / (1000 * 60 * 60 * 24)) / totalDays * 95);
               return (
                 <div
                   key={idx}
@@ -222,11 +225,6 @@ const WorkGantt: React.FC<WorkGanttProps> = ({ work, volunteering = [], onItemCl
                               className="gantt-bar work-bar"
                               style={calculateBarStyle(item)}
                             >
-                              <div className="bar-content">
-                                <span className="bar-label">
-                                  {calculateDuration(item.startDate, item.endDate)}
-                                </span>
-                              </div>
                               <div className="bar-tooltip">
                                 <div className="tooltip-title">{item.position}</div>
                                 <div className="tooltip-org">{item.organization}</div>
@@ -270,11 +268,6 @@ const WorkGantt: React.FC<WorkGanttProps> = ({ work, volunteering = [], onItemCl
                               className="gantt-bar volunteer-bar"
                               style={calculateBarStyle(item)}
                             >
-                              <div className="bar-content">
-                                <span className="bar-label">
-                                  {calculateDuration(item.startDate, item.endDate)}
-                                </span>
-                              </div>
                               <div className="bar-tooltip">
                                 <div className="tooltip-title">{item.position}</div>
                                 <div className="tooltip-org">{item.organization}</div>
