@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import PortfolioGlobe from '../components/PortfolioGlobe';
+import FlatMap from '../components/FlatMap';
 import LocationDetail from '../components/LocationDetail';
 import Carousel from '../components/Carousel';
 import Modal from '../components/Modal';
@@ -46,6 +47,8 @@ const GlobePage: React.FC<GlobePageProps> = ({
   const [selectedJourney, setSelectedJourney] = useState<Journey | null>(null);
   const [activeFilter, setActiveFilter] = useState<string | null>(null);
   const [workViewMode, setWorkViewMode] = useState<'gantt' | 'cards'>('gantt');
+  const [trainingsViewMode, setTrainingsViewMode] = useState<'map' | 'cards'>('map');
+  const [tripsViewMode, setTripsViewMode] = useState<'map' | 'cards'>('map');
   const [modalContent, setModalContent] = useState<{
     type: 'project' | 'training' | 'work' | 'trip' | null;
     data: any;
@@ -393,7 +396,35 @@ const GlobePage: React.FC<GlobePageProps> = ({
       {trainings && trainings.length > 0 && (
         <section className="trainings-section" id="trainings">
           <div className="section-content">
-            <h2>Trainings & Workshops</h2>
+            <div className="section-header-with-toggle">
+              <h2>Trainings & Workshops</h2>
+              <div className="view-toggle">
+                <button
+                  className={`toggle-btn ${trainingsViewMode === 'map' ? 'active' : ''}`}
+                  onClick={() => setTrainingsViewMode('map')}
+                  aria-label="Map view"
+                >
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M3 6l6-3 6 3 6-3v15l-6 3-6-3-6 3V6z" />
+                    <path d="M9 3v15M15 6v15" />
+                  </svg>
+                  Map
+                </button>
+                <button
+                  className={`toggle-btn ${trainingsViewMode === 'cards' ? 'active' : ''}`}
+                  onClick={() => setTrainingsViewMode('cards')}
+                  aria-label="Card view"
+                >
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <rect x="3" y="3" width="7" height="7" />
+                    <rect x="14" y="3" width="7" height="7" />
+                    <rect x="3" y="14" width="7" height="7" />
+                    <rect x="14" y="14" width="7" height="7" />
+                  </svg>
+                  Cards
+                </button>
+              </div>
+            </div>
             
             {/* Training Filters */}
             <div className="section-filters">
@@ -439,7 +470,17 @@ const GlobePage: React.FC<GlobePageProps> = ({
               />
             </div>
 
-            {filteredTrainings.length > 0 ? (
+            {trainingsViewMode === 'map' ? (
+              <div className="map-view-container">
+                <FlatMap
+                  onLocationSelect={handleLocationSelect}
+                  onJourneySelect={handleJourneySelect}
+                  activeFilter="training"
+                  selectedLocation={selectedLocation}
+                  selectedJourney={selectedJourney}
+                />
+              </div>
+            ) : filteredTrainings.length > 0 ? (
               <Carousel itemsPerView={3} gap={24}>
                 {filteredTrainings.map((training, index) => {
                   // Handle both TrainingContent and Training types
@@ -489,7 +530,35 @@ const GlobePage: React.FC<GlobePageProps> = ({
       {tripsContent && tripsContent.length > 0 && (
         <section className="trips-section" id="trips">
           <div className="section-content">
-            <h2>Travel & Field Visits</h2>
+            <div className="section-header-with-toggle">
+              <h2>Travel & Field Visits</h2>
+              <div className="view-toggle">
+                <button
+                  className={`toggle-btn ${tripsViewMode === 'map' ? 'active' : ''}`}
+                  onClick={() => setTripsViewMode('map')}
+                  aria-label="Map view"
+                >
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M3 6l6-3 6 3 6-3v15l-6 3-6-3-6 3V6z" />
+                    <path d="M9 3v15M15 6v15" />
+                  </svg>
+                  Map
+                </button>
+                <button
+                  className={`toggle-btn ${tripsViewMode === 'cards' ? 'active' : ''}`}
+                  onClick={() => setTripsViewMode('cards')}
+                  aria-label="Card view"
+                >
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <rect x="3" y="3" width="7" height="7" />
+                    <rect x="14" y="3" width="7" height="7" />
+                    <rect x="3" y="14" width="7" height="7" />
+                    <rect x="14" y="14" width="7" height="7" />
+                  </svg>
+                  Cards
+                </button>
+              </div>
+            </div>
             
             {/* Trip Filters */}
             <div className="section-filters">
@@ -520,7 +589,17 @@ const GlobePage: React.FC<GlobePageProps> = ({
               />
             </div>
 
-            {filteredTrips.length > 0 ? (
+            {tripsViewMode === 'map' ? (
+              <div className="map-view-container">
+                <FlatMap
+                  onLocationSelect={handleLocationSelect}
+                  onJourneySelect={handleJourneySelect}
+                  activeFilter="travel"
+                  selectedLocation={selectedLocation}
+                  selectedJourney={selectedJourney}
+                />
+              </div>
+            ) : filteredTrips.length > 0 ? (
               <Carousel itemsPerView={3} gap={24}>
                 {filteredTrips.map((trip, index) => (
                     <div 
