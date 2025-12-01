@@ -1145,3 +1145,81 @@
     min-width: auto;
   }
 }
+
+/* View toggle styles */
+.section-header-with-toggle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.section-header-with-toggle h2 {
+  margin-bottom: 0;
+}
+
+.view-toggle {
+  display: flex;
+  gap: 0.5rem;
+  background-color: #FCF6E5;
+  padding: 0.25rem;
+  border-radius: 10px;
+  border: 1px solid #6A7A82;
+}
+
+.toggle-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border: none;
+  background: transparent;
+  color: #6A7A82;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  font-family: 'IBM Plex Mono', monospace;
+}
+
+.toggle-btn svg {
+  width: 18px;
+  height: 18px;
+}
+
+.toggle-btn:hover {
+  background-color: rgba(255, 255, 255, 0.5);
+  color: #C34681;
+}
+
+.toggle-btn.active {
+  background-color: white;
+  color: #C34681;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+  .section-header-with-toggle {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .view-toggle {
+    width: 100%;
+  }
+
+  .toggle-btn {
+    flex: 1;
+    justify-content: center;
+    font-size: 0.85rem;
+    padding: 0.6rem 0.75rem;
+  }
+
+  .toggle-btn svg {
+    width: 16px;
+    height: 16px;
+  }
+}
+

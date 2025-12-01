@@ -200,6 +200,7 @@ const App: React.FC<AppProps> = ({ data }) => {
             basics={data.basics} 
             work={data.work}
             trainings={data.trainings}
+            volunteering={data.volunteering}
             projects={allContent.filter(c => c.section === 'projects') as ProjectContent[]}
             trainingsContent={allContent.filter(c => c.section === 'trainings') as TrainingContent[]}
             workContent={allContent.filter(c => c.section === 'work') as WorkContent[]}

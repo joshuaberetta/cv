@@ -6,6 +6,7 @@ import Carousel from '../components/Carousel';
 import Modal from '../components/Modal';
 import MultiSelectFilter from '../components/MultiSelectFilter';
 import SideNav from '../components/SideNav';
+import WorkGantt from '../components/WorkGantt';
 import { GlobeLocation, Journey } from '../types/globe';
 import { Training, WorkExperience } from '../types/cv';
 import { ProjectContent, TrainingContent, WorkContent, TripContent } from '../types/content';
@@ -23,6 +24,7 @@ interface GlobePageProps {
   };
   work?: WorkExperience[];
   trainings?: Training[];
+  volunteering?: any[];
   projects: ProjectContent[];
   trainingsContent?: TrainingContent[];
   workContent?: WorkContent[];
@@ -33,6 +35,7 @@ const GlobePage: React.FC<GlobePageProps> = ({
   basics, 
   work = [], 
   trainings = [], 
+  volunteering = [],
   projects,
   trainingsContent = [],
   workContent = [],
@@ -42,6 +45,7 @@ const GlobePage: React.FC<GlobePageProps> = ({
   const [selectedLocation, setSelectedLocation] = useState<GlobeLocation | null>(null);
   const [selectedJourney, setSelectedJourney] = useState<Journey | null>(null);
   const [activeFilter, setActiveFilter] = useState<string | null>(null);
+  const [workViewMode, setWorkViewMode] = useState<'gantt' | 'cards'>('gantt');
   const [modalContent, setModalContent] = useState<{
     type: 'project' | 'training' | 'work' | 'trip' | null;
     data: any;
@@ -563,68 +567,107 @@ const GlobePage: React.FC<GlobePageProps> = ({
       {work && work.length > 0 && (
         <section className="work-section" id="experience">
           <div className="section-content">
-            <h2>Work Experience</h2>
-            
-            {/* Work Filters */}
-            <div className="section-filters">
-              <MultiSelectFilter
-                id="work-company-filter"
-                label="Company:"
-                options={allWorkCompanies.map(company => ({
-                  value: company,
-                  label: company,
-                  count: work.filter(w => w.company === company).length
-                }))}
-                selectedValues={workCompanyFilters}
-                onChange={setWorkCompanyFilters}
-                placeholder="All Companies"
-              />
-
-              <MultiSelectFilter
-                id="work-location-filter"
-                label="Location:"
-                options={allWorkLocations.map(location => ({
-                  value: location,
-                  label: location,
-                  count: work.filter(w => w.location === location).length
-                }))}
-                selectedValues={workLocationFilters}
-                onChange={setWorkLocationFilters}
-                placeholder="All Locations"
-              />
-            </div>
-
-            {filteredWork.length > 0 ? (
-              <Carousel itemsPerView={3} gap={24}>
-                {filteredWork.map((job, index) => (
-                  <div 
-                    key={index} 
-                    className="carousel-square-card work-card"
-                    onClick={() => handleOpenModal('work', job)}
-                  >
-                    <div className="card-content">
-                      <h3>{job.position}</h3>
-                      <div className="card-preview">
-                        <p className="preview-text">{job.description}</p>
-                      </div>
-                    </div>
-                    <div className="card-expand-hint">Click to expand</div>
-                  </div>
-                ))}
-              </Carousel>
-            ) : (
-              <div className="no-results">
-                <p>No work experiences match the selected filters.</p>
+            <div className="section-header-with-toggle">
+              <h2>Work Experience</h2>
+              <div className="view-toggle">
                 <button
-                  className="reset-filters-btn"
-                  onClick={() => {
-                    setWorkCompanyFilters([]);
-                    setWorkLocationFilters([]);
-                  }}
+                  className={`toggle-btn ${workViewMode === 'gantt' ? 'active' : ''}`}
+                  onClick={() => setWorkViewMode('gantt')}
+                  aria-label="Gantt view"
                 >
-                  Reset Filters
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <rect x="2" y="4" width="8" height="2" />
+                    <rect x="2" y="10" width="14" height="2" />
+                    <rect x="2" y="16" width="6" height="2" />
+                  </svg>
+                  Timeline
+                </button>
+                <button
+                  className={`toggle-btn ${workViewMode === 'cards' ? 'active' : ''}`}
+                  onClick={() => setWorkViewMode('cards')}
+                  aria-label="Card view"
+                >
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <rect x="3" y="3" width="7" height="7" />
+                    <rect x="14" y="3" width="7" height="7" />
+                    <rect x="3" y="14" width="7" height="7" />
+                    <rect x="14" y="14" width="7" height="7" />
+                  </svg>
+                  Cards
                 </button>
               </div>
+            </div>
+            
+            {workViewMode === 'gantt' ? (
+              <WorkGantt
+                work={filteredWork}
+                volunteering={volunteering}
+                onItemClick={(item) => handleOpenModal('work', item)}
+              />
+            ) : (
+              <>
+                {/* Work Filters */}
+                <div className="section-filters">
+                  <MultiSelectFilter
+                    id="work-company-filter"
+                    label="Company:"
+                    options={allWorkCompanies.map(company => ({
+                      value: company,
+                      label: company,
+                      count: work.filter(w => w.company === company).length
+                    }))}
+                    selectedValues={workCompanyFilters}
+                    onChange={setWorkCompanyFilters}
+                    placeholder="All Companies"
+                  />
+
+                  <MultiSelectFilter
+                    id="work-location-filter"
+                    label="Location:"
+                    options={allWorkLocations.map(location => ({
+                      value: location,
+                      label: location,
+                      count: work.filter(w => w.location === location).length
+                    }))}
+                    selectedValues={workLocationFilters}
+                    onChange={setWorkLocationFilters}
+                    placeholder="All Locations"
+                  />
+                </div>
+
+                {filteredWork.length > 0 ? (
+                  <Carousel itemsPerView={3} gap={24}>
+                    {filteredWork.map((job, index) => (
+                      <div 
+                        key={index} 
+                        className="carousel-square-card work-card"
+                        onClick={() => handleOpenModal('work', job)}
+                      >
+                        <div className="card-content">
+                          <h3>{job.position}</h3>
+                          <div className="card-preview">
+                            <p className="preview-text">{job.description}</p>
+                          </div>
+                        </div>
+                        <div className="card-expand-hint">Click to expand</div>
+                      </div>
+                    ))}
+                  </Carousel>
+                ) : (
+                  <div className="no-results">
+                    <p>No work experiences match the selected filters.</p>
+                    <button
+                      className="reset-filters-btn"
+                      onClick={() => {
+                        setWorkCompanyFilters([]);
+                        setWorkLocationFilters([]);
+                      }}
+                    >
+                      Reset Filters
+                    </button>
+                  </div>
+                )}
+              </>
             )}
           </div>
         </section>
